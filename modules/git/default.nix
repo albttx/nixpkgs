@@ -23,6 +23,14 @@
     };
 
     programs.zsh.shellAliases = {
-      "ggpull" = "git pull origin (current_branch)";
+        gd = "git diff";
+        gb = "git branch";
+        gst = "git status";
+        gco = "git checkout";
+
+        gcm = "git checkout $(git symbolic-ref refs/remotes/origin/HEAD)";
+
+        ggpull = "git pull origin $(git symbolic-ref --quiet HEAD)";
+        ggpush = "git pull origin $(git symbolic-ref --quiet HEAD)";
     };
 }

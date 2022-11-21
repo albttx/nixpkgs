@@ -11,18 +11,20 @@
         ll = "ls -lh";
         la = "ls -lah";
 
-        ".." = "cd ..";
-        "..." = "cd ../..";
-        "...." = "cd ../../..";
-        "....." = "cd ../../../..";
-        "......" = "cd ../../../../..";
-        "......." = "cd ../../../../../..";
-
-        gst = "git status";
-        gco = "git checkout";
-        gcm = "git checkout $(git rev-parse --abbrev-ref origin/HEAD)";
-        gd = "git diff";
       };
+
+      shellGlobalAliases = {
+        "..." = "../..";
+        "...." = "../../..";
+        "....." = "../../../..";
+        "......" = "../../../../..";
+      };
+
+
+      #ohMyZsh = {
+      #  enable = true;
+      #};
+
 
       initExtra = ''
         bindkey '^[[1;5D' backward-word
@@ -59,8 +61,12 @@
           src = ./configs;
           file = "p10k.zsh";
         }
+
       ];
 
     };
+    
+     # home.file.".config/zsh/scripts".recursive = true;
   };
+  home.file.".config/zsh/lib/git.plugin.zsh".source = ./configs/git.plugin.zsh;
 }
