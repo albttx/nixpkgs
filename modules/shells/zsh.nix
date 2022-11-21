@@ -1,0 +1,66 @@
+{ config, pkgs, ... }:
+
+{
+  programs = {
+    zsh = {
+      enable = true;
+      enableCompletion = false;
+      dotDir = ".config/zsh";
+
+      shellAliases = {
+        ll = "ls -lh";
+        la = "ls -lah";
+
+        ".." = "cd ..";
+        "..." = "cd ../..";
+        "...." = "cd ../../..";
+        "....." = "cd ../../../..";
+        "......" = "cd ../../../../..";
+        "......." = "cd ../../../../../..";
+
+        gst = "git status";
+        gco = "git checkout";
+        gcm = "git checkout $(git rev-parse --abbrev-ref origin/HEAD)";
+        gd = "git diff";
+      };
+
+      initExtra = ''
+        bindkey '^[[1;5D' backward-word
+        bindkey '^[[1;5C' forward-word
+      '';
+
+      profileExtra = ''
+      if [ -f "${config.home.profileDirectory}/etc/profile.d/nix.sh" ]; then
+        source "${config.home.profileDirectory}/etc/profile.d/nix.sh"
+      fi
+      '';
+
+      plugins = [
+        { 
+          name = "powerline10k";
+          src = pkgs.zsh-powerlevel10k;
+          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        }
+
+        {
+          name = "autosuggestions";
+          src = pkgs.zsh-autosuggestions;
+          file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh"; 
+        }
+
+        {
+          name = "fast-syntax-highlighting";
+          src = pkgs.zsh-fast-syntax-highlighting;
+          file = "share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh";
+        }
+
+        {
+          name = "powerline10k-config";
+          src = ./configs;
+          file = "p10k.zsh";
+        }
+      ];
+
+    };
+  };
+}
