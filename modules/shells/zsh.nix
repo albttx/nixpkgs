@@ -10,7 +10,6 @@
       shellAliases = {
         ll = "ls -lh";
         la = "ls -lah";
-
       };
 
       shellGlobalAliases = {
@@ -20,21 +19,24 @@
         "......" = "../../../../..";
       };
 
-
       #ohMyZsh = {
       #  enable = true;
       #};
 
-
       initExtra = ''
         bindkey '^[[1;5D' backward-word
         bindkey '^[[1;5C' forward-word
+
+        # source profileExtra
+        source ${config.home.homeDirectory}/.config/zsh/.zprofile
       '';
 
       profileExtra = ''
       if [ -f "${config.home.profileDirectory}/etc/profile.d/nix.sh" ]; then
         source "${config.home.profileDirectory}/etc/profile.d/nix.sh"
       fi
+
+      source ${config.home.homeDirectory}/.config/zsh/lib/git.plugin.zsh
       '';
 
       plugins = [
@@ -61,12 +63,10 @@
           src = ./configs;
           file = "p10k.zsh";
         }
-
       ];
-
     };
-    
-     # home.file.".config/zsh/scripts".recursive = true;
   };
+
   home.file.".config/zsh/lib/git.plugin.zsh".source = ./configs/git.plugin.zsh;
+
 }

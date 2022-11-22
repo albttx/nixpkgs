@@ -28,7 +28,7 @@
         gst = "git status";
         gco = "git checkout";
 
-        gcm = "git checkout $(git symbolic-ref refs/remotes/origin/HEAD)";
+        gcm = "git checkout $(git_main_branch)";
 
         ggpull = "git pull origin $(git symbolic-ref --quiet HEAD)";
         ggpush = "git pull origin $(git symbolic-ref --quiet HEAD)";
