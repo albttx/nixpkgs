@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   programs.go = {
     enable = true;
-    goPath = "golang";
+    goPath = "go";
     goBin = "go/bin";
     package = pkgs.go_1_19;
   };
@@ -12,13 +12,12 @@
     gopls
     gotags
     gotools
+    gotest
   ];
 
-  # config.env.GOPATH = "$(go env GOPATH)";
-  # home.sessionPath = [ "$HOME/${config.programs.go.goPath}/bin" ];
   home.sessionVariables = {
     GOPATH = "$(go env GOPATH)";
-    LOL = "test123";
+    GOBIN = "$(go env GOBIN)";
   };
 }
 

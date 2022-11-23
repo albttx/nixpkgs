@@ -5,8 +5,14 @@
       enable = true;
       userName = "albttx";
       userEmail = "contact@albttx.tech";
+      signing = {
+        key = "115435B3B5520E4B";
+        signByDefault = true;
+      };
+
       aliases = {
       };
+
       ignores = [
         "*~" "*.bak*" # backup files
         ".*.sw?" "tags" # vim swap and tag files
