@@ -30,7 +30,7 @@
 
         gcm = "git checkout $(git_main_branch)";
 
-        ggpull = "git pull origin $(git symbolic-ref --quiet HEAD)";
-        ggpush = "git pull origin $(git symbolic-ref --quiet HEAD)";
+        ggpull = ''git pull origin "$(git_current_branch)"'';
+        ggpush = ''git push origin "$(git_current_branch)"'';
     };
 }

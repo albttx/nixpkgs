@@ -29,12 +29,16 @@
 
         # source profileExtra
         source ${config.home.homeDirectory}/.config/zsh/.zprofile
+
+        export __HM_SESS_VARS_SOURCED=
+        . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
       '';
 
       profileExtra = ''
       if [ -f "${config.home.profileDirectory}/etc/profile.d/nix.sh" ]; then
         source "${config.home.profileDirectory}/etc/profile.d/nix.sh"
       fi
+
 
       source ${config.home.homeDirectory}/.config/zsh/lib/git.plugin.zsh
       '';

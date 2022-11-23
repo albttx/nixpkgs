@@ -7,11 +7,12 @@
     ./modules/ssh/default.nix
     ./modules/git/default.nix
     ./modules/shells/default.nix
+    ./modules/dev/default.nix
     ./modules/neovim/default.nix
+    ./modules/awesomewm/default.nix
   ];
 
   home.packages =  with pkgs; [
-    go_1_19
     emacs
     ripgrep
     tree
@@ -20,10 +21,6 @@
 
     docker
 
-    golangci-lint
-    # pkgs.gofumpt
-    gopls
-    gotags
-    gotools
+    nixfmt
   ];
 }
