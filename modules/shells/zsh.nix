@@ -1,44 +1,63 @@
 { config, pkgs, ... }:
 
 {
+  home.packages =  with pkgs; [
+    oh-my-zsh
+  ];
+
   programs = {
     zsh = {
       enable = true;
       enableCompletion = false;
       dotDir = ".config/zsh";
 
-      shellAliases = {
-        ll = "ls -lh";
-        la = "ls -lah";
+      oh-my-zsh = {
+        enable = true;
+        plugins = [
+          "git"
+          "sudo"
+          "docker"
+        ];
       };
 
-      shellGlobalAliases = {
-        "..." = "../..";
-        "...." = "../../..";
-        "....." = "../../../..";
-        "......" = "../../../../..";
-      };
+      # shellAliases = {
+      #   ll = "ls -lh";
+      #   la = "ls -lah";
+      # };
 
-      #ohMyZsh = {
-      #  enable = true;
-      #};
+      # shellGlobalAliases = {
+      #   "..." = "../..";
+      #   "...." = "../../..";
+      #   "....." = "../../../..";
+      #   "......" = "../../../../..";
+      # };
 
-      initExtra = ''
-        bindkey '^[[1;5D' backward-word
-        bindkey '^[[1;5C' forward-word
+      initExtra =
+        let
+          p10k-config = "${config.home.homeDirectory}/.p10k.zsh";
+        in
+        ''
+        if [ -e "${p10k-config}" ]
+        then
+          source "${p10k-config}"
+        fi
 
         # source profileExtra
         source ${config.home.homeDirectory}/.config/zsh/.zprofile
       '';
 
       profileExtra = ''
-      if [ -f "${config.home.profileDirectory}/etc/profile.d/nix.sh" ]; then
-        source "${config.home.profileDirectory}/etc/profile.d/nix.sh"
-      fi
+        if [ -f "${config.home.profileDirectory}/etc/profile.d/nix.sh" ]; then
+          source "${config.home.profileDirectory}/etc/profile.d/nix.sh"
+        fi
 
-      source ${config.home.homeDirectory}/.config/zsh/lib/git.plugin.zsh
+        bindkey '^[[1;5D' backward-word
+        bindkey '^[[1;5C' forward-word
+        bindkey '^H' backward-delete-char 
+        bindkey  "^[[H"   beginning-of-line
+        bindkey  "^[[F"   end-of-line
 
-      _HM_SESS_VARS_SOURCED= . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+        _HM_SESS_VARS_SOURCED= . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
       '';
 
       plugins = [
@@ -59,16 +78,9 @@
           src = pkgs.zsh-fast-syntax-highlighting;
           file = "share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh";
         }
-
-        {
-          name = "powerline10k-config";
-          src = ./configs;
-          file = "p10k.zsh";
-        }
       ];
     };
   };
 
-  home.file.".config/zsh/lib/git.plugin.zsh".source = ./configs/git.plugin.zsh;
-
+  home.file.".p10k.zsh".source = ./configs/p10k.zsh;
 }
