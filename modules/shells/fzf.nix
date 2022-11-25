@@ -15,6 +15,7 @@
     changeDirWidgetCommand = "fd --type d";
     changeDirWidgetOptions = [ "--preview" "'tree -C {} | head -200'" ];
     historyWidgetOptions = [ "--sort" "--exact" ];
+
     tmux.enableShellIntegration = false;
   };
 
