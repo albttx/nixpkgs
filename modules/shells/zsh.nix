@@ -20,17 +20,10 @@
         ];
       };
 
-      # shellAliases = {
-      #   ll = "ls -lh";
-      #   la = "ls -lah";
-      # };
-
-      # shellGlobalAliases = {
-      #   "..." = "../..";
-      #   "...." = "../../..";
-      #   "....." = "../../../..";
-      #   "......" = "../../../../..";
-      # };
+      shellAliases = {
+        pbcopy = "xclip -selection clipboard";
+        pbpaste = "xclip -selection clipboard -o";
+      };
 
       initExtra =
         let
