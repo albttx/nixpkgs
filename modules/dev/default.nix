@@ -3,5 +3,6 @@
 {
   imports = [
     ./go.nix
+    ./nodejs.nix
   ];
 }
