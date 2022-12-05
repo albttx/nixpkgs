@@ -416,6 +416,15 @@ awful.keyboard.append_global_keybindings({
               {description = "select previous", group = "layout"}),
 })
 
+-- Screenshot
+awful.keyboard.append_global_keybindings({
+    awful.key({}, "Print", function ()
+        awful.util.spawn("gnome-screenshot --clipboard --area -f \"$HOME/Pictures/Screenshot_$(date +'%Y-%m-%d_%H-%M').png\"")
+    end),
+    awful.key({modkey}, "Print", function ()
+        awful.util.spawn("gnome-screenshot --interactive")
+    end),
+})
 
 awful.keyboard.append_global_keybindings({
     awful.key {
@@ -597,19 +606,6 @@ ruled.client.connect_signal("request::rules", function()
         rule_any   = { type = { "normal", "dialog" } },
         properties = { titlebars_enabled = false      } -- remove screen decoration
     }
-
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    ruled.client.append_rule {
-        rule       = { class = "firefox"     },
-        properties = { screen = 1, tag = "FIREFOX" }
-    }
-
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    ruled.client.append_rule {
-        rule       = { class = "Slack"     },
-        properties = { screen = 1, tag = "SLACK" }
-    }
-
 
 end)
 
