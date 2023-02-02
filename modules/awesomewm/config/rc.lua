@@ -329,7 +329,7 @@ awful.keyboard.append_global_keybindings({
               {description = "show the menubar", group = "launcher"}),
     awful.key({ modkey }, "d", function() awful.spawn(rofi_cmd) end,
               {description = "show the menubar", group = "launcher"}),
-    awful.key({ modkey }, "Escape", function() awful.spawn("i3lock-fancy") end,
+    awful.key({ modkey }, "Delete", function() awful.spawn("i3lock-fancy") end,
               {description = "show the menubar", group = "launcher"}),
 })
 
@@ -339,8 +339,8 @@ awful.keyboard.append_global_keybindings({
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Page_Down",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
-              {description = "go back", group = "tag"}),
+    -- awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
+            --   {description = "go back", group = "tag"}),
 })
 
 -- Focus related keybindings
@@ -610,9 +610,10 @@ ruled.client.connect_signal("request::rules", function()
 end)
 
 local autorun_apps = {
-	"firefox",
---    "code",
-    "slack",
+    -- "firefox",
+    -- "code",
+    -- "bravec"
+    -- "slack",
 }
 
 for i, app in ipairs(autorun_apps) do
