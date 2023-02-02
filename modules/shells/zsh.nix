@@ -3,6 +3,7 @@
 {
   home.packages =  with pkgs; [
     oh-my-zsh
+    exa
   ];
 
   programs = {
@@ -23,6 +24,7 @@
       shellAliases = {
         pbcopy = "xclip -selection clipboard";
         pbpaste = "xclip -selection clipboard -o";
+        dckdel = "docker rm -f $(docker ps -aq)";
       };
 
       initExtra =

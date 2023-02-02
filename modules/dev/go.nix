@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }: 
+{
   programs.go = {
     enable = true;
     goPath = "go";
@@ -18,6 +19,7 @@
   home.sessionVariables = {
     GOPATH = "$(go env GOPATH)";
     GOBIN = "$(go env GOBIN)";
+    PATH = "$PATH:$(go env GOBIN)";
   };
 }
 

@@ -4,5 +4,6 @@
   imports = [
     ./go.nix
     ./nodejs.nix
+    ./direnv.nix
   ];
 }

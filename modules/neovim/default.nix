@@ -1,8 +1,32 @@
 { pkgs, lib, ... }:
 
+let
+  github-nvim-theme = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    name = "github-nvim-theme";
+    src = pkgs.fetchFromGitHub {
+      owner = "projekt0n";
+      repo = "github-nvim-theme";
+      rev = "b3f15193d1733cc4e9c9fe65fbfec329af4bdc2a";
+      sha256 = "wLX81wgl4E50mRig9erbLyrxyGbZllFbHFAQ9+v60W4=";
+    };
+  };
+
+  go-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    name = "go-nvim";
+    src = pkgs.fetchFromGitHub {
+      owner = "ray-x";
+      repo = "go.nvim";
+      rev = "10349e1e430d00bc314c1d4abb043ac66ed219d9";
+      sha256 = "15b18chsfgnkrlp996b07ih19gjxkqksghg02nknlid9vj2sf2d1";
+    };
+  };
+
+in
+
 {
   home.packages = with pkgs; [
     # neovim
+    silver-searcher
   ];
 
   programs.neovim = {
@@ -33,6 +57,8 @@
     plugins = with pkgs.vimPlugins; [
       vim-plug
 
+      github-nvim-theme
+
       #nvim-autopairs
       auto-pairs
       fzf-vim
@@ -40,7 +66,23 @@
       # coc-go
 
       vim-nix
-      vim-go
+      # vim-go
+      {
+        plugin = go-nvim;
+        type = "lua";
+        config = ''
+require('go').setup()
+
+local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+   require('go.format').goimport()
+  end,
+  group = format_sync_grp,
+})
+        '';
+      }
 
       vim-airline
       vim-airline-themes
@@ -62,32 +104,46 @@
       }
       {
         plugin = nvim-lspconfig;
+        type = "lua";
         config = ''
-          lua << EOF
-            require('lspconfig').rust_analyzer.setup{}
-            require('lspconfig').sumneko_lua.setup{}
-          EOF
+          require('lspconfig').rust_analyzer.setup{}
+          require('lspconfig').sumneko_lua.setup{}
+
+          require('go').setup({
+             lsp_cfg = true, -- setup gopls for us
+             -- moved this into .gonvim per-project directory as this isn't usually what I want
+             -- lsp_cfg = {
+             --   settings= {
+             --     gopls = {
+             --       staticcheck=false,
+             --     }
+             --   }
+             -- },
+             lsp_on_attach = on_attach,
+             --verbose = true,
+             --tag_options = "json="
+             tag_transform = "camelcase",
+           })
+
         '';
       }
 
       {
         plugin = nvim-treesitter;
+        type = "lua";
         config = ''
-          lua << EOF
-            require('nvim-treesitter.configs').setup {
-              highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = false,
-              },
-            }
-          EOF
+          require('nvim-treesitter.configs').setup {
+            highlight = {
+              enable = true,
+              additional_vim_regex_highlighting = false,
+            },
+          }
         '';
       }
 
-
       {
-        type = "lua";
         plugin = nightfox-nvim;
+        type = "lua";
         config = builtins.readFile ./configs/nightfox-nvim.lua;
       }
     ];
