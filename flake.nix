@@ -36,7 +36,8 @@
         home-manager.useUserPackages = true;
 
         homeConfigurations = {
-            "albttx" = home-manager.lib.homeManagerConfiguration {
+            # thinkpad-p1
+            "thinkpad" = home-manager.lib.homeManagerConfiguration {
                 # Note: I am sure this could be done better with flake-utils or something
                 # pkgs = nixpkgs.legacyPackages.x86_64-linux;
                 pkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -49,9 +50,25 @@
                   inherit inputs nixpkgs;
                 };
 
-                modules = [ ./home.nix ];
+                modules = [ ./thinkpad-p1.nix ];
             };
-            # nixpkgs = inputs.nixpkgs;
+
+            "surface" = home-manager.lib.homeManagerConfiguration {
+                # Note: I am sure this could be done better with flake-utils or something
+                # pkgs = nixpkgs.legacyPackages.x86_64-linux;
+                pkgs = nixpkgs.legacyPackages.x86_64-linux;
+                
+                # pkgs = import nixpkgs {
+                #     inherit inputs;
+                # };
+
+                extraSpecialArgs = {
+                  inherit inputs nixpkgs;
+                };
+
+                modules = [ ./surface.nix ];
+            };
+
         };
     };
 }
