@@ -8,6 +8,7 @@
     jq
     entr
 
+    grpcurl
     just
 
     keybase
