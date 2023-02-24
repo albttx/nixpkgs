@@ -66,6 +66,20 @@ in
       # coc-go
 
       vim-nix
+
+      {
+        plugin = which-key-nvim;
+        type = "lua";
+        config = ''
+          ------------------------------------- WHICH-KEY -----------------------------------------
+          require("which-key").setup {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+          }
+        '';
+      }
+
       # vim-go
       {
         plugin = go-nvim;
@@ -95,8 +109,9 @@ vim.api.nvim_create_autocmd("BufWritePre", {
           telescope.setup{}
           -- telescope.load_extension('fzf')
           local opts = { noremap = true }
-          vim.api.nvim_set_keymap("n","<C-p>", ":Telescope find_files<CR>", opts)
           vim.api.nvim_set_keymap("n","<C-t>", ":Telescope<CR>", opts)
+          vim.api.nvim_set_keymap("n","<C-p>", ":Telescope find_files<CR>", opts)
+          vim.api.nvim_set_keymap("n","<C-b>", ":Telescope buffers<CR>", opts)
           vim.api.nvim_set_keymap("n","<C-g>", ":Telescope live_grep<CR>", opts)
           vim.api.nvim_set_keymap("n","<leader>t", ":Telescope help_tags<CR>", opts)
         EOF
@@ -145,6 +160,31 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         plugin = nightfox-nvim;
         type = "lua";
         config = builtins.readFile ./configs/nightfox-nvim.lua;
+      }
+
+
+      {
+        plugin = bufferline-nvim;
+        type = "lua";
+        config = ''
+          require("bufferline").setup {
+            options = {
+              numbers = "none",
+              tab_size = 7,
+              show_close_icon = false,
+              close_command = safe_delete_buffer,
+              right_mouse_command = safe_delete_buffer,
+            }
+          }
+          require("which-key").register({
+            ["<leader>"] = {
+              ["}"] = {"<cmd>BufferLineCycleNext<cr>", "Next buffer"},
+              ["{"] = {"<cmd>BufferLineCyclePrev<cr>", "Prev buffer"},
+              b = {"<cmd>BufferLinePick<cr>", "Pick buffer to swap to"},
+              d = {"<cmd>BufferLinePickClose<cr>", "Pick buffer to close"},
+            }
+          })
+        '';
       }
     ];
   };
