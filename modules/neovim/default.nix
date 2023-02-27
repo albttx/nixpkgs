@@ -67,6 +67,7 @@ in
 
       vim-nix
 
+      vim-polyglot
       {
         plugin = which-key-nvim;
         type = "lua";
