@@ -3,7 +3,7 @@
 
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05";
+        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
         nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
         nixpkgs-master.url = "github:nixos/nixpkgs";
 
@@ -22,6 +22,10 @@
             flake = false;
         };
 
+        tmux-conf = {
+            url = "github:gpakosz/.tmux";
+            flake = false;
+        };
     };
 
     outputs = inputs@{nixpkgs, home-manager, ...}: {
