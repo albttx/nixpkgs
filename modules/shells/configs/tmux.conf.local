@@ -405,3 +405,8 @@ tmux_conf_uninstall_plugins_on_reload=true
 #
 # "$@"
 # # /!\ do not remove the previous line
+
+
+
+# -- MY CONFIG -----------------------------------------------------------------
+bind | split-window -h
