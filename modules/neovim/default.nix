@@ -52,12 +52,21 @@ in
       set noswapfile
       set encoding=UTF-8
       let mapleader=" "
+
+			function! GnoFmt()
+				cexpr system('gofmt -e -w ' . expand('%')) "or replace with gofumpt
+				edit!
+			endfunction
+			command! GnoFmt call GnoFmt()
+			augroup gno_autocmd
+				autocmd!
+				autocmd BufNewFile,BufRead *.gno set filetype=go
+				autocmd BufWritePost *.gno GnoFmt
+			augroup END
     '';
 
     plugins = with pkgs.vimPlugins; [
       vim-plug
-
-      github-nvim-theme
 
       #nvim-autopairs
       auto-pairs
@@ -68,6 +77,16 @@ in
       vim-nix
 
       vim-polyglot
+
+      {
+        plugin = github-nvim-theme;
+        type = "lua";
+        config = ''
+          require('github-theme').setup {
+            theme_style = "dark_default";
+          }
+        '';
+      }
       {
         plugin = which-key-nvim;
         type = "lua";
@@ -145,7 +164,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
       }
 
       {
-        plugin = nvim-treesitter;
+        plugin = nvim-treesitter.withAllGrammars;
         type = "lua";
         config = ''
           require('nvim-treesitter.configs').setup {
