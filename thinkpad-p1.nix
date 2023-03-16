@@ -8,6 +8,8 @@
   home.stateVersion = "22.05";
   home.extraOutputsToInstall = [ "doc" "info" "man" "devdoc" ];
 
+  fonts.fontconfig.enable = true;
+
   imports = [
     ./packages.nix
 
@@ -17,6 +19,7 @@
     ./modules/dev/default.nix
     ./modules/neovim/default.nix
     ./modules/awesomewm/default.nix
+    ./modules/picom/default.nix
   ];
 
   # Let Home Manager install and manage itself.

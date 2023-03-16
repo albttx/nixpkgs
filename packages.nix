@@ -17,5 +17,10 @@
     docker
 
     nixfmt
+
+    terminus-nerdfont
+    inconsolata
+    fantasque-sans-mono
+    ankacoder
   ];
 }
