@@ -6,7 +6,7 @@
       userName = "albttx";
       userEmail = "contact@albttx.tech";
       signing = {
-        key = "115435B3B5520E4B";
+        key = "6ECDB1C9555BCE18";
         signByDefault = true;
       };
 
