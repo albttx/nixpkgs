@@ -78,6 +78,7 @@ in
 
       vim-polyglot
 
+      nvim-tree-lua
       {
         plugin = github-nvim-theme;
         type = "lua";
