@@ -1,10 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  home.packages =  with pkgs; [
-    oh-my-zsh
-    exa
-  ];
+  home.packages = with pkgs; [ oh-my-zsh exa ];
 
   programs = {
     zsh = {
@@ -14,24 +11,18 @@
 
       oh-my-zsh = {
         enable = true;
-        plugins = [
-          "git"
-          "sudo"
-          "docker"
-        ];
+        plugins = [ "git" "sudo" "docker" ];
       };
 
       shellAliases = {
         pbcopy = "xclip -selection clipboard";
         pbpaste = "xclip -selection clipboard -o";
         dckdel = "docker rm -f $(docker ps -aq)";
+        fcd = "cd $(fd --type directory | fzf)";
       };
 
-      initExtra =
-        let
-          p10k-config = "${config.home.homeDirectory}/.p10k.zsh";
-        in
-        ''
+      initExtra = let p10k-config = "${config.home.homeDirectory}/.p10k.zsh";
+      in ''
         if [ -e "${p10k-config}" ]
         then
           source "${p10k-config}"
@@ -56,7 +47,7 @@
       '';
 
       plugins = [
-        { 
+        {
           name = "powerline10k";
           src = pkgs.zsh-powerlevel10k;
           file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
@@ -65,7 +56,7 @@
         {
           name = "autosuggestions";
           src = pkgs.zsh-autosuggestions;
-          file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh"; 
+          file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh";
         }
 
         {
