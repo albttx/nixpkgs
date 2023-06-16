@@ -1,7 +1,19 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ oh-my-zsh exa ];
+  home.packages = with pkgs; [
+    oh-my-zsh
+    exa
+
+    (writeScriptBin "fzf-tmux-sessions" ''
+      #!/bin/sh
+      selected_session=$(tmux list-sessions -F "#{session_name}" | fzf)
+
+      if [ -n "$selected_session" ]; then
+          tmux switch-client -t "$selected_session"
+      fi
+    '')
+  ];
 
   programs = {
     zsh = {
@@ -36,6 +48,10 @@
         if [ -f "${config.home.profileDirectory}/etc/profile.d/nix.sh" ]; then
           source "${config.home.profileDirectory}/etc/profile.d/nix.sh"
         fi
+
+        fzf_tmux_sessions_widget() fzf-tmux-sessions
+        zle -N fzf_tmux_sessions_widget
+        bindkey '^s' fzf_tmux_sessions_widget
 
         bindkey '^[[1;5D' backward-word
         bindkey '^[[1;5C' forward-word
