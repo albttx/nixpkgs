@@ -3,7 +3,7 @@
 {
   programs.ssh = {
     enable = true;
-    controlMaster  = "no";
+    controlMaster = "no";
     forwardAgent = true;
     hashKnownHosts = true;
 
@@ -25,42 +25,41 @@
         user = "albttx";
         hostname = "51.15.177.223";
       };
-        
+
       "juno-mainnet-01" = {
         user = "albttx";
         hostname = "163.172.101.4";
       };
-        
+
       "stargaze-mainnet-01" = {
         user = "albttx";
         hostname = "163.172.100.37";
       };
-        
+
       "ki-mainnet-01" = {
         user = "albttx";
-      hostname = "51.159.29.54";
+        hostname = "51.159.29.54";
       };
-        
+
       "orai-mainnet-01" = {
         user = "albttx";
         hostname = "51.159.29.22 ";
       };
-        
+
       "checq-mainnet-01" = {
         user = "albttx";
-      hostname = "163.172.57.117";
+        hostname = "163.172.57.117";
       };
-        
+
       "evmos-mainnet-01" = {
         user = "albttx";
         hostname = "163.172.100.84";
       };
-        
+
       "evmos-testnet-01" = {
         user = "albttx";
         hostname = "51.159.36.3";
       };
-
 
       # Interop
       ######################################################
@@ -77,7 +76,5 @@
     };
   };
 
-  home.packages = with pkgs; [
-    openssh
-  ];
+  home.packages = with pkgs; [ openssh ];
 }

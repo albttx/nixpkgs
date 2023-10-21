@@ -1,12 +1,11 @@
-{ config, lib, pkgs, ... }:
-{
+{ config, lib, pkgs, ... }: {
   services.picom = {
     enable = true;
     extraArgs = [ "--legacy-backends" ];
     shadow = true;
     shadowExclude = [
       "window_type *= 'menu'"
-      "name ~= 'Firefox\$'"
+      "name ~= 'Firefox$'"
       "focused = 1"
       "n:e:Notification"
       "n:e:Docky"
@@ -32,5 +31,6 @@
     };
   };
 
-  systemd.user.services.picom.Install.WantedBy = lib.mkForce [ "x11-session.target" ];
+  systemd.user.services.picom.Install.WantedBy =
+    lib.mkForce [ "x11-session.target" ];
 }

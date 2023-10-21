@@ -1,6 +1,6 @@
-{ inputs, pkgs, lib, config, ... }:
-{
-  home.file.".config/awesome".source = config.lib.file.mkOutOfStoreSymlink ./config;
+{ inputs, pkgs, lib, config, ... }: {
+  home.file.".config/awesome".source =
+    config.lib.file.mkOutOfStoreSymlink ./config;
 
   xsession = {
     enable = true;

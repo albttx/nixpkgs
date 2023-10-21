@@ -1,9 +1,5 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./zsh.nix
-    ./fzf.nix
-    ./tmux.nix
-  ];
+  imports = [ ./zsh.nix ./fzf.nix ./tmux.nix ];
 }

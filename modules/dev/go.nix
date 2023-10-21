@@ -1,5 +1,4 @@
-{ config, pkgs, ... }: 
-{
+{ config, pkgs, ... }: {
   programs.go = {
     enable = true;
     goPath = "go";
@@ -7,7 +6,7 @@
     package = pkgs.go_1_19;
   };
 
-  home.packages =  with pkgs; [
+  home.packages = with pkgs; [
     golangci-lint
     gofumpt
     gopls

@@ -1,12 +1,9 @@
-{ pkgs, inputs, ... }:
-{
-    home.file.".tmux.conf".source = "${inputs.tmux-conf}/.tmux.conf";
-    home.file.".tmux.conf.local".source = ./configs/tmux.conf.local;
+{ pkgs, inputs, ... }: {
+  home.file.".tmux.conf".source = "${inputs.tmux-conf}/.tmux.conf";
+  home.file.".tmux.conf.local".source = ./configs/tmux.conf.local;
 
-    programs.tmux = {
-        enable = true;
-        plugins = with pkgs.tmuxPlugins; [
-            tmux-fzf
-        ];
-    };
+  programs.tmux = {
+    enable = true;
+    plugins = with pkgs.tmuxPlugins; [ tmux-fzf ];
+  };
 }

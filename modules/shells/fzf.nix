@@ -1,23 +1,19 @@
 { pkgs, ... }:
 
 {
-  home.packages = [
-    pkgs.fd
-  ];
+  home.packages = [ pkgs.fd ];
 
   programs.zsh = {
-    plugins = [
-      {
-         name = "fzf-marks";
-         file = "fzf-marks.plugin.zsh";
-         src = pkgs.fetchFromGitHub {
-           owner = "urbainvaes";
-           repo = "fzf-marks";
-           rev = "f2e8844ce813f8ad35a1903eb8c680c4492e153b";
-           sha256 = "0a8jlwc12m0xid2v4d7rxzci91w8qrc4x91jq4lv0lm62v2w4n1j";
-        };
-      }
-    ];
+    plugins = [{
+      name = "fzf-marks";
+      file = "fzf-marks.plugin.zsh";
+      src = pkgs.fetchFromGitHub {
+        owner = "urbainvaes";
+        repo = "fzf-marks";
+        rev = "f2e8844ce813f8ad35a1903eb8c680c4492e153b";
+        sha256 = "0a8jlwc12m0xid2v4d7rxzci91w8qrc4x91jq4lv0lm62v2w4n1j";
+      };
+    }];
   };
 
   programs.fzf = {

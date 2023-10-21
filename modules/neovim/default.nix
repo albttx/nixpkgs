@@ -21,13 +21,12 @@ let
     };
   };
 
-in
-
-{
-  home.packages = with pkgs; [
-    # neovim
-    silver-searcher
-  ];
+in {
+  home.packages = with pkgs;
+    [
+      # neovim
+      silver-searcher
+    ];
 
   programs.neovim = {
     enable = true;
@@ -38,31 +37,29 @@ in
     withNodeJs = true;
     withRuby = false;
 
-    extraPython3Packages = (ps: with ps; [
-      pynvim
-    ]);
+    extraPython3Packages = (ps: with ps; [ pynvim ]);
 
     extraConfig = ''
-      set expandtab
-      set tabstop=2
-      set softtabstop=2
-      set shiftwidth=2
-      set number
-      set list
-      set noswapfile
-      set encoding=UTF-8
-      let mapleader=" "
+            set expandtab
+            set tabstop=2
+            set softtabstop=2
+            set shiftwidth=2
+            set number
+            set list
+            set noswapfile
+            set encoding=UTF-8
+            let mapleader=" "
 
-			function! GnoFmt()
-				cexpr system('gofmt -e -w ' . expand('%')) "or replace with gofumpt
-				edit!
-			endfunction
-			command! GnoFmt call GnoFmt()
-			augroup gno_autocmd
-				autocmd!
-				autocmd BufNewFile,BufRead *.gno set filetype=go
-				autocmd BufWritePost *.gno GnoFmt
-			augroup END
+      			function! GnoFmt()
+      				cexpr system('gofmt -e -w ' . expand('%')) "or replace with gofumpt
+      				edit!
+      			endfunction
+      			command! GnoFmt call GnoFmt()
+      			augroup gno_autocmd
+      				autocmd!
+      				autocmd BufNewFile,BufRead *.gno set filetype=go
+      				autocmd BufWritePost *.gno GnoFmt
+      			augroup END
     '';
 
     plugins = with pkgs.vimPlugins; [
@@ -106,16 +103,16 @@ in
         plugin = go-nvim;
         type = "lua";
         config = ''
-require('go').setup()
+          require('go').setup()
 
-local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
-  callback = function()
-   require('go.format').goimport()
-  end,
-  group = format_sync_grp,
-})
+          local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            pattern = "*.go",
+            callback = function()
+             require('go.format').goimport()
+            end,
+            group = format_sync_grp,
+          })
         '';
       }
 
@@ -125,17 +122,17 @@ vim.api.nvim_create_autocmd("BufWritePre", {
       {
         plugin = telescope-nvim;
         config = ''
-        lua << EOF
-          local telescope = require'telescope'
-          telescope.setup{}
-          -- telescope.load_extension('fzf')
-          local opts = { noremap = true }
-          vim.api.nvim_set_keymap("n","<C-t>", ":Telescope<CR>", opts)
-          vim.api.nvim_set_keymap("n","<C-p>", ":Telescope find_files<CR>", opts)
-          vim.api.nvim_set_keymap("n","<C-b>", ":Telescope buffers<CR>", opts)
-          vim.api.nvim_set_keymap("n","<C-g>", ":Telescope live_grep<CR>", opts)
-          vim.api.nvim_set_keymap("n","<leader>t", ":Telescope help_tags<CR>", opts)
-        EOF
+          lua << EOF
+            local telescope = require'telescope'
+            telescope.setup{}
+            -- telescope.load_extension('fzf')
+            local opts = { noremap = true }
+            vim.api.nvim_set_keymap("n","<C-t>", ":Telescope<CR>", opts)
+            vim.api.nvim_set_keymap("n","<C-p>", ":Telescope find_files<CR>", opts)
+            vim.api.nvim_set_keymap("n","<C-b>", ":Telescope buffers<CR>", opts)
+            vim.api.nvim_set_keymap("n","<C-g>", ":Telescope live_grep<CR>", opts)
+            vim.api.nvim_set_keymap("n","<leader>t", ":Telescope help_tags<CR>", opts)
+          EOF
         '';
       }
       {
@@ -182,7 +179,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         type = "lua";
         config = builtins.readFile ./configs/nightfox-nvim.lua;
       }
-
 
       {
         plugin = bufferline-nvim;
