@@ -3,7 +3,7 @@
 
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
+        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
         nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
         nixpkgs-master.url = "github:nixos/nixpkgs";
 
@@ -40,6 +40,23 @@
         home-manager.useUserPackages = true;
 
         homeConfigurations = {
+            "mac" = home-manager.lib.homeManagerConfiguration {
+                # Note: I am sure this could be done better with flake-utils or something
+                # pkgs = nixpkgs.legacyPackages.x86_64-linux;
+                pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+                
+                # pkgs = import nixpkgs {
+                #     inherit inputs;
+                # };
+
+                extraSpecialArgs = {
+                  inherit inputs nixpkgs;
+                };
+
+                modules = [ ./macos.nix ];
+            };
+
+
             # thinkpad-p1
             "thinkpad" = home-manager.lib.homeManagerConfiguration {
                 # Note: I am sure this could be done better with flake-utils or something
