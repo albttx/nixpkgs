@@ -59,7 +59,11 @@
         bindkey  "^[[H"   beginning-of-line
         bindkey  "^[[F"   end-of-line
 
-        _HM_SESS_VARS_SOURCED= . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+        bindkey '^[[A' up-line-or-search
+        bindkey '^[[B' down-line-or-search
+
+
+        #_HM_SESS_VARS_SOURCED= . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
       '';
 
       plugins = [

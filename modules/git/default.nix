@@ -1,6 +1,16 @@
 { pkgs, ... }:
 
 {
+
+  home.packages = with pkgs; [
+    tig
+  ];
+
+  programs.gh = {
+    enable = true;
+    settings.git_protocol = "ssh";
+  };
+
   programs.git = {
     enable = true;
     userName = "albttx";
@@ -9,6 +19,14 @@
       key = "6ECDB1C9555BCE18";
       signByDefault = true;
     };
+
+    #extraConfig = {
+    #  gpg = {
+    #    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+    #    format = "ssh";
+    #  };
+    #};
+
 
     aliases = { };
 

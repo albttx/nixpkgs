@@ -3,7 +3,7 @@
     enable = true;
     goPath = "go";
     goBin = "go/bin";
-    package = pkgs.go_1_19;
+    package = pkgs.go;
   };
 
   home.packages = with pkgs; [
@@ -14,11 +14,5 @@
     gotools
     gotest
   ];
-
-  home.sessionVariables = {
-    GOPATH = "$(go env GOPATH)";
-    GOBIN = "$(go env GOBIN)";
-    PATH = "$PATH:$(go env GOBIN)";
-  };
 }
 

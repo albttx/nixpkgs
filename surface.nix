@@ -5,7 +5,7 @@
   # paths it should manage.
   home.username = "albttx";
   home.homeDirectory = "/home/albttx";
-  home.stateVersion = "22.05";
+  home.stateVersion = "23.05";
   home.extraOutputsToInstall = [ "doc" "info" "man" "devdoc" ];
 
   imports = [

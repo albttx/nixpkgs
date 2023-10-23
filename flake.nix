@@ -2,19 +2,38 @@
   description = "My Home Manager Flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:nixos/nixpkgs";
 
-    darwin.url = "github:lnl7/nix-darwin/master";
-    darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-doom-emacs = {
+      url = "github:nix-community/nix-doom-emacs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.emacs-overlay.follows = "emacs-overlay";
+    };
+
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      #url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    catppuccin-kitty = {
+      url = "github:catppuccin/kitty";
+      flake = false;
     };
 
     awesome-git = {
@@ -33,11 +52,19 @@
     };
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, nix-darwin, home-manager, nix-doom-emacs
+    , flake-utils, ... }@inputs:
     let
       inherit (self.lib) attrValues makeOverridable optionalAttrs singleton;
+      inherit (self) outputs;
 
       homeStateVersion = "23.05";
+
+      mkHome = modules: pkgs:
+        home-manager.lib.homeManagerConfiguration {
+          inherit modules pkgs;
+          extraSpecialArgs = { inherit inputs outputs; };
+        };
 
       # Configuration for `nixpkgs`
       nixpkgsDefaults = {
@@ -47,127 +74,50 @@
         ];
       };
 
-      primaryUserInfo = {
-        username = "albttx";
-        fullName = "";
-        email = "contact@albttx.tech";
-        nixConfigDirectory = "/Users/albttx/go/src/github.com/albttx/nixpkgs";
-      };
-
-      ciUserInfo = {
-        username = "runner";
-        fullName = "";
-        email = "github-actions@github.com";
-        nixConfigDirectory = "/Users/runner/work/nixpkgs/nixpkgs";
-      };
-
     in {
-      inherit (darwin.lib) darwinSystem;
-      #defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
-      #defaultPackage.x86_64-darwin = home-manager.defaultPackage.x86_64-darwin;
+      inherit (nix-darwin.lib) darwinSystem;
 
       lib = inputs.nixpkgs-unstable.lib.extend (_: _: {
         mkDarwinSystem = import ./lib/mkDarwinSystem.nix inputs;
         lsnix = import ./lib/lsnix.nix;
       });
 
-      commonModules = {
-        #colors = import ./modules/home/colors;
-        #my-colors = import ./home/colors.nix;
-      };
-
-      darwinModules = {
-        # My configurations
-        my-bootstrap = import ./darwin/bootstrap.nix;
-        #my-defaults = import ./darwin/defaults.nix;
-        #my-env = import ./darwin/env.nix;
-        #my-homebrew = import ./darwin/homebrew.nix;
-        #my-yabai = import ./darwin/yabai.nix;
-        #my-skhd = import ./darwin/skhd.nix;
-
-        # local modules
-        #services-emacsd = import ./modules/darwin/services/emacsd.nix;
-        users-primaryUser = import ./modules/darwin/users.nix;
-        #programs-nix-index = import ./modules/darwin/programs/nix-index.nix;
-      };
-
-
-      # specialArgs = { inherit inputs; };
-
-      overlays = import ./overlays { inherit inputs; };
-
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-
-      darwinConfigurations = rec {
+      darwinConfigurations = {
         # Mininal configurations to bootstrap systems
-        bootstrap-x86 = makeOverridable darwin.lib.darwinSystem {
+        bootstrap-x86 = nix-darwin.lib.darwinSystem {
           system = "x86_64-darwin";
           modules = [ ./darwin/bootstrap.nix { nixpkgs = nixpkgsDefaults; } ];
         };
-        bootstrap-arm = bootstrap-x86.override { system = "aarch64-darwin"; };
-
-        # My Apple Silicon macOS laptop config
-        macbook = makeOverridable self.lib.mkDarwinSystem (primaryUserInfo // {
+        bootstrap-arm = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          modules = (attrValues self.darwinModules)
-            ++ (attrValues self.commonModules) ++ singleton {
-              nixpkgs = nixpkgsDefaults;
-              networking.computerName = "guicp";
-              networking.hostName = "ghost";
-              networking.knownNetworkServices =
-                [ "Wi-Fi" "USB 10/100/1000 LAN" ];
-              nix.registry.my.flake = inputs.self;
-            };
+          modules = [ ./darwin/bootstrap.nix { nixpkgs = nixpkgsDefaults; } ];
+        };
 
-          inherit homeStateVersion;
-          homeModules = (attrValues self.homeManagerModules)
-            ++ (attrValues self.commonModules) ++ [
+        mbp-albttx = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = { inherit inputs outputs nix-doom-emacs; };
+          modules = [
+            ./machines/mbp-albttx/default.nix
+            ./darwin/services/emacsd.nix
+            home-manager.darwinModules.home-manager
 
-            ];
-        });
+             ({ config, pkgs, ... }: {
+               imports = [ ./machines/mbp-albttx/hm.nix ];
+
+                services.emacsd = {
+                  enable = true;
+                  package = pkgs.emacs-gtk;
+                };
+
+
+             })
+          ];
+        };
       };
 
       homeConfigurations = {
-        "mbp-wolf" = home-manager.lib.homeManagerConfiguration {
-          # Note: I am sure this could be done better with flake-utils or something
-          # pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-
-          extraSpecialArgs = { inherit inputs nixpkgs; };
-
-          modules = [ ./macos.nix ];
-        };
-
-        # thinkpad-p1
-        "thinkpad" = home-manager.lib.homeManagerConfiguration {
-          # Note: I am sure this could be done better with flake-utils or something
-          # pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
-          # pkgs = import nixpkgs {
-          #     inherit inputs;
-          # };
-
-          extraSpecialArgs = { inherit inputs nixpkgs; };
-
-          modules = [ ./thinkpad-p1.nix ];
-        };
-
-        "surface" = home-manager.lib.homeManagerConfiguration {
-          # Note: I am sure this could be done better with flake-utils or something
-          # pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
-          # pkgs = import nixpkgs {
-          #     inherit inputs;
-          # };
-
-          extraSpecialArgs = { inherit inputs nixpkgs; };
-
-          modules = [ ./surface.nix ];
-        };
-
+        "mbp-albttx" = mkHome [ ./machines/mbp-albttx/home.nix ]
+          nixpkgs.legacyPackages."aarch64-darwin";
       };
     };
 }
