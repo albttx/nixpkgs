@@ -34,9 +34,7 @@ in {
   environment.darwinConfig =
     "$HOME/go/src/github.com/albttx/nixpkgs/machines/mbp-albttx/default.nix";
 
-
   #environment.variables.SSH_AUTH_SOCK = "/Users/albttx/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
-
 
   # security.pki.certificateFiles = [ secrets.work_certpath ];
 

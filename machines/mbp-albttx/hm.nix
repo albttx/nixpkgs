@@ -34,7 +34,11 @@
         # import editors
         ../../modules/emacs
       ];
-
+      programs.zsh = {
+        initExtra = ''
+          eval "$(/opt/homebrew/bin/brew shellenv)"
+        '';
+      };
 
       programs.home-manager.enable = true;
 

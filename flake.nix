@@ -101,16 +101,15 @@
             ./darwin/services/emacsd.nix
             home-manager.darwinModules.home-manager
 
-             ({ config, pkgs, ... }: {
-               imports = [ ./machines/mbp-albttx/hm.nix ];
+            ({ config, pkgs, ... }: {
+              imports = [ ./machines/mbp-albttx/hm.nix ];
 
-                # services.emacsd = {
-                #   enable = true;
-                #   package = pkgs.emacs-gtk;
-                # };
+              # services.emacsd = {
+              #   enable = true;
+              #   package = pkgs.emacs-gtk;
+              # };
 
-
-             })
+            })
           ];
         };
       };

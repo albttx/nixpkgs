@@ -14,14 +14,12 @@ in {
     # theme = "Tokyo Night";
     theme = "Catppuccin-Mocha";
 
-    extraConfig = ''
-
-    '';
+    extraConfig = "\n";
 
     keybindings = {
-      "ctrl+shift+up"    = "no_op";
-      "ctrl+shift+down"  = "no_op";
-      "ctrl+shift+left"  = "no_op";
+      "ctrl+shift+up" = "no_op";
+      "ctrl+shift+down" = "no_op";
+      "ctrl+shift+left" = "no_op";
       "ctrl+shift+right" = "no_op";
 
       "super+/" = "no_op";
