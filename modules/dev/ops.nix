@@ -1,5 +1,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ ansible ];
+  home.packages = with pkgs; [
+    # Ansible suite tools
+    ansible
+  ];
+
 }
