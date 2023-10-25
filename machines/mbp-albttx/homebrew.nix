@@ -10,6 +10,12 @@
     brews = [ "cask" ];
     taps = [ "homebrew/bundle" "homebrew/cask-fonts" "homebrew/services" ];
     casks = [
+      # Fonts
+      "font-fira-mono-nerd-font"
+      "font-fira-code-nerd-font"
+      "font-jetbrains-mono-nerd-font"
+
+      # Applications
       "1password"
       "1password-cli" # need to install CLI via brew too to make biometric unlock work with GUI app
       "arc"

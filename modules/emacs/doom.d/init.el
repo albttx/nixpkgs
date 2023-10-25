@@ -81,7 +81,7 @@
        ;;gist
        (lookup +docsets +dictionary)
        lsp
-       magit             ;
+       magit
        make              ; run make tasks from Emacs
        ;;pass                ; password manager for nerds
        pdf               ; pdf enhancements
@@ -149,7 +149,7 @@
        ;;swift
        web
        yaml
-       zig
+       ;; zig
 
        :email
        ;;(mu4e +gmail)       ; WIP

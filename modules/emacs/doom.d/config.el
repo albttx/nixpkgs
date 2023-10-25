@@ -17,6 +17,7 @@
 
   (setq mac-command-modifier 'meta)
 
+(add-to-list 'auto-mode-alist '("\\.gno" . go-mode))
 
 ;  (global-set-key (kbd "s-/") 'comment-line)
 ;  (global-set-key (kbd "M-/") 'comment-line)
@@ -36,9 +37,3 @@
    :nvi "C-/" #'comment-line
    :nvi "M-/" #'comment-line
 )
-;; Configure keybindings for moving between tabs (splits)
-;;  (map! :map evil-window-map
-;;      :n "s-<left>"  #'evil-window-left
-;;      :n "s-<right>" #'evil-window-right
-;;      :n "s-<up>"    #'evil-window-up
-;;      :n "s-<down>"  #'evil-window-down)

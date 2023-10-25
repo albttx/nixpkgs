@@ -14,7 +14,7 @@
 
     nix-doom-emacs = {
       url = "github:nix-community/nix-doom-emacs";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.emacs-overlay.follows = "emacs-overlay";
     };
 
@@ -104,10 +104,10 @@
              ({ config, pkgs, ... }: {
                imports = [ ./machines/mbp-albttx/hm.nix ];
 
-                services.emacsd = {
-                  enable = true;
-                  package = pkgs.emacs-gtk;
-                };
+                # services.emacsd = {
+                #   enable = true;
+                #   package = pkgs.emacs-gtk;
+                # };
 
 
              })

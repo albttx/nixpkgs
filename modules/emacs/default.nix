@@ -4,47 +4,91 @@
   nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
 
   home.packages = with pkgs; [
+    sqlite # required by magit
+
     # basics
     fd
     git
+
     # build tools
     clang
+    cmake
+    libtool
+    # libvterm
+    libvterm-neovim # libvterm not available yet on aarch64-darwin
     coreutils
 
     #completion tools
-    #ripgrep
-    (ripgrep.override {withPCRE2 = true;})
+    ripgrep
+    silver-searcher
 
-    # :lang nix
+    # :searcher nix
     nixfmt
 
     # :lang javascript
     nodejs
     nodePackages.npm
     nodePackages.prettier
-    bun
-
-    ## lsp
     nodePackages.typescript-language-server
 
+    # TODO: install editor config
+    #nodePackages.editorconfig
+    bun
 
+    # :lang bash
+    shfmt
+
+    ## lsp
 
     # syntax color
     emacs-all-the-icons-fonts
   ];
 
-  #home = {
-  #  ".doom.d/init.el".source = ./doom.d/init.el;
-  #  ".doom.d/config.el".source = ./doom.d/config.el;
-  #  ".doom.d/packages.el".source = ./doom.d/packages.el;
-  #};
+  home.file.".doom.d" = {
+    source = ./doom.d;
+    recursive = true;
+    #onChange = builtins.readFile ./doom.sh;
+    onChange = ''
+      export PATH="$PATH:/run/current-system/sw/bin"
+      export PATH="$PATH:/nix/var/nix/profiles/default/bin"
+      export PATH="$PATH:/usr/local/bin"
+      export PATH="$PATH:/usr/bin"
 
+      EMACS_DIR="$HOME/.config/emacs"
 
-  programs.doom-emacs = {
-    enable = true;
-    doomPrivateDir = ./doom.d;
-    #	extraConfig = ''
-    #	  (setq epg-gpg-program "${pkgs.gnupg}/bin/gpg")
-    #	'';
+      if [ ! -d "$EMACS_DIR" ]; then
+        ${pkgs.git}/bin/git clone https://github.com/hlissner/doom-emacs.git $EMACS_DIR
+        yes | $EMACS_DIR/bin/doom install
+        $EMACS_DIR/bin/doom sync
+      else
+        $EMACS_DIR/bin/doom sync
+      fi
+    '';
   };
+
+  # programs.doom-emacs = {
+  #  enable = true;
+  #  doomPrivateDir = ./doom.d;
+  #  # emacsPackage = pkgs.emacs28;
+
+  #   # Only init/packages so we only rebuild when those change.
+  #   doomPackageDir = pkgs.linkFarm "doom-packages-dir" [
+  #     {
+  #       name = "init.el";
+  #       path = ./doom.d/init.el;
+  #     }
+  #     {
+  #       name = "packages.el";
+  #       path = ./doom.d/packages.el;
+  #     }
+  #     {
+  #       name = "config.el";
+  #       path = pkgs.emptyFile;
+  #     }
+  #   ];
+
+  #  extraConfig = ''
+  #    (setq epg-gpg-program "${pkgs.gnupg}/bin/gpg")
+  #  '';
+  # };
 }

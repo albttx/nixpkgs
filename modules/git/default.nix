@@ -2,9 +2,7 @@
 
 {
 
-  home.packages = with pkgs; [
-    tig
-  ];
+  home.packages = with pkgs; [ tig ];
 
   programs.gh = {
     enable = true;
@@ -20,18 +18,18 @@
       signByDefault = true;
     };
 
-    #extraConfig = {
-    #  gpg = {
-    #    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-    #    format = "ssh";
-    #  };
-    #};
-
-
+    extraConfig = {
+      color.ui = true;
+      color.diff = true;
+      core.whitespace = "trailing-space,space-before-tab";
+      diff.colorMoved = "default";
+      pull.rebase = true;
+    };
     aliases = { };
 
     ignores = [
       "*~"
+      "*.swp"
       "*.bak*" # backup files
       ".*.sw?"
       "tags" # vim swap and tag files
@@ -45,6 +43,8 @@
 
       "Session.vim" # vim session file
       ".root" # file denoting the root of a project
+
+      ".dir-locals.el"
     ];
 
   };

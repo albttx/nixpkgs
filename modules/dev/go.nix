@@ -13,6 +13,10 @@
     gotags
     gotools
     gotest
+
+    gotests
+    gomodifytags
+    gore
   ];
 }
 

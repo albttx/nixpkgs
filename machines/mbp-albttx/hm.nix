@@ -33,7 +33,6 @@
 
         # import editors
         ../../modules/emacs
-
       ];
 
 

@@ -8,6 +8,8 @@ in {
 
     ../../darwin/bootstrap.nix
     ../../darwin/services/emacsd.nix
+
+    #../../modules/emacs/doom-emacs.nix
   ];
 
   # Apps

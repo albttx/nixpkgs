@@ -13,7 +13,7 @@ endif
 # Channels
 NIX_CHANNELS := nixpkgs-master nixpkgs-stable nixpkgs-unstable nixos-stable
 HOME_CHANNELS := home-manager darwin
-EMACS_CHANNELS := emacs-overlay chemacs2
+EMACS_CHANNELS := emacs-overlay doom-emacs
 SPACEMACS_CHANNELS := spacemacs
 DOOM_CHANNELS := doomemacs
 ZSH_CHANNELS := fast-syntax-highlighting fzf-tab powerlevel10k zi zsh-colored-man-pages
@@ -66,14 +66,6 @@ fclean:
 # Remove entries from /boot/loader/entries:
 
 
-fast-update: update.nix update.zsh update.misc # fast update ignore emacs update
-update: update.nix update.emacs update.spacemacs update.zsh update.asdf update.misc
+update: update.nix update.emacs update.zsh  update.misc
 update.nix:; nix flake lock $(addprefix --update-input , $(NIX_CHANNELS))
 update.emacs:; nix flake lock $(addprefix --update-input , $(EMACS_CHANNELS))
-update.spacemacs:; nix flake lock $(addprefix --update-input , $(SPACEMACS_CHANNELS))
-update.doom:; nix flake lock $(addprefix --update-input , $(DOOM_CHANNELS))
-update.zsh:; nix flake lock $(addprefix --update-input ,$(ZSH_CHANNELS))
-update.misc:; nix flake lock $(addprefix --update-input ,$(MISC_CHANNELS))
-update.home:; nix flake lock $(addprefix --update-input , $(NIX_CHANNELS))
-update.asdf:; nix flake lock $(addprefix --update-input , $(ASDF_CHANNELS))
-
