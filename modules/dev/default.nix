@@ -1,5 +1,5 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./go.nix ./nodejs.nix ./direnv.nix ];
+  imports = [ ./go.nix ./nodejs.nix ./direnv.nix ./ops.nix ];
 }

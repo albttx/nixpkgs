@@ -24,9 +24,7 @@
         ../../modules/terminal/kitty
 
         # programming
-        ../../modules/dev/go.nix
-        ../../modules/dev/nodejs.nix
-        ../../modules/dev/direnv.nix
+        ../../modules/dev
 
         # import zsh, fxf, tmux config
         ../../modules/shells/default.nix
