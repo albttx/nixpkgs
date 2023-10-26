@@ -37,3 +37,17 @@
    :nvi "C-/" #'comment-line
    :nvi "M-/" #'comment-line
 )
+
+;; Increase window size
+;; TODO: down left and right
+(after! evil
+  (define-key evil-normal-state-map (kbd "C-S-<up>") 'evil-window-decrease-height)
+  (define-key evil-normal-state-map (kbd "C-S-<down>") 'evil-window-increase-height)
+)
+
+
+;; Move the view in the buffer
+(after! evil
+  (define-key evil-normal-state-map (kbd "C-<up>") (lambda () (interactive) (evil-scroll-up 1)))
+  (define-key evil-normal-state-map (kbd "C-<down>") (lambda () (interactive) (evil-scroll-down 1)))
+)
