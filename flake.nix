@@ -46,13 +46,13 @@
       flake = false;
     };
 
-    tmux-conf = {
+    gpakosz-tmux = {
       url = "github:gpakosz/.tmux";
       flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, nix-doom-emacs
+  outputs = { self, nixpkgs, nix-darwin, home-manager, nix-doom-emacs, gpakosz-tmux
     , flake-utils, ... }@inputs:
     let
       inherit (self.lib) attrValues makeOverridable optionalAttrs singleton;
@@ -75,12 +75,14 @@
       };
 
     in {
-      inherit (nix-darwin.lib) darwinSystem;
-
       lib = inputs.nixpkgs-unstable.lib.extend (_: _: {
         mkDarwinSystem = import ./lib/mkDarwinSystem.nix inputs;
         lsnix = import ./lib/lsnix.nix;
       });
+
+      overlays = {
+        my-libvterm = import ./overlays/libvterm.nix;
+      };
 
       darwinConfigurations = {
         # Mininal configurations to bootstrap systems
@@ -95,19 +97,20 @@
 
         mbp-albttx = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = { inherit inputs outputs nix-doom-emacs; };
+          specialArgs = { inherit inputs outputs nix-doom-emacs gpakosz-tmux; };
           modules = [
             ./machines/mbp-albttx/default.nix
             ./darwin/services/emacsd.nix
             home-manager.darwinModules.home-manager
 
-            ({ config, pkgs, ... }: {
+            # ./modules/shells/tmux.nix
+            {
+              nixpkgs = {
+                overlays = attrValues self.overlays ++ [];
+              };
+            }
+            ({ inputs, config, pkgs, ... }: {
               imports = [ ./machines/mbp-albttx/hm.nix ];
-
-              # services.emacsd = {
-              #   enable = true;
-              #   package = pkgs.emacs-gtk;
-              # };
 
             })
           ];

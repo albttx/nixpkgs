@@ -270,6 +270,22 @@
         "type": "github"
       }
     },
+    "gpakosz-tmux": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1681567899,
+        "narHash": "sha256-LkoRWds7PHsteJCDvsBpZ80zvlLtFenLU3CPAxdEHYA=",
+        "owner": "gpakosz",
+        "repo": ".tmux",
+        "rev": "fd1bbb56148101f4b286ddafd98f2ac2dcd69cd8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gpakosz",
+        "repo": ".tmux",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -586,6 +602,7 @@
         "catppuccin-kitty": "catppuccin-kitty",
         "emacs-overlay": "emacs-overlay",
         "flake-utils": "flake-utils_2",
+        "gpakosz-tmux": "gpakosz-tmux",
         "home-manager": "home-manager",
         "lain": "lain",
         "nix-darwin": "nix-darwin",
@@ -593,8 +610,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-stable": "nixpkgs-stable_2",
-        "nixpkgs-unstable": "nixpkgs-unstable",
-        "tmux-conf": "tmux-conf"
+        "nixpkgs-unstable": "nixpkgs-unstable"
       }
     },
     "rotate-text": {
@@ -671,22 +687,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "tmux-conf": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1678110674,
-        "narHash": "sha256-/1hQXNOJZ8NQkERaMgR6l4ZnOq/Sc31xv7bBBrJa7YI=",
-        "owner": "gpakosz",
-        "repo": ".tmux",
-        "rev": "a989554fbc124ec428089819f5ca81ddd500c584",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gpakosz",
-        "repo": ".tmux",
         "type": "github"
       }
     },

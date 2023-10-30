@@ -14,9 +14,8 @@
     clang
     cmake
     libtool
-    # libvterm
-    libvterm-neovim # libvterm not available yet on aarch64-darwin
     coreutils
+    # libvterm # installed with overlay my-libvterm
 
     #completion tools
     ripgrep

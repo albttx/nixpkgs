@@ -27,7 +27,7 @@
         ../../modules/dev
 
         # import zsh, fxf, tmux config
-        ../../modules/shells/default.nix
+        ../../modules/shells
 
         # import editors
         ../../modules/emacs
@@ -40,7 +40,14 @@
 
       programs.home-manager.enable = true;
 
-      home.packages = with pkgs; [ coreutils curl wget ];
+      home.packages = with pkgs; [
+        # build tool
+        coreutils
+        curl
+        wget
+
+        my-libvterm
+      ];
 
     };
   };

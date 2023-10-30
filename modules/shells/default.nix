@@ -4,7 +4,7 @@
   imports = [
     ./zsh.nix
     ./fzf.nix
-    #	./tmux.nix
+    ./tmux.nix
   ];
 
   # Htop
