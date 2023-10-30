@@ -19,6 +19,9 @@
 
 (add-to-list 'auto-mode-alist '("\\.gno" . go-mode))
 
+;; Ansible hosts file syntax color
+(add-to-list 'auto-mode-alist '("hosts\\'" . ini-mode))
+
 ;  (global-set-key (kbd "s-/") 'comment-line)
 ;  (global-set-key (kbd "M-/") 'comment-line)
 ;
