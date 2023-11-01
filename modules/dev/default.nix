@@ -8,6 +8,7 @@
     jq
 
     grpcurl
+    httpie
   ];
 
 
