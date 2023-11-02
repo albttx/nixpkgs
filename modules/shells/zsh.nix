@@ -27,6 +27,7 @@
       };
 
       shellAliases = {
+        ls = "exa";
         #TODO: add mkIf isLinux
         # pbcopy = "xclip -selection clipboard";
         # pbpaste = "xclip -selection clipboard -o";
