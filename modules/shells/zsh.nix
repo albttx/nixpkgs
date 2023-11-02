@@ -27,8 +27,9 @@
       };
 
       shellAliases = {
-        pbcopy = "xclip -selection clipboard";
-        pbpaste = "xclip -selection clipboard -o";
+        #TODO: add mkIf isLinux
+        # pbcopy = "xclip -selection clipboard";
+        # pbpaste = "xclip -selection clipboard -o";
         dckdel = "docker rm -f $(docker ps -aq)";
         fcd = "cd $(fd --type directory | fzf)";
       };
