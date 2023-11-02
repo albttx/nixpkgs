@@ -9,6 +9,12 @@
 
     grpcurl
     httpie
+
+    # basic watcher and exec
+    # find . -name "*.go" | entr -c go test -v ./...
+    entr
+
+    watch
   ];
 
 
