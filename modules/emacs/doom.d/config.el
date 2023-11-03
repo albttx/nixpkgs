@@ -13,6 +13,8 @@
 
 (setq mac-command-modifier 'meta)
 
+(setq doom-modeline-vcs-max-length 24)
+
 (add-to-list 'auto-mode-alist '("\\.gno" . go-mode))
 
 ;; Ansible hosts file syntax color
@@ -24,11 +26,15 @@
 (global-set-key (kbd "M-<down>") 'evil-window-down)
 
 
+(setq evil-move-beyond-eol t)
 (map!
  :envi "M-<up>"  #'evil-window-up
  :envi "M-<down>"  #'evil-window-down
  :envi "M-<left>"  #'evil-window-left
  :envi "M-<right>"  #'evil-window-right
+
+ :envi "<home>"  #'evil-beginning-of-line
+ :envi "<end>"   #'evil-end-of-line
 
  :nvi "C-/" #'comment-line
  :nvi "M-/" #'comment-line
