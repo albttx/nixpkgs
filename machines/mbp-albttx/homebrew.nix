@@ -22,6 +22,7 @@
       "discord"
       "docker"
       # "flameshot" # screenshot
+      "notion"
       "protonvpn"
       "raycast"
       "slack"
