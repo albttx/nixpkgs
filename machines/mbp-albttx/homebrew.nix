@@ -35,6 +35,7 @@
       # 1. `sudo tailscaled install-system-daemon`
       # 2. `tailscale up --accept-routes`
       "tailscale"
+      "telegram"
     ];
 
     masApps = {
