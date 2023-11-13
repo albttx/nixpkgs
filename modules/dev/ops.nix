@@ -7,6 +7,10 @@
     ansible-lint
 
     nomad
+
+    awscli2
+    minio-client
+    scaleway-cli
   ];
 
 }
