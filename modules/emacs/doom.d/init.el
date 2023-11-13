@@ -43,7 +43,7 @@
        file-templates
        fold              ; (nigh) universal code folding
        ;;objed
-       format            ; automated prettiness
+       (format +onsave)    ; automated prettiness
        ;;lispy             ; vim for lisp, for people who dont like vim
        multiple-cursors  ; editing in many places at once
        ;;parinfer          ; turn lisp into python, sort of
@@ -81,7 +81,7 @@
        ;;gist
        (lookup +docsets +dictionary)
        lsp
-       magit
+       (magit +forge)
        make              ; run make tasks from Emacs
        ;;pass                ; password manager for nerds
        pdf               ; pdf enhancements
