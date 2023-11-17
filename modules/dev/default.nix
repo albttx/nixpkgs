@@ -7,6 +7,9 @@
     # basic dev tools
     jq
 
+    # custom syntax color
+    grc
+
     grpcurl
     httpie
 
@@ -17,5 +20,8 @@
     watch
   ];
 
-
+  home.file.".grc" = {
+    source = ./grc;
+    recursive = true;
+  };
 }
