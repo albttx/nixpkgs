@@ -6,6 +6,10 @@
     package = pkgs.go;
   };
 
+  programs.zsh.initExtra = ''
+    export PATH="$GOPATH/bin:$PATH"
+  '';
+
   home.packages = with pkgs; [
     golangci-lint
     gofumpt

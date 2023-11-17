@@ -12,7 +12,6 @@ in {
     #../../modules/emacs/doom-emacs.nix
   ];
 
-
   programs.nix-index.enable = true;
   # Apps
   # `home-manager` currently has issues adding them to `~/Applications`
