@@ -6,6 +6,8 @@
     ansible
     ansible-lint
 
+    ipcalc
+
     nomad
 
     awscli2
