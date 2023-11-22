@@ -12,6 +12,7 @@
       "cask"
 
       "libvterm"
+      "libtool"
     ];
     taps = [ "homebrew/bundle" "homebrew/cask-fonts" "homebrew/services" ];
     casks = [
