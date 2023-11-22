@@ -270,22 +270,6 @@
         "type": "github"
       }
     },
-    "gpakosz-tmux": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1681567899,
-        "narHash": "sha256-LkoRWds7PHsteJCDvsBpZ80zvlLtFenLU3CPAxdEHYA=",
-        "owner": "gpakosz",
-        "repo": ".tmux",
-        "rev": "fd1bbb56148101f4b286ddafd98f2ac2dcd69cd8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gpakosz",
-        "repo": ".tmux",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -602,7 +586,6 @@
         "catppuccin-kitty": "catppuccin-kitty",
         "emacs-overlay": "emacs-overlay",
         "flake-utils": "flake-utils_2",
-        "gpakosz-tmux": "gpakosz-tmux",
         "home-manager": "home-manager",
         "lain": "lain",
         "nix-darwin": "nix-darwin",
