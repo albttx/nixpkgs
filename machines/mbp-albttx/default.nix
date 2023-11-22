@@ -7,8 +7,8 @@ in {
     ./homebrew.nix
 
     ../../darwin/bootstrap.nix
-    ../../darwin/services/emacsd.nix
 
+    # ../../darwin/services/emacsd.nix
     #../../modules/emacs/doom-emacs.nix
   ];
 
@@ -16,12 +16,7 @@ in {
   # Apps
   # `home-manager` currently has issues adding them to `~/Applications`
   # Issue: https://github.com/nix-community/home-manager/issues/1341
-  environment.systemPackages = with pkgs; [ emacs-gtk kitty terminal-notifier ];
-
-  #services.emacsd = {
-  #  package = pkgs.emacs-gtk;
-  #  enable = true;
-  #};
+  environment.systemPackages = with pkgs; [ kitty terminal-notifier ];
 
   fonts.fontDir.enable = false;
   fonts.fonts = with pkgs; [

@@ -1,7 +1,7 @@
 { inputs, config, lib, pkgs, nixos, system, ... }:
 
 {
-  nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+  # nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
 
   home.packages = with pkgs; [
     sqlite # required by magit
@@ -50,6 +50,7 @@
     onChange = ''
       export PATH="$PATH:/run/current-system/sw/bin"
       export PATH="$PATH:/nix/var/nix/profiles/default/bin"
+      export PATH="$PATH:/opt/homebrew/bin"
       export PATH="$PATH:/usr/local/bin"
       export PATH="$PATH:/usr/bin"
 
@@ -62,6 +63,7 @@
       else
         $EMACS_DIR/bin/doom sync
       fi
+      $EMACS_DIR/bin/doom env
     '';
   };
 

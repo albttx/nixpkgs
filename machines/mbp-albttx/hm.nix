@@ -14,7 +14,7 @@
       home.stateVersion = "23.05";
 
       imports = [
-        nix-doom-emacs.hmModule
+        #nix-doom-emacs.hmModule
 
         ../../modules/ssh
         ../../modules/git

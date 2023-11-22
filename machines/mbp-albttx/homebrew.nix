@@ -7,7 +7,12 @@
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
     onActivation.cleanup = "zap";
-    brews = [ "cask" ];
+    brews = [
+      # brew install cask
+      "cask"
+
+      "libvterm"
+    ];
     taps = [ "homebrew/bundle" "homebrew/cask-fonts" "homebrew/services" ];
     casks = [
       # Fonts
@@ -22,6 +27,8 @@
       "discord"
       "docker"
       # "flameshot" # screenshot
+      "emacs"
+
       "notion"
       "protonvpn"
       "raycast"
