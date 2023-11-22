@@ -43,6 +43,11 @@
     emacs-all-the-icons-fonts
   ];
 
+  programs.zsh.shellAliases = {
+    # emacs cli
+    e = "emacsclient --tty";
+  };
+
   home.file.".doom.d" = {
     source = ./doom.d;
     recursive = true;
