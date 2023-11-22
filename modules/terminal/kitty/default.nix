@@ -28,8 +28,14 @@ in {
       "super+down" = "no_op";
       "super+left" = "no_op";
       "super+right" = "no_op";
-    };
 
+      # hints
+      "cmd+g" =
+        "kitten hints --type=linenum --linenum-action=self emacsclient --tty +{line} {path}";
+
+      # editor
+      "cmd+e" = "launch --cwd=current --type=overlay emacsclient --tty";
+    };
     #font = {
     #  name = "Monaco";
     #  size = 14;
