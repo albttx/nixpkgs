@@ -24,10 +24,16 @@ in {
 
       "super+/" = "no_op";
 
-      "super+up" = "no_op";
-      "super+down" = "no_op";
-      "super+left" = "no_op";
-      "super+right" = "no_op";
+      "cmd+q" = "no_op";
+      "cmd+t" = "new_tab_with_cwd";
+
+      "cmd+-" = "launch --cwd=current --location=vsplit";
+      "cmd+|" = "launch --cwd=current --location=hsplit";
+
+      "super+up" = "neighboring_window up";
+      "super+down" = "neighboring_window down";
+      "super+left" = "neighboring_window left";
+      "super+right" = "neighboring_window right";
 
       # hints
       "cmd+g" =
