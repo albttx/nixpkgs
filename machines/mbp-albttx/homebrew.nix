@@ -31,6 +31,7 @@
       "emacs"
 
       "notion"
+      "orbstack"
       "protonvpn"
       "raycast"
       "slack"

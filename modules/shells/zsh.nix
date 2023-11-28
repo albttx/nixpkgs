@@ -31,6 +31,9 @@
         #TODO: add mkIf isLinux
         # pbcopy = "xclip -selection clipboard";
         # pbpaste = "xclip -selection clipboard -o";
+
+        "docker-compose" = "docker compose";
+
         dckdel = "docker rm -f $(docker ps -aq)";
         fcd = "cd $(fd --type directory | fzf)";
       };
