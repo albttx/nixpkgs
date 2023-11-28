@@ -53,11 +53,13 @@
     recursive = true;
     #onChange = builtins.readFile ./doom.sh;
     onChange = ''
+      export PATH="$PATH:/usr/bin"
+      export PATH="$PATH:/usr/local/bin"
+      export PATH="$PATH:/opt/homebrew/bin"
+      export PATH="$PATH:/home/albttx/go/bin"
       export PATH="$PATH:/run/current-system/sw/bin"
       export PATH="$PATH:/nix/var/nix/profiles/default/bin"
-      export PATH="$PATH:/opt/homebrew/bin"
-      export PATH="$PATH:/usr/local/bin"
-      export PATH="$PATH:/usr/bin"
+      export PATH="$PATH:/etc/profiles/per-user/albttx/bin/"
 
       EMACS_DIR="$HOME/.config/emacs"
 
