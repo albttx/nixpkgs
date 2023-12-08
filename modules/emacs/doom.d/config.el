@@ -53,3 +53,17 @@
   (define-key evil-normal-state-map (kbd "C-<up>") (lambda () (interactive) (evil-scroll-up 1)))
   (define-key evil-normal-state-map (kbd "C-<down>") (lambda () (interactive) (evil-scroll-down 1)))
   )
+
+
+
+;; (defun my/vertico-git-hunks ()
+;;   (interactive)
+;;   (require 'magit)
+;;   (let* ((hunks (magit-changed-hunk-sections 'unstaged))
+;;          (titles (mapcar (lambda (hunk) (oref hunk title)) hunks))
+;;          (choice (completing-read "Select hunk: " titles nil t))
+;;          (selected-hunk (seq-find (lambda (hunk) (string= (oref hunk title) choice)) hunks)))
+;;     (magit-diff-visit-file (oref selected-hunk value) (oref selected-hunk start))))
+
+;; (map! :leader
+;;       "b g" #'my/vertico-git-hunks)

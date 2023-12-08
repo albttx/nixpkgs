@@ -30,6 +30,8 @@
       # "flameshot" # screenshot
       "emacs"
 
+      "ledger-live"
+
       "notion"
       "orbstack"
       "protonvpn"
