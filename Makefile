@@ -12,7 +12,7 @@ endif
 
 # Channels
 NIX_CHANNELS := nixpkgs-master nixpkgs-stable nixpkgs-unstable nixos-stable
-HOME_CHANNELS := home-manager darwin
+HOME_CHANNELS := home-manager nix-darwin
 EMACS_CHANNELS := emacs-overlay doom-emacs
 SPACEMACS_CHANNELS := spacemacs
 DOOM_CHANNELS := doomemacs
@@ -68,4 +68,5 @@ fclean:
 
 update: update.nix update.emacs update.zsh  update.misc
 update.nix:; nix flake lock $(addprefix --update-input , $(NIX_CHANNELS))
+update.home:; nix flake lock $(addprefix --update-input , $(HOME_CHANNELS))
 update.emacs:; nix flake lock $(addprefix --update-input , $(EMACS_CHANNELS))
