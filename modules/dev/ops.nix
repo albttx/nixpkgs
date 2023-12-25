@@ -6,6 +6,8 @@
     ansible
     ansible-lint
 
+    ctop
+
     ipcalc
 
     nomad
