@@ -16,7 +16,7 @@ with builtins // lib; {
         owner = "gpakosz";
         repo = ".tmux";
         rev = "master";
-        sha256 = "sha256-Na8kyUz5oSf5tjxZF2oFJLdK4J0tjfxM+pLlWAnMgeM=";
+        sha256 = "sha256-iG7ECDWCbfdSUTuRsOgrhtveSBFY/rIGHb06V4fLUNk=";
       };
     in concatStringsSep "\n" [
       (readFile (gpakosz-tmux + "/.tmux.conf"))
