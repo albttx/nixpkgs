@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./go.nix ./nodejs.nix ./direnv.nix ./ops.nix ./python.nix ];
+  imports =
+    [ ./go.nix ./rust.nix ./nodejs.nix ./direnv.nix ./ops.nix ./python.nix ];
 
   home.packages = with pkgs; [
     # basic dev tools
