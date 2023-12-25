@@ -11,6 +11,7 @@
           pyyaml
           requests
           boto3
+          bech32
         ]))
     ];
 }
