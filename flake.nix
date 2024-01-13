@@ -2,14 +2,13 @@
   description = "My Home Manager Flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixpkgs-23.11-darwin";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     nix-doom-emacs = {
@@ -20,15 +19,15 @@
 
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
       #url = "github:nix-community/home-manager/master";
-      url = "github:nix-community/home-manager/release-23.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager/release-23.11";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     catppuccin-kitty = {
@@ -54,7 +53,7 @@
       inherit (self.lib) attrValues makeOverridable optionalAttrs singleton;
       inherit (self) outputs;
 
-      homeStateVersion = "23.05";
+      homeStateVersion = "24.05";
 
       mkHome = modules: pkgs:
         home-manager.lib.homeManagerConfiguration {

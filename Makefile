@@ -12,12 +12,11 @@ endif
 
 # Channels
 NIX_CHANNELS := nixpkgs-master nixpkgs-stable nixpkgs-unstable nixos-stable
-HOME_CHANNELS := home-manager nix-darwin
-EMACS_CHANNELS := emacs-overlay doom-emacs
-SPACEMACS_CHANNELS := spacemacs
-DOOM_CHANNELS := doomemacs
-ZSH_CHANNELS := fast-syntax-highlighting fzf-tab powerlevel10k zi zsh-colored-man-pages
-ASDF_CHANNELS := asdf-plugins
+HOME_CHANNELS := home-manager
+OSX_CHANNELS := nix-darwin
+
+EMACS_CHANNELS := emacs-overlay nix-doom-emacs
+
 MISC_CHANNELS := flake-utils flake-compat
 
 NIX_FILES := $(shell find . -type f -name '*.nix')
@@ -66,7 +65,9 @@ fclean:
 # Remove entries from /boot/loader/entries:
 
 
-update: update.nix update.emacs update.zsh  update.misc
+update: update.nix update.osx update.home
 update.nix:; nix flake lock $(addprefix --update-input , $(NIX_CHANNELS))
+update.osx:; nix flake lock $(addprefix --update-input , $(OSX_CHANNELS))
 update.home:; nix flake lock $(addprefix --update-input , $(HOME_CHANNELS))
+
 update.emacs:; nix flake lock $(addprefix --update-input , $(EMACS_CHANNELS))

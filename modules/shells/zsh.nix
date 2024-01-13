@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     oh-my-zsh
-    exa
+    eza
 
     (writeScriptBin "fzf-tmux-sessions" ''
       #!/bin/sh
@@ -27,7 +27,7 @@
       };
 
       shellAliases = {
-        ls = "exa";
+        ls = "eza";
         #TODO: add mkIf isLinux
         # pbcopy = "xclip -selection clipboard";
         # pbpaste = "xclip -selection clipboard -o";
