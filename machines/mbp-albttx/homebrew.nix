@@ -28,9 +28,11 @@
       "discord"
       "docker"
       # "flameshot" # screenshot
+      "keybase"
       "emacs"
 
       "ledger-live"
+      # "libiconv" # lib required for rust
 
       "notion"
       "orbstack"
