@@ -37,6 +37,7 @@
   fonts.enableFontDir = true;
   fonts.fonts = with pkgs; [
     recursive
+    emacs-all-the-icons-fonts
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
