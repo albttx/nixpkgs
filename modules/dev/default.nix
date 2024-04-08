@@ -19,6 +19,8 @@
     entr
 
     watch
+
+    hasura-cli
   ];
 
   home.file.".grc" = {

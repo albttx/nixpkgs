@@ -3,7 +3,7 @@
     enable = true;
     goPath = "go";
     goBin = "go/bin";
-    package = pkgs.go_1_20;
+    package = pkgs.go;
   };
 
   programs.zsh.initExtra = ''

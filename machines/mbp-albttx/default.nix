@@ -22,7 +22,9 @@ in {
   fonts.fonts = with pkgs; [
     # recursive
     emacs-all-the-icons-fonts
-    (nerdfonts.override { fonts = [ "Iosevka" "JetBrainsMono" "FiraCode" ]; })
+    (nerdfonts.override {
+      fonts = [ "Hack" "Iosevka" "JetBrainsMono" "FiraCode" ];
+    })
   ];
 
   # Use a custom configuration.nix location.

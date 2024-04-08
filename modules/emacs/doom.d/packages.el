@@ -12,8 +12,9 @@
 
 ;; required for gno
 (package! polymode)
+(package! flycheck)
 
 ;; My custom packages
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (load-file "~/.doom.d/packages/gno/gno.el")
+;; (load! "~/.doom.d/packages/gno/gno.el")

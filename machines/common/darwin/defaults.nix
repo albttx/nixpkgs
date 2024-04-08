@@ -49,10 +49,6 @@
     zsh.enable = true;
   };
 
-  # add nerd fonts
-  fonts.fontDir.enable = true;
-  fonts.fonts = with pkgs; [ (nerdfonts.override { fonts = [ "Hack" ]; }) ];
-
   #system-defaults.nix
   system.keyboard = { enableKeyMapping = true; };
   system.defaults = {
