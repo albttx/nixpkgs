@@ -18,15 +18,6 @@ in {
   # Issue: https://github.com/nix-community/home-manager/issues/1341
   environment.systemPackages = with pkgs; [ kitty terminal-notifier ];
 
-  fonts.fontDir.enable = false;
-  fonts.fonts = with pkgs; [
-    # recursive
-    emacs-all-the-icons-fonts
-    (nerdfonts.override {
-      fonts = [ "Hack" "Iosevka" "JetBrainsMono" "FiraCode" ];
-    })
-  ];
-
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   environment.darwinConfig =
