@@ -4,9 +4,13 @@
   #homebrew packages
   homebrew = {
     enable = true;
-    onActivation.autoUpdate = true;
-    onActivation.upgrade = true;
-    onActivation.cleanup = "zap";
+
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "zap";
+    };
+
     brews = [
       # brew install cask
       "cask"
@@ -14,7 +18,9 @@
       "libvterm"
       "libtool"
     ];
+
     taps = [ "homebrew/bundle" "homebrew/cask-fonts" "homebrew/services" ];
+
     casks = [
       # Fonts
       "font-fira-mono-nerd-font"

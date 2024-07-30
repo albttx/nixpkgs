@@ -22,7 +22,7 @@
     silver-searcher
 
     # :searcher nix
-    nixfmt
+    nixfmt-classic
 
     # :lang javascript
     nodejs

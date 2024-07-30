@@ -3,19 +3,14 @@
 
   inputs = {
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixpkgs-23.11-darwin";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixpkgs-24.05-darwin";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-
-    nix-doom-emacs = {
-      url = "github:nix-community/nix-doom-emacs";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.emacs-overlay.follows = "emacs-overlay";
-    };
+    # nix-doom-emacs = {
+    #   url = "github:nix-community/nix-doom-emacs";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    #   inputs.emacs-overlay.follows = "emacs-overlay";
+    # };
 
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -26,7 +21,7 @@
 
     home-manager = {
       #url = "github:nix-community/home-manager/master";
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
@@ -47,8 +42,8 @@
 
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, nix-doom-emacs
-    , flake-utils, ... }@inputs:
+  outputs =
+    { self, nixpkgs, nix-darwin, home-manager, flake-utils, ... }@inputs:
     let
       inherit (self.lib) attrValues makeOverridable optionalAttrs singleton;
       inherit (self) outputs;
@@ -90,7 +85,7 @@
 
         mbp-albttx = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = { inherit inputs outputs nix-doom-emacs; };
+          specialArgs = { inherit inputs outputs; };
           modules = [
             ./machines/mbp-albttx/default.nix
             ./darwin/services/emacsd.nix
