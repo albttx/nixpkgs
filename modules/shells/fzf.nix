@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   home.packages = [ pkgs.fd ];
@@ -37,4 +37,19 @@
     # into the bash file
     FZF_COMPLETION_TRIGGER = "\\\\";
   };
+
+  home.activation.generateFzFMarks =
+    lib.hm.dag.entryAfter [ "installPackages" ] ''
+      #!/usr/bin/env bash
+
+      DIRS=$(find $HOME/go/src -name .git -type d -prune | sort --ignore-case)
+
+      echo -n "" > $HOME/.fzf-marks
+
+      for d in $DIRS; do
+          d=$(echo $d | sed 's/\/.git//g')
+          name=$(echo $d | sed -E "s/^.*(github\.com|gitlab\.com)\///g")
+          echo "$name : $d" >> $HOME/.fzf-marks
+      done
+    '';
 }
