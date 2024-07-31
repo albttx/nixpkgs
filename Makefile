@@ -11,7 +11,7 @@ BOOTSTRAP := bootstrap-x86
 endif
 
 # Channels
-NIX_CHANNELS := nixpkgs-master nixpkgs-stable nixpkgs-unstable nixos-stable
+NIX_CHANNELS := nixpkgs-master nixpkgs-stable nixpkgs-unstable nixos-stable flake-utils
 HOME_CHANNELS := home-manager
 OSX_CHANNELS := nix-darwin
 
