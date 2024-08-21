@@ -2,7 +2,7 @@
 
 {
 
-  home.packages = with pkgs; [ tig ];
+  home.packages = with pkgs.pkgs-master; [ tig ];
 
   programs.gh = {
     enable = true;

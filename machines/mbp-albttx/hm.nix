@@ -31,6 +31,8 @@
 
         # import editors
         ../../modules/emacs
+        ../../modules/zed
+
       ];
       programs.zsh = {
         initExtra = ''
