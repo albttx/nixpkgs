@@ -55,6 +55,32 @@
   )
 
 
+;; Kill the workspace when the last window is closed
+(defun my/kill-workspace-on-last-window ()
+  "Kill the current workspace if it's the last window."
+  (when (and (bound-and-true-p +workspace-mode)
+             (= (count-windows) 1))
+    (+workspace/delete (+workspace-current-name))))
+
+(add-hook 'delete-window-hook #'my/kill-workspace-on-last-window)
+
+
+;; Override SPC TAB TAB to use consult
+(map! :leader
+      :desc "Switch workspace" "TAB TAB" #'+workspace/switch-to)
+
+
+;; Use consult for switching workspaces
+(defun +workspace/switch-to ()
+  "Use `consult` to switch to a workspace."
+  (interactive)
+  (let* ((current (or (+workspace-current-name) ""))
+         (workspace (consult--read (persp-names)
+                                   :prompt "Switch to workspace: "
+                                   :require-match t
+                                   :default current)))
+    (+workspace-switch workspace)))
+
 
 ;; (defun my/vertico-git-hunks ()
 ;;   (interactive)
