@@ -55,6 +55,10 @@
       # 2. `tailscale up --accept-routes`
       "tailscale"
       "telegram"
+
+      # zed code editor
+      # TODO: install via nix, currently it's broken
+      "zed"
     ];
 
     masApps = {

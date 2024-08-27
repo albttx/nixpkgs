@@ -31,7 +31,7 @@
 
         # import editors
         ../../modules/emacs
-        ../../modules/zed
+        # ../../modules/zed
 
       ];
       programs.zsh = {
