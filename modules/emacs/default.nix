@@ -18,6 +18,7 @@
     # libvterm # installed with overlay my-libvterm
 
     #completion tools
+    semgrep
     ripgrep
     silver-searcher
 
@@ -34,10 +35,25 @@
     #nodePackages.editorconfig
     bun
 
+    # :lang go
+    golangci-lint-langserver
+
     # :lang bash
     shfmt
 
     ## lsp
+    # (pkgs.buildGoModule {
+    #   pname = "gnopls";
+    #   version = "v0.1.0";
+    #   src = pkgs.fetchFromGitHub {
+    #     owner = "gnolang";
+    #     repo = "gnopls";
+    #     rev = "v0.1.0";
+    #     sha256 = "sha256-3LWeWIDn8+IMrXZGSJwx/9BKFoBx4puPcRFDIVq4Yiw=";
+    #   };
+    #   lsFlags = [ "-mod=mod" ];
+    #   vendorHash = "sha256-xaIv3l+7kNlywtiCg7YvP+WMVOilzCLvyOA9gGeUziQ=";
+    # })
 
     # syntax color
     emacs-all-the-icons-fonts
@@ -51,12 +67,13 @@
   home.file.".doom.d" = {
     source = ./doom.d;
     recursive = true;
+    linkType = "symbolic";
     #onChange = builtins.readFile ./doom.sh;
     onChange = ''
       export PATH="$PATH:/usr/bin"
       export PATH="$PATH:/usr/local/bin"
       export PATH="$PATH:/opt/homebrew/bin"
-      export PATH="$PATH:/home/albttx/go/bin"
+      export PATH="$PATH:$HOME/go/bin"
       export PATH="$PATH:/run/current-system/sw/bin"
       export PATH="$PATH:/nix/var/nix/profiles/default/bin"
       export PATH="$PATH:/etc/profiles/per-user/albttx/bin/"

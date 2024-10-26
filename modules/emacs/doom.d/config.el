@@ -54,7 +54,6 @@
   (define-key evil-normal-state-map (kbd "C-<down>") (lambda () (interactive) (evil-scroll-down 1)))
   )
 
-
 ;; Kill the workspace when the last window is closed
 (defun my/kill-workspace-on-last-window ()
   "Kill the current workspace if it's the last window."
@@ -81,6 +80,9 @@
                                    :default current)))
     (+workspace-switch workspace)))
 
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode t))
 
 ;; (defun my/vertico-git-hunks ()
 ;;   (interactive)
@@ -93,3 +95,7 @@
 
 ;; (map! :leader
 ;;       "b g" #'my/vertico-git-hunks)
+
+;; (add-load-path! "lisp/gno")
+;; (use-package gno
+;;   :load-path "lisp/gno")

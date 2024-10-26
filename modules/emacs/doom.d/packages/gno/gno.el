@@ -14,10 +14,11 @@
 ;;; Code:
 
 (require 'gno-mode)
+(require 'lsp-gno)
 (require 'testscripts-mode)
 
 ;; Setup lsp-gno
-;; (lsp-gno-setup)
+(lsp-gno-setup)
 
 (provide 'gno)
 

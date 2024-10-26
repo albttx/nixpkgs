@@ -94,7 +94,7 @@
        :os
        ;;arch
        macos
-       ;(:if IS-MAC macos)
+                                        ;(:if IS-MAC macos)
        ;;nixos
        tty               ; enable terminal integration
 
@@ -108,7 +108,7 @@
        ;;(csharp +unity +lsp)
        ;;common-lisp
        ;;coq
-       ;;data
+       data
        ;;dart
        ;;erlang
        ;;elixir
