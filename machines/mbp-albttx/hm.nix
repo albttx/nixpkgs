@@ -31,6 +31,7 @@
 
         # import editors
         ../../modules/emacs
+        ../../modules/vscode
         # ../../modules/zed
 
       ];
