@@ -1,7 +1,8 @@
 ;;; ~/.doom.d/init.el -*- lexical-binding: t; -*-
 
 (doom! :completion
-       (company +childframe)
+       ;; (company +childframe)
+       (corfu +orderless)
        ;;ivy
        ;;helm
        ;;ido
@@ -55,7 +56,7 @@
        dired             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        ;;ibuffer           ; interactive buffer management
-       ;;undo
+       undo
        vc
 
        :term
@@ -93,8 +94,7 @@
 
        :os
        ;;arch
-       macos
-                                        ;(:if IS-MAC macos)
+       (:if (featurep :system 'macos) macos)  ; improve compatibility with macOS
        ;;nixos
        tty               ; enable terminal integration
 

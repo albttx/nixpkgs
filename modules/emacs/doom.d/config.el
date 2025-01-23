@@ -80,9 +80,9 @@
                                    :default current)))
     (+workspace-switch workspace)))
 
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode t))
+;; (use-package flycheck
+;;   :ensure t
+;;   :init (global-flycheck-mode t))
 
 ;; (defun my/vertico-git-hunks ()
 ;;   (interactive)

@@ -413,3 +413,5 @@ tmux_conf_uninstall_plugins_on_reload=true
 bind | split-window -h
 
 unbind -n C-l
+
+set -g default-terminal "xterm-kitty"

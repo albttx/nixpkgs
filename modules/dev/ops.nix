@@ -11,6 +11,9 @@
     ipcalc
 
     nomad
+    nomad-pack
+
+    nmap
 
     awscli2
     minio-client

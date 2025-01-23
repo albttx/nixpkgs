@@ -105,7 +105,6 @@
                     (flycheck-buffer-saved-p)))
   :modes gno-mode)
 
-;;;###autoload
 (add-to-list 'flycheck-checkers 'gno-lint)
 ;;;###autoload
 (add-hook 'gno-mode-hook

@@ -27,6 +27,8 @@
       };
 
       shellAliases = {
+        icat = "kitten icat";
+
         ls = "eza";
         #TODO: add mkIf isLinux
         # pbcopy = "xclip -selection clipboard";

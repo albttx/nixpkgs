@@ -19,8 +19,6 @@
 
     trusted-users = [ "@admin" ];
 
-    auto-optimise-store = true;
-
     experimental-features = [ "nix-command" "flakes" ];
 
     keep-outputs = true;
@@ -33,6 +31,8 @@
   };
 
   nix.configureBuildUsers = true;
+
+  nix.optimise.automatic = true;
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;

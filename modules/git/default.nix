@@ -18,6 +18,9 @@
       signByDefault = true;
     };
 
+    # NOTE: master need to be used to avoid sigkill on git
+    # package = pkgs.pkgs-stable.git;
+
     extraConfig = {
       color.ui = true;
       color.diff = true;

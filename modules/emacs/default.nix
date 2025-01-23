@@ -9,6 +9,8 @@
     # basics
     fd
     git
+    # nerdfonts
+    fontconfig
 
     # build tools
     clang
@@ -23,7 +25,8 @@
     silver-searcher
 
     # :searcher nix
-    nixfmt-classic
+    # nixfmt-classic
+    nixfmt
 
     # :lang javascript
     nodejs
@@ -35,11 +38,39 @@
     #nodePackages.editorconfig
     bun
 
+    # :checkers
+    aspell
+
+    # :tools
+    dockfmt
+    # editorconfig
+
+    # :lang org
+    pngpaste
+    graphviz
+
+    # :lang python
+    black
+    python312Packages.pyflakes
+    # python312Packages.pynose
+    python312Packages.pytest
+    isort
+    pipenv
+
+    # :lang markdown
+    ispell
+    gh-markdown-preview
+
     # :lang go
     golangci-lint-langserver
 
     # :lang bash
+    shellcheck
     shfmt
+
+    # :lang web
+    # stylelint
+    jsbeautifier
 
     ## lsp
     # (pkgs.buildGoModule {
@@ -67,7 +98,6 @@
   home.file.".doom.d" = {
     source = ./doom.d;
     recursive = true;
-    linkType = "symbolic";
     #onChange = builtins.readFile ./doom.sh;
     onChange = ''
       export PATH="$PATH:/usr/bin"
