@@ -31,11 +31,14 @@
       "1password"
       "1password-cli" # need to install CLI via brew too to make biometric unlock work with GUI app
       "arc"
+      "charles"
       "discord"
       "docker"
       # "flameshot" # screenshot
       "keybase"
       "emacs"
+
+      "ghostty"
 
       "ledger-live"
       # "libiconv" # lib required for rust
@@ -44,6 +47,7 @@
       "orbstack"
       "protonvpn"
       "raycast"
+      "rectangle"
       "slack"
       "signal"
       "spotify"
