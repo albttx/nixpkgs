@@ -72,7 +72,6 @@
 
       overlays = {
         my-libvterm = import ./overlays/libvterm.nix;
-
         # Install master packages
         pkgs-master = _: prev: {
           pkgs-master = import inputs.nixpkgs-master {

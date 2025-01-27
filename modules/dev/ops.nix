@@ -11,7 +11,7 @@
     ipcalc
 
     nomad
-    nomad-pack
+    pkgs-master.nomad-pack
 
     nmap
 
