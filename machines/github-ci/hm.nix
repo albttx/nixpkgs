@@ -10,7 +10,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.albttx = {
+    users.github-ci = {
       home.stateVersion = "23.05";
 
       imports = [
