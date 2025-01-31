@@ -52,7 +52,7 @@ jobs:
 
       - name: Build nix-darwin config
         run: |
-          nix build .#darwinConfigurations.githubCI.system --extra-experimental-features nix-command flakes
+          nix build .#darwinConfigurations.githubCI.system --extra-experimental-features nix-command --extra-experimental-features flakes
 
       - name: Switch to nix-darwin env
         run: |
