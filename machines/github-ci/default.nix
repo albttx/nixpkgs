@@ -8,6 +8,8 @@ in {
     ../../darwin/bootstrap.nix
   ];
 
+  username = "github-ci";
+
   programs.nix-index.enable = true;
   # Apps
   # `home-manager` currently has issues adding them to `~/Applications`
