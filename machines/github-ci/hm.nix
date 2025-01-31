@@ -16,22 +16,22 @@
       home.stateVersion = "23.05";
 
       imports = [
-        ../../modules/ssh
-        ../../modules/git
-        ../../modules/gpg
+        # ../../modules/ssh
+        # ../../modules/git
+        # ../../modules/gpg
 
-        # terminal
-        ../../modules/terminal/kitty
+        # # terminal
+        # ../../modules/terminal/kitty
 
-        # programming
-        ../../modules/dev
+        # # programming
+        # ../../modules/dev
 
-        # import zsh, fxf, tmux config
-        ../../modules/shells
+        # # import zsh, fxf, tmux config
+        # ../../modules/shells
 
-        # import editors
-        ../../modules/emacs
-        # ../../modules/vscode
+        # # import editors
+        # ../../modules/emacs
+        # # ../../modules/vscode
         # ../../modules/zed
 
       ];
