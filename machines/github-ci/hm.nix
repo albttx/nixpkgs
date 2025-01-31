@@ -16,12 +16,12 @@
       home.stateVersion = "23.05";
 
       imports = [
-        # ../../modules/ssh
-        # ../../modules/git
-        # ../../modules/gpg
+        ../../modules/ssh
+        ../../modules/git
+        ../../modules/gpg
 
         # # terminal
-        # ../../modules/terminal/kitty
+        ../../modules/terminal/kitty
 
         # # programming
         # ../../modules/dev
