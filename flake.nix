@@ -155,7 +155,7 @@
         "mbp-albttx" = mkHome [ ./machines/mbp-albttx/hm.nix ]
           nixpkgs.legacyPackages."aarch64-darwin";
 
-        "github-ci" = mkHome [ ./machines/mbp-albttx/hm.nix ]
+        "github-ci" = mkHome [ ./machines/github-ci/hm.nix ]
           nixpkgs.legacyPackages."aarch64-darwin";
       };
     };
