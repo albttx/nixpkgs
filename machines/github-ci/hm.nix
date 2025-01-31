@@ -1,6 +1,8 @@
 { inputs, config, pkgs, lib, nix-doom-emacs, ... }:
 
 {
+  home.username = "github-ci";
+
   users.users.github-ci = {
     home = "/Users/github-ci";
     description = "github-ci";
