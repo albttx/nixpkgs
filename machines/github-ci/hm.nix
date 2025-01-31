@@ -1,8 +1,8 @@
 { inputs, config, pkgs, lib, nix-doom-emacs, ... }:
 
 {
-  users.users.ghost = {
-    home = "/Users/ghost";
+  users.users.github-ci = {
+    home = "/Users/github-ci";
     description = "ghost";
     shell = pkgs.zsh;
   };
