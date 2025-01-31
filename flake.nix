@@ -138,6 +138,7 @@
         githubCI = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           username = "github-ci";
+          specialArgs = { inherit inputs outputs; };
           modules = [
             ./machines/github-ci/default.nix
             ./darwin/services/emacsd.nix
