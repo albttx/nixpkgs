@@ -29,7 +29,7 @@
 
         # import editors
         ../../modules/emacs
-        ../../modules/vscode
+        # ../../modules/vscode
         # ../../modules/zed
 
       ];
