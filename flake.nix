@@ -153,7 +153,10 @@
       };
 
       homeConfigurations = {
-        "mbp-albttx" = mkHome [ ./machines/mbp-albttx/home.nix ]
+        "mbp-albttx" = mkHome [ ./machines/mbp-albttx/hm.nix ]
+          nixpkgs.legacyPackages."aarch64-darwin";
+
+        "github-ci" = mkHome [ ./machines/mbp-albttx/hm.nix ]
           nixpkgs.legacyPackages."aarch64-darwin";
       };
     };

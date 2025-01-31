@@ -38,16 +38,20 @@ jobs:
           name: ${{ env.CACHIX_USER }}
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-      - name: Build and switch to nix-darwin env
+      - name: Create /run directory
         run: |
-          # Create /run directory
           echo -e "run\tprivate/var/run" | sudo tee -a /etc/synthetic.conf >/dev/null
           /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t &>/dev/null || true
-          # Prevent conflict between Cachix installed by workflow and the one installed in the config
+
+      - name: Prevent conflict between Cachix installed by workflow and the one installed in the config
+        run: |
           nix-env --set-flag priority 1 cachix
 
+      - name: Build and switch to nix-darwin env
+        run: |
           # Build and Switch to config
           nix build .#darwinConfigurations.githubCI.system
+
           # Build and switch to full config
           ./result/sw/bin/darwin-rebuild switch --flake .#githubCI
 
@@ -70,9 +74,10 @@ jobs:
           name: ${{ env.CACHIX_USER }}
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
+      - name: Prevent conflict between Cachix installed by workflow and the one installed in the config
+        run: |
+          nix-env --set-flag priority 1 cachix
+
       - name: Build and switch to home-manager env
         run: |
-          # Prevent conflict between Cachix installed by workflow and the one installed in the config
-          nix-env --set-flag priority 1 cachix
-          # Build and switch to home-manager env
-          nix build ".#homeConfigurations.githubCI.activationPackage"; ./result/activate
+          nix build ".#homeConfigurations.github-ci.activationPackage"; ./result/activate
