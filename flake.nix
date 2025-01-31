@@ -117,6 +117,7 @@
 
         mbp-albttx = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
+          username = "albttx";
           specialArgs = { inherit inputs outputs; };
           modules = [
             ./machines/mbp-albttx/default.nix
@@ -136,6 +137,7 @@
 
         githubCI = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
+          username = "github-ci";
           modules = [
             ./machines/github-ci/default.nix
             ./darwin/services/emacsd.nix
