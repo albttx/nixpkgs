@@ -2,6 +2,7 @@
 
 {
   users.users.github-ci = {
+    name = "github-ci";
     home = "/Users/github-ci";
     description = "github-ci";
     shell = pkgs.zsh;
