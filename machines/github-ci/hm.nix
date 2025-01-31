@@ -1,17 +1,18 @@
 { inputs, config, pkgs, lib, nix-doom-emacs, ... }:
 
 {
-  users.users.github-ci = {
-    name = "github-ci";
-    home = "/Users/github-ci";
-    description = "github-ci";
+  users.users.runner = {
+    name = "runner";
+    home = "/Users/runner";
+    description = "runner";
     shell = pkgs.zsh;
   };
 
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.github-ci = {
+
+    users.runner = {
       home.stateVersion = "23.05";
 
       imports = [
