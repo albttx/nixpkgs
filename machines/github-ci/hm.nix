@@ -3,7 +3,7 @@
 {
   users.users.github-ci = {
     home = "/Users/github-ci";
-    description = "ghost";
+    description = "github-ci";
     shell = pkgs.zsh;
   };
 
