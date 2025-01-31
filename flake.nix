@@ -136,6 +136,7 @@
 
         githubCI = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
+          username = "github-ci";
           modules = [
             ./machines/github-ci/default.nix
             ./darwin/services/emacsd.nix
