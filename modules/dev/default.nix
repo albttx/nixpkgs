@@ -3,12 +3,12 @@
 {
   imports = [
     # modules
-    ./go.nix
-    # ./rust.nix
-    # ./nodejs.nix
-    # ./direnv.nix
-    # ./ops.nix
-    # ./python.nix
+    # ./go.nix
+    ./rust.nix
+    ./nodejs.nix
+    ./direnv.nix
+    ./ops.nix
+    ./python.nix
   ];
 
   home.packages = with pkgs; [
