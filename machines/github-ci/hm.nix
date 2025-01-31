@@ -27,7 +27,7 @@
         ../../modules/dev
 
         # # import zsh, fxf, tmux config
-        # ../../modules/shells
+        ../../modules/shells
 
         # # import editors
         ../../modules/emacs
@@ -35,6 +35,7 @@
         # ../../modules/zed
 
       ];
+
       programs.zsh = {
         initExtra = ''
           eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -51,6 +52,9 @@
 
         my-libvterm
       ];
+
+      # disabled fzf
+      home.activation.generateFzFMarks = lib.mkForce "";
 
     };
   };
