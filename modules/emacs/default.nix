@@ -108,7 +108,9 @@
       export PATH="$PATH:/nix/var/nix/profiles/default/bin"
       export PATH="$PATH:/etc/profiles/per-user/albttx/bin/"
 
+
       EMACS_DIR="$HOME/.config/emacs"
+      mkdir -p $HOME/.config
 
       if [ ! -d "$EMACS_DIR" ]; then
         ${pkgs.git}/bin/git clone https://github.com/hlissner/doom-emacs.git $EMACS_DIR

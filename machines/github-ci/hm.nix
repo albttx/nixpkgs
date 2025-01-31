@@ -30,7 +30,7 @@
         ../../modules/shells
 
         # # import editors
-        # ../../modules/emacs
+        ../../modules/emacs
         # ../../modules/vscode
         # ../../modules/zed
 
