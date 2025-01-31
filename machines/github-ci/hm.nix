@@ -24,7 +24,7 @@
         ../../modules/terminal/kitty
 
         # # programming
-        # ../../modules/dev
+        ../../modules/dev
 
         # # import zsh, fxf, tmux config
         ../../modules/shells
