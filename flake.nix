@@ -134,6 +134,22 @@
             })
           ];
         };
+
+        githubCI = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            ./machines/github-ci/default.nix
+            ./darwin/services/emacsd.nix
+            home-manager.darwinModules.home-manager
+
+            # ./modules/shells/tmux.nix
+            { nixpkgs = { overlays = attrValues self.overlays ++ [ ]; }; }
+            ({ inputs, config, pkgs, ... }: {
+              imports = [ ./machines/github-ci/hm.nix ];
+            })
+          ];
+
+        };
       };
 
       homeConfigurations = {
