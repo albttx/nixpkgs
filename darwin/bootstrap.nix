@@ -6,6 +6,7 @@
   nix.settings = {
     substituters = [
       "https://cache.nixos.org/"
+      "https://albttx.cachix.org"
       "https://gfanton.cachix.org"
       "https://moul.cachix.org"
       "https://nix-community.cachix.org"
