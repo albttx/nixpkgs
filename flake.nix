@@ -20,7 +20,6 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
-      #url = "github:nix-community/home-manager/master";
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
@@ -134,10 +133,30 @@
             })
           ];
         };
+
+        githubCI = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./machines/github-ci/default.nix
+            ./darwin/services/emacsd.nix
+            home-manager.darwinModules.home-manager
+
+            # ./modules/shells/tmux.nix
+            { nixpkgs = { overlays = attrValues self.overlays ++ [ ]; }; }
+            ({ inputs, config, pkgs, ... }: {
+              imports = [ ./machines/github-ci/hm.nix ];
+            })
+          ];
+
+        };
       };
 
       homeConfigurations = {
-        "mbp-albttx" = mkHome [ ./machines/mbp-albttx/home.nix ]
+        "mbp-albttx" = mkHome [ ./machines/mbp-albttx/hm.nix ]
+          nixpkgs.legacyPackages."aarch64-darwin";
+
+        "github-ci" = mkHome [ ./machines/github-ci/hm.nix ]
           nixpkgs.legacyPackages."aarch64-darwin";
       };
     };

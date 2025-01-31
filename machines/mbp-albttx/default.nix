@@ -30,4 +30,30 @@ in {
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
+
+  system = {
+    defaults = {
+      dock = {
+        autohide = true;
+        autohide-delay = 0.0;
+        orientation = "left";
+      };
+
+      CustomUserPreferences = {
+        "com.apple.mail" = {
+          InboxViewerAttributes = {
+            # DisplayInThreadedMode = "yes";
+            # DisableInlineAttachmentViewing = true;
+            # SortedDescending = "yes";
+            # SortOrder = "received-date";
+          };
+          NSUserKeyEquivalents = {
+            # Send = "@U21a9"; # cmd + enter
+            Archive = "\\U007F"; # delete
+          };
+        };
+      };
+
+    };
+  };
 }
