@@ -27,7 +27,7 @@
         ../../modules/dev
 
         # # import zsh, fxf, tmux config
-        ../../modules/shells
+        # ../../modules/shells
 
         # # import editors
         ../../modules/emacs
