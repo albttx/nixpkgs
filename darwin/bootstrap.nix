@@ -33,6 +33,7 @@
   };
 
   nix.configureBuildUsers = true;
+  ids.uids.nixbld = lib.mkForce 30000;
 
   nix.optimise.automatic = true;
 

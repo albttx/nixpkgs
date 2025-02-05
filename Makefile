@@ -35,7 +35,7 @@ switch.bootstrap: result/sw/bin/darwin-rebuild
 	TERM=xterm ./result/sw/bin/darwin-rebuild switch ${impure} --verbose --flake .#mbp-albttx
 
 result/sw/bin/darwin-rebuild:
-	nix --experimental-features 'flakes nix-command' build ".#darwinConfigurations.$(BOOTSTRAP).system"
+	nix --experimental-features 'flakes nix-command' build ".#darwinConfigurations.$(BOOTSTRAP).system" --option sandbox false
 
 
 endif # end osx
