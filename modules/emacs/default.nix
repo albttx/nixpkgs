@@ -42,7 +42,7 @@
     aspell
 
     # :tools
-    dockfmt
+    # dockfmt
     # editorconfig
 
     # :lang org
