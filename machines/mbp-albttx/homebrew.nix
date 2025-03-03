@@ -17,6 +17,8 @@
 
       "libvterm"
       "libtool"
+
+      "supabase/tap/supabase"
     ];
 
     taps = [ "homebrew/bundle" "homebrew/cask-fonts" "homebrew/services" ];
@@ -32,6 +34,7 @@
       "1password-cli" # need to install CLI via brew too to make biometric unlock work with GUI app
       "arc"
       "charles"
+      "cursor"
       "discord"
       "docker"
       # "flameshot" # screenshot

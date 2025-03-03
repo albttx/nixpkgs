@@ -15,6 +15,8 @@
     # basic dev tools
     jq
 
+    tree
+
     # custom syntax color
     grc
 
@@ -28,6 +30,7 @@
     watch
 
     hasura-cli
+    # pkgs-master.supabase-cli
   ];
 
   home.file.".grc" = {

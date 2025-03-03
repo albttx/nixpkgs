@@ -7,6 +7,8 @@
   programs.gh = {
     enable = true;
     settings.git_protocol = "ssh";
+
+    package = pkgs.pkgs-master.gh;
   };
 
   programs.git = {
