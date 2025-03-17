@@ -13,7 +13,7 @@
     # package = lib.mkDefault pkgs.nix;
     package = pkgs.nix;
     settings = {
-      experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+      experimental-features = [ "nix-command" "flakes" ];
       warn-dirty = false;
       sandbox = "relaxed";
     };
@@ -31,7 +31,7 @@
     };
   };
 
-  services.activate-system.enable = true;
+  # services.activate-system.enable = true;
   services.nix-daemon.enable = true;
   programs.nix-index.enable = true;
 

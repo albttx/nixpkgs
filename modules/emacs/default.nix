@@ -55,7 +55,7 @@
     # python312Packages.pynose
     python312Packages.pytest
     isort
-    pipenv
+    # pipenv
 
     # :lang markdown
     ispell

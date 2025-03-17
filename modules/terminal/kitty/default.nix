@@ -12,7 +12,7 @@ in {
     enable = true;
     # Pick "name" from https://github.com/kovidgoyal/kitty-themes/blob/master/themes.json
     # theme = "Tokyo Night";
-    theme = "Catppuccin-Mocha";
+    themeFile = "Catppuccin-Mocha";
 
     extraConfig = "\n";
 
