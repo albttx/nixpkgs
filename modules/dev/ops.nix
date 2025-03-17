@@ -10,7 +10,7 @@
 
     ipcalc
 
-    nomad
+    pkgs-master.nomad
     pkgs-master.nomad-pack
 
     nmap
