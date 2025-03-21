@@ -13,6 +13,8 @@
     pkgs-master.nomad
     pkgs-master.nomad-pack
 
+    postgresql
+
     nmap
 
     awscli2
