@@ -1,7 +1,7 @@
 { pkgs, inputs, lib, ... }:
 with builtins // lib; {
   # home.file.".tmux.conf".source = "${inputs.gpakosz-tmux}/.tmux.conf";
-  home.file.".tmux.conf.local".source = ./configs/tmux.conf.local;
+  home.file.".config/tmux/tmux.conf.local".source = ./configs/tmux.conf.local;
 
   # programs.tmux = {
   #   enable = true;
@@ -20,7 +20,7 @@ with builtins // lib; {
       };
     in concatStringsSep "\n" [
       (readFile (gpakosz-tmux + "/.tmux.conf"))
-      (readFile (./configs/tmux.conf.local))
+      # (readFile (./configs/tmux.conf.local))
       # (readFile (gpakosz-tmux + "/.tmux.conf.local"))
     ];
   };
