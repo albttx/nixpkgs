@@ -13,6 +13,8 @@
     pkgs-master.nomad
     pkgs-master.nomad-pack
 
+    pkgs-master.terraform
+
     postgresql
 
     nmap
