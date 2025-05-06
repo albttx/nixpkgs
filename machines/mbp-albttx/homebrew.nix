@@ -74,6 +74,9 @@
       Numbers = 409203825;
       Pages = 409201541;
       Xcode = 497799835;
+      Perplexity = 6714467650;
+      WhatsApp = 310633997;
+      Todoist = 585829637;
     };
   };
 }
