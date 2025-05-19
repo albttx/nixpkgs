@@ -42,6 +42,7 @@
       "emacs"
 
       "ghostty"
+      "google-chrome"
 
       "ledger-live"
       # "libiconv" # lib required for rust
