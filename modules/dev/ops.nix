@@ -23,6 +23,22 @@
     minio-client
     scaleway-cli
 
+    speedtest-cli
+
+    ## tfreveal
+    (pkgs-master.buildGo124Module {
+      pname = "tfreveal";
+      version = "v0.0.4";
+      src = pkgs.fetchFromGitHub {
+        owner = "breml";
+        repo = "tfreveal";
+        rev = "v0.0.4";
+        sha256 = "sha256-Bd6AYQZcVGHWjubax9v/guRPFoONSrfOqY23wrzA/ts=";
+      };
+      lsFlags = [ "-mod=mod" ];
+      vendorHash = "sha256-lxYR29P6XvRF+qQ1/Z0TG/hFOcraNBJFdWBkpSiRVt8=";
+    })
+
     ## tmtop
     (pkgs-master.buildGo122Module {
       pname = "tmtop";
@@ -44,7 +60,6 @@
         mv $GOPATH/bin/cmd $out/bin/tmtop
         runHook postInstall
       '';
-
     })
 
   ];
