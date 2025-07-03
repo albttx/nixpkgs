@@ -45,6 +45,7 @@
       "google-chrome"
 
       "ledger-live"
+      "little-snitch"
       # "libiconv" # lib required for rust
 
       "notion"
