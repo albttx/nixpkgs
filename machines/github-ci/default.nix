@@ -25,5 +25,5 @@ in {
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
 
-  system.primaryUser = "ci";
+  system.primaryUser = "runner";
 }
