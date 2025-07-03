@@ -57,7 +57,7 @@ jobs:
       - name: Switch to nix-darwin env
         run: |
           # Build and switch to full config
-          ./result/sw/bin/darwin-rebuild switch --flake .#githubCI
+          sudo ./result/sw/bin/darwin-rebuild switch --flake .#githubCI
 
   # build-linux-env:
   #   name: Build/cache Linux Nix env
