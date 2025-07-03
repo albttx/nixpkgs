@@ -9,7 +9,7 @@
     #(yarn.override {nodejs = nodejs-16_x;})
   ];
 
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = ''
     export PATH="$PATH:$HOME/.yarn/bin"
   '';
 }

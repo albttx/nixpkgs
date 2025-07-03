@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixpkgs-24.11-darwin";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # nix-doom-emacs = {
@@ -13,14 +13,14 @@
     # };
 
     nix-darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-24.11";
+      url = "github:LnL7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
@@ -47,7 +47,7 @@
       inherit (self.lib) attrValues makeOverridable optionalAttrs singleton;
       inherit (self) outputs;
 
-      homeStateVersion = "24.11";
+      homeStateVersion = "25.05";
 
       mkHome = modules: pkgs:
         home-manager.lib.homeManagerConfiguration {

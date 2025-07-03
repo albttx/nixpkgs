@@ -5,7 +5,6 @@
   nix.binaryCachePublicKeys =
     [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
   nix.trustedUsers = [ "@admin" ];
-  users.nix.configureBuildUsers = true;
 
   # Enable experimental nix command and flakes
   # nix.package = pkgs.nixUnstable;
@@ -17,9 +16,6 @@
 
   # Create /etc/bashrc that loads the nix-darwin environment.
   programs.zsh.enable = true;
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
 
   # Apps
   # `home-manager` currently has issues adding them to `~/Applications`
@@ -45,6 +41,5 @@
   system.keyboard.remapCapsLockToEscape = true;
 
   # Add ability to used TouchID for sudo authentication
-  security.pam.enableSudoTouchIdAuth = true;
-
+  security.pam.services.sudo_local.touchIdAuth = true;
 }

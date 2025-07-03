@@ -34,6 +34,8 @@ in {
   system.stateVersion = 4;
 
   system = {
+    primaryUser = "albttx";
+
     defaults = {
       dock = {
         autohide = true;

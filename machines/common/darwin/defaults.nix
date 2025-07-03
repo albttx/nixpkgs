@@ -18,8 +18,6 @@
       sandbox = "relaxed";
     };
 
-    configureBuildUsers = true;
-
     gc = {
       automatic = true;
       interval = {
@@ -32,7 +30,6 @@
   };
 
   # services.activate-system.enable = true;
-  services.nix-daemon.enable = true;
   programs.nix-index.enable = true;
 
   environment = {
@@ -96,5 +93,5 @@
   '';
 
   # Use touch ID for sudo auth
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 }

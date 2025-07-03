@@ -207,7 +207,7 @@ in {
   };
 
   programs.zsh = {
-    initExtra = ''
+    initContent = ''
       export EDITOR="nvim"
     '';
   };
