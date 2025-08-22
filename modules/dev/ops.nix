@@ -17,6 +17,8 @@
 
     postgresql
 
+    lz4
+
     nmap
 
     awscli2
