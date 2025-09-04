@@ -47,7 +47,7 @@
       inherit (self.lib) attrValues makeOverridable optionalAttrs singleton;
       inherit (self) outputs;
 
-      homeStateVersion = "25.05";
+      homeStateVersion = "25.11";
 
       mkHome = modules: pkgs:
         home-manager.lib.homeManagerConfiguration {
