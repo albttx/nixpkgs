@@ -38,6 +38,8 @@
       programs.zsh = {
         initContent = ''
           eval "$(/opt/homebrew/bin/brew shellenv)"
+
+          export PATH="$HOME/.orbstack/bin:$PATH"
         '';
       };
 

@@ -36,7 +36,7 @@
       "charles"
       "cursor"
       "discord"
-      "docker"
+      # "docker"
       # "flameshot" # screenshot
       "keybase"
       "emacs"
