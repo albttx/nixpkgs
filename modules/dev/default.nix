@@ -30,6 +30,8 @@
     watch
 
     hasura-cli
+
+    pkgs-master.nhost-cli
     # pkgs-master.supabase-cli
   ];
 
