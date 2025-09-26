@@ -31,7 +31,8 @@
 
     hasura-cli
 
-    pkgs-master.nhost-cli
+    # pkgs-master.nhost-cli
+    mcp-nhost
     # pkgs-master.supabase-cli
   ];
 

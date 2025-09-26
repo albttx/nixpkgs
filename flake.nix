@@ -39,6 +39,10 @@
       flake = false;
     };
 
+    mcp-nhost = {
+      url = "github:nhost/mcp-nhost";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
   };
 
   outputs =
@@ -71,6 +75,10 @@
 
       overlays = {
         my-libvterm = import ./overlays/libvterm.nix;
+        mcp-nhost = _: prev: {
+          mcp-nhost = inputs.mcp-nhost.packages.${prev.stdenv.system}.mcp-nhost;
+        };
+
         # Install master packages
         pkgs-master = _: prev: {
           pkgs-master = import inputs.nixpkgs-master {

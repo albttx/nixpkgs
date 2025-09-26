@@ -18,10 +18,10 @@
       "libvterm"
       "libtool"
 
-      "supabase/tap/supabase"
+      "supabase"
     ];
 
-    taps = [ "homebrew/bundle" "homebrew/cask-fonts" "homebrew/services" ];
+    taps = [ "homebrew/bundle" "homebrew/cask-fonts" "homebrew/services" "supabase/tap" ];
 
     casks = [
       # Fonts
@@ -36,16 +36,17 @@
       "charles"
       "cursor"
       "discord"
+      "displaybuddy"
       # "docker"
       # "flameshot" # screenshot
       "keybase"
-      "emacs"
+      "emacs-app"
 
       "ghostty"
       "google-chrome"
 
       "ledger-live"
-      "little-snitch"
+      # "little-snitch"
       # "libiconv" # lib required for rust
 
       "notion"
@@ -62,8 +63,11 @@
       #  https://github.com/tailscale/tailscale/wiki/Tailscaled-on-macOS#run-the-tailscaled-daemon
       # 1. `sudo tailscaled install-system-daemon`
       # 2. `tailscale up --accept-routes`
-      "tailscale"
+      "tailscale-app"
       "telegram"
+      "todoist-app"
+
+      "whatsapp"
 
       # zed code editor
       # TODO: install via nix, currently it's broken
@@ -77,8 +81,6 @@
       Pages = 409201541;
       Xcode = 497799835;
       Perplexity = 6714467650;
-      WhatsApp = 310633997;
-      Todoist = 585829637;
     };
   };
 }
