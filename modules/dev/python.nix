@@ -21,6 +21,7 @@
           opencv
           pep8
           pylsp-mypy
+          # python-telegram-bot
           pytorch
           # tensorflow
           # tensorflow_avx2
