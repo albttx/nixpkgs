@@ -66,8 +66,7 @@ fclean:
 
 
 update: update.nix update.osx update.home
-update.nix:; nix flake lock $(addprefix --update-input , $(NIX_CHANNELS))
-update.osx:; nix flake lock $(addprefix --update-input , $(OSX_CHANNELS))
-update.home:; nix flake lock $(addprefix --update-input , $(HOME_CHANNELS))
-
-update.emacs:; nix flake lock $(addprefix --update-input , $(EMACS_CHANNELS))
+update.nix:; nix flake update $(NIX_CHANNELS)
+update.osx:; nix flake update $(OSX_CHANNELS)
+update.home:; nix flake update $(HOME_CHANNELS)
+update.emacs:; nix flake update $(EMACS_CHANNELS)

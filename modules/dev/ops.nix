@@ -42,14 +42,14 @@
     })
 
     ## tmtop
-    (pkgs-master.buildGo122Module {
+    (pkgs-master.buildGoModule {
       pname = "tmtop";
-      version = "v2.0.2";
+      version = "v2.1.0";
       src = pkgs.fetchFromGitHub {
         owner = "QuokkaStake";
         repo = "tmtop";
-        rev = "v2.0.2";
-        sha256 = "sha256-n/vn7zHB5p/GTalDM+H92pZevyGmUHGsO1b/aQnEb1E=";
+        rev = "v2.1.0";
+        sha256 = "sha256-1Vq25HToIfrUcB0mGPsKTExupR3DsWZirGIuyX2uuWY=";
       };
       subPackages = [ "cmd" ];
       lsFlags = [ "-mod=mod" ];
