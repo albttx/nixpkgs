@@ -8,7 +8,7 @@
 (package! ini-mode)
 
 (package! yaml-pro)
-
+;; (package! color-theme-approximate)
 (package! consult)
 
 ;; required for gno

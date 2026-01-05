@@ -25,7 +25,6 @@
 (global-set-key (kbd "M-<up>") 'evil-window-up)
 (global-set-key (kbd "M-<down>") 'evil-window-down)
 
-
 (setq evil-move-beyond-eol t)
 (map!
  :envi "M-<up>"  #'evil-window-up
@@ -99,3 +98,8 @@
 ;; (add-load-path! "lisp/gno")
 ;; (use-package gno
 ;;   :load-path "lisp/gno")
+
+;;(use-package color-theme-approximate
+;;  :config
+;;  (color-theme-approximate-on)
+;;  )

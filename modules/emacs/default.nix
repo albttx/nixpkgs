@@ -91,7 +91,8 @@
 
   programs.zsh.shellAliases = {
     # emacs cli
-    e = "emacsclient --tty";
+    # e = "emacsclient --tty";
+    e = "$HOME/.config/emacs/bin/doom emacs";
   };
 
   home.file.".doom.d" = {
@@ -103,6 +104,7 @@
       export PATH="$PATH:/usr/local/bin"
       export PATH="$PATH:/opt/homebrew/bin"
       export PATH="$PATH:$HOME/go/bin"
+      export PATH="$PATH:$HOME/.config/emacs/bin"
       export PATH="$PATH:/run/current-system/sw/bin"
       export PATH="$PATH:/nix/var/nix/profiles/default/bin"
       export PATH="$PATH:/etc/profiles/per-user/albttx/bin/"
