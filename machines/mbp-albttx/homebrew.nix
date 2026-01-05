@@ -45,7 +45,7 @@
       "ghostty"
       "google-chrome"
 
-      "ledger-live"
+      "ledger-wallet"
       # "little-snitch"
       # "libiconv" # lib required for rust
 
