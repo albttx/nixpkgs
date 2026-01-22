@@ -21,7 +21,12 @@
       "supabase"
     ];
 
-    taps = [ "homebrew/bundle" "homebrew/cask-fonts" "homebrew/services" "supabase/tap" ];
+    taps = [
+      "homebrew/bundle"
+      "homebrew/cask-fonts"
+      "homebrew/services"
+      "supabase/tap"
+    ];
 
     casks = [
       # Fonts
@@ -67,6 +72,7 @@
       "telegram"
       "todoist-app"
 
+      "unity"
       "whatsapp"
 
       # zed code editor
