@@ -36,7 +36,7 @@
     # pkgs-master.supabase-cli
 
     # ai tools
-    claude-code
+    pkgs-master.claude-code
   ];
 
   home.file.".grc" = {
