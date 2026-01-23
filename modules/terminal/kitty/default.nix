@@ -40,7 +40,7 @@ in {
         "kitten hints --type=linenum --linenum-action=self emacsclient --tty +{line} {path}";
 
       # editor
-      "cmd+e" = "launch --cwd=current --type=overlay emacsclient --tty";
+      "cmd+e" = "launch --cwd=current --type=overlay doom emacs";
     };
     #font = {
     #  name = "Monaco";

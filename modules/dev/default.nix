@@ -34,6 +34,9 @@
     # pkgs-master.nhost-cli
     mcp-nhost
     # pkgs-master.supabase-cli
+
+    # ai tools
+    claude-code
   ];
 
   home.file.".grc" = {

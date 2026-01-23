@@ -89,6 +89,10 @@
     emacs-all-the-icons-fonts
   ];
 
+  programs.zsh.initContent = ''
+    export PATH="$HOME/.config/emacs/bin:$PATH"
+  '';
+
   programs.zsh.shellAliases = {
     # emacs cli
     # e = "emacsclient --tty";
