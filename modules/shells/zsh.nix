@@ -40,6 +40,10 @@
         fcd = "cd $(fd --type directory | fzf)";
       };
 
+      initExtra = ''
+        mcd() { mkdir -p "$1" && cd "$1"; }
+      '';
+
       initContent = let p10k-config = "${config.home.homeDirectory}/.p10k.zsh";
       in ''
         if [ -e "${p10k-config}" ]
