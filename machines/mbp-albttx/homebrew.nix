@@ -56,7 +56,11 @@
 
       "notion"
       "orbstack"
+
       "protonvpn"
+      "proton-drive"
+      "proton-mail"
+
       "raycast"
       "rectangle"
       "slack"
