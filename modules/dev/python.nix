@@ -9,7 +9,7 @@
           autopep8
           boto3
           bech32
-          # black
+          black
           # flake8
           ipykernel
           ipython
@@ -22,7 +22,7 @@
           pep8
           pylsp-mypy
           # python-telegram-bot
-          pytorch
+          torch
           # tensorflow
           # tensorflow_avx2
           torchvision

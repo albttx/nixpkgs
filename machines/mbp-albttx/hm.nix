@@ -10,6 +10,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    backupFileExtension = "backup";
     users.albttx = {
       home.stateVersion = "23.05";
 

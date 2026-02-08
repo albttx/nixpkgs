@@ -27,14 +27,7 @@
     # :searcher nix
     nixfmt-classic
 
-    # :lang javascript
-    nodejs
-    nodePackages.npm
-    nodePackages.prettier
-    nodePackages.typescript-language-server
-
-    # TODO: install editor config
-    #nodePackages.editorconfig
+    # :lang javascript (nodejs + nodePackages come from modules/dev/nodejs.nix to avoid duplicate derivations)
     bun
 
     # :checkers
@@ -49,10 +42,11 @@
     graphviz
 
     # :lang python
-    black
-    python312Packages.pyflakes
+    # black is provided by modules/dev/python.nix (in python3.withPackages environment)
+    # black
+    #python312Packages.pyflakes
     # python312Packages.pynose
-    python312Packages.pytest
+    #python312Packages.pytest
     isort
     # pipenv
 

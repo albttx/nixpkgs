@@ -3,11 +3,14 @@
 {
   programs.ssh = {
     enable = true;
-    controlMaster = "no";
-    forwardAgent = true;
-    hashKnownHosts = true;
+    enableDefaultConfig = false;
 
     matchBlocks = {
+      "*" = {
+        controlMaster = "no";
+        forwardAgent = true;
+        hashKnownHosts = true;
+      };
       "github.com" = {
         identityFile = "~/.ssh/albttx";
         hostname = "github.com";

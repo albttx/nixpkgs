@@ -34,7 +34,8 @@ in {
     viAlias = true;
     vimdiffAlias = true;
     withPython3 = true;
-    withNodeJs = true;
+    # Disabled to avoid duplicate nodejs - nodejs is provided by modules/dev/nodejs.nix
+    withNodeJs = false;
     withRuby = false;
 
     extraPython3Packages = (ps: with ps; [ pynvim ]);
