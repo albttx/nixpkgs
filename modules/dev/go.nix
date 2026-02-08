@@ -1,9 +1,11 @@
 { config, pkgs, ... }: {
   programs.go = {
     enable = true;
-    goPath = "go";
-    goBin = "go/bin";
     package = pkgs.go_1_24;
+    env = {
+      GOPATH = "go";
+      GOBIN = "go/bin";
+    };
   };
 
   programs.zsh.initContent = ''

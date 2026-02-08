@@ -19,7 +19,7 @@
     zsh = {
       enable = true;
       enableCompletion = false;
-      dotDir = ".config/zsh";
+      dotDir = "${config.home.homeDirectory}/.config/zsh";
 
       oh-my-zsh = {
         enable = true;
@@ -40,12 +40,10 @@
         fcd = "cd $(fd --type directory | fzf)";
       };
 
-      initExtra = ''
-        mcd() { mkdir -p "$1" && cd "$1"; }
-      '';
-
       initContent = let p10k-config = "${config.home.homeDirectory}/.p10k.zsh";
       in ''
+        mcd() { mkdir -p "$1" && cd "$1"; }
+
         if [ -e "${p10k-config}" ]
         then
           source "${p10k-config}"

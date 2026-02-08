@@ -13,8 +13,6 @@
 
   programs.git = {
     enable = true;
-    userName = "albttx";
-    userEmail = "contact@albttx.tech";
     signing = {
       key = "6ECDB1C9555BCE18";
       signByDefault = true;
@@ -23,14 +21,18 @@
     # NOTE: master need to be used to avoid sigkill on git
     # package = pkgs.pkgs-stable.git;
 
-    extraConfig = {
+    settings = {
+      user = {
+        name = "albttx";
+        email = "contact@albttx.tech";
+      };
+      alias = { };
       color.ui = true;
       color.diff = true;
       core.whitespace = "trailing-space,space-before-tab";
       diff.colorMoved = "default";
       pull.rebase = true;
     };
-    aliases = { };
 
     ignores = [
       "*~"
