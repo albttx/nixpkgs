@@ -12,14 +12,15 @@ inputs.darwin.lib.darwinSystem {
     inputs.nix-homebrew.darwinModules.nix-homebrew
     {
       nixpkgs = {
-        config = { allowUnfree = true; };
+        config = {
+          allowUnfree = true;
+        };
         overlays = overlays;
       };
 
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.${username} =
-        import ../users/${username}/home-manager.nix;
+      home-manager.users.${username} = import ../users/${username}/home-manager.nix;
 
       nix-homebrew = {
         enable = true;

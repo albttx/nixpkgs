@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   services.picom = {
     enable = true;
     extraArgs = [ "--legacy-backends" ];
@@ -31,6 +37,5 @@
     };
   };
 
-  systemd.user.services.picom.Install.WantedBy =
-    lib.mkForce [ "x11-session.target" ];
+  systemd.user.services.picom.Install.WantedBy = lib.mkForce [ "x11-session.target" ];
 }

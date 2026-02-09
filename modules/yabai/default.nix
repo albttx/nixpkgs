@@ -1,5 +1,12 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  services.yabai = { enable = false; };
+  services.yabai = {
+    enable = false;
+  };
 }

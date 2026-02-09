@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   #theme = import ../../../themes/catppuccin/mocha.nix;
   #theme = import ../../../themes/solarized.nix;
@@ -6,7 +11,8 @@ let
   #theme = config.colors.catppuccin-macchiato;
   #theme = config.colors.solarized-dark;
   #theme = config.colors.catppuccin-mocha;
-in {
+in
+{
   # Better terminal, with good rendering.
   programs.kitty = {
     enable = true;
@@ -36,8 +42,7 @@ in {
       "super+right" = "neighboring_window right";
 
       # hints
-      "cmd+g" =
-        "kitten hints --type=linenum --linenum-action=self emacsclient --tty +{line} {path}";
+      "cmd+g" = "kitten hints --type=linenum --linenum-action=self emacsclient --tty +{line} {path}";
 
       # editor
       "cmd+e" = "launch --cwd=current --type=overlay doom emacs";

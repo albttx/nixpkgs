@@ -1,4 +1,12 @@
-{ inputs, config, lib, pkgs, nixos, system, ... }:
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  nixos,
+  system,
+  ...
+}:
 
 {
   # nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];

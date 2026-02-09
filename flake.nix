@@ -46,14 +46,27 @@
   };
 
   outputs =
-    { self, nixpkgs, nix-darwin, home-manager, flake-utils, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      nix-darwin,
+      home-manager,
+      flake-utils,
+      ...
+    }@inputs:
     let
-      inherit (self.lib) attrValues makeOverridable optionalAttrs singleton;
+      inherit (self.lib)
+        attrValues
+        makeOverridable
+        optionalAttrs
+        singleton
+        ;
       inherit (self) outputs;
 
       homeStateVersion = "25.11";
 
-      mkHome = modules: pkgs:
+      mkHome =
+        modules: pkgs:
         home-manager.lib.homeManagerConfiguration {
           inherit modules pkgs;
           extraSpecialArgs = { inherit inputs outputs; };
@@ -61,17 +74,22 @@
 
       # Configuration for `nixpkgs`
       nixpkgsDefaults = {
-        config = { allowUnfree = true; };
+        config = {
+          allowUnfree = true;
+        };
         overlays = attrValues self.overlays ++ [
           # put stuff here
         ];
       };
 
-    in {
-      lib = inputs.nixpkgs-unstable.lib.extend (_: _: {
-        mkDarwinSystem = import ./lib/mkDarwinSystem.nix inputs;
-        lsnix = import ./lib/lsnix.nix;
-      });
+    in
+    {
+      lib = inputs.nixpkgs-unstable.lib.extend (
+        _: _: {
+          mkDarwinSystem = import ./lib/mkDarwinSystem.nix inputs;
+          lsnix = import ./lib/lsnix.nix;
+        }
+      );
 
       overlays = {
         my-libvterm = import ./overlays/libvterm.nix;
@@ -100,7 +118,8 @@
           };
 
           # Overlay useful on Macs with Apple Silicon
-          pkgs-silicon = _: prev:
+          pkgs-silicon =
+            _: prev:
             optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
               # Add access to x86 packages system is running Apple Silicon
               pkgs-x86 = import inputs.nixpkgs-unstable {
@@ -116,11 +135,17 @@
         # Mininal configurations to bootstrap systems
         bootstrap-x86 = nix-darwin.lib.darwinSystem {
           system = "x86_64-darwin";
-          modules = [ ./darwin/bootstrap.nix { nixpkgs = nixpkgsDefaults; } ];
+          modules = [
+            ./darwin/bootstrap.nix
+            { nixpkgs = nixpkgsDefaults; }
+          ];
         };
         bootstrap-arm = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          modules = [ ./darwin/bootstrap.nix { nixpkgs = nixpkgsDefaults; } ];
+          modules = [
+            ./darwin/bootstrap.nix
+            { nixpkgs = nixpkgsDefaults; }
+          ];
         };
 
         mbp-albttx = nix-darwin.lib.darwinSystem {
@@ -132,13 +157,25 @@
             home-manager.darwinModules.home-manager
 
             # ./modules/shells/tmux.nix
-            { nixpkgs = { overlays = attrValues self.overlays ++ [ ]; }; }
-            ({ inputs, config, pkgs, ... }: {
-              imports = [
-                # home-manager config
-                ./machines/mbp-albttx/hm.nix
-              ];
-            })
+            {
+              nixpkgs = {
+                overlays = attrValues self.overlays ++ [ ];
+              };
+            }
+            (
+              {
+                inputs,
+                config,
+                pkgs,
+                ...
+              }:
+              {
+                imports = [
+                  # home-manager config
+                  ./machines/mbp-albttx/hm.nix
+                ];
+              }
+            )
           ];
         };
 
@@ -151,21 +188,31 @@
             home-manager.darwinModules.home-manager
 
             # ./modules/shells/tmux.nix
-            { nixpkgs = { overlays = attrValues self.overlays ++ [ ]; }; }
-            ({ inputs, config, pkgs, ... }: {
-              imports = [ ./machines/github-ci/hm.nix ];
-            })
+            {
+              nixpkgs = {
+                overlays = attrValues self.overlays ++ [ ];
+              };
+            }
+            (
+              {
+                inputs,
+                config,
+                pkgs,
+                ...
+              }:
+              {
+                imports = [ ./machines/github-ci/hm.nix ];
+              }
+            )
           ];
 
         };
       };
 
       homeConfigurations = {
-        "mbp-albttx" = mkHome [ ./machines/mbp-albttx/hm.nix ]
-          nixpkgs.legacyPackages."aarch64-darwin";
+        "mbp-albttx" = mkHome [ ./machines/mbp-albttx/hm.nix ] nixpkgs.legacyPackages."aarch64-darwin";
 
-        "github-ci" = mkHome [ ./machines/github-ci/hm.nix ]
-          nixpkgs.legacyPackages."aarch64-darwin";
+        "github-ci" = mkHome [ ./machines/github-ci/hm.nix ] nixpkgs.legacyPackages."aarch64-darwin";
       };
     };
 }

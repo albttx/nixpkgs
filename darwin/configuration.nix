@@ -1,16 +1,17 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   # Nix configuration ------------------------------------------------------------------------------
 
   nix.binaryCaches = [ "https://cache.nixos.org/" ];
-  nix.binaryCachePublicKeys =
-    [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
+  nix.binaryCachePublicKeys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
   nix.trustedUsers = [ "@admin" ];
 
   # Enable experimental nix command and flakes
   # nix.package = pkgs.nixUnstable;
   nix.extraOptions = ''
     experimental-features = nix-command flakes
-  '' + lib.optionalString (pkgs.stdenv.hostPlatform.system == "aarch64-darwin") ''
+  ''
+  + lib.optionalString (pkgs.stdenv.hostPlatform.system == "aarch64-darwin") ''
     extra-platforms = x86_64-darwin aarch64-darwin
   '';
 
@@ -20,7 +21,10 @@
   # Apps
   # `home-manager` currently has issues adding them to `~/Applications`
   # Issue: https://github.com/nix-community/home-manager/issues/1341
-  environment.systemPackages = with pkgs; [ kitty terminal-notifier ];
+  environment.systemPackages = with pkgs; [
+    kitty
+    terminal-notifier
+  ];
 
   # https://github.com/nix-community/home-manager/issues/423
   environment.variables = {

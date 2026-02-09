@@ -1,9 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  home.packages = with pkgs.pkgs-master;
-    [
-      # new code editor
-      zed-editor
-    ];
+  home.packages = with pkgs.pkgs-master; [
+    # new code editor
+    zed-editor
+  ];
 }

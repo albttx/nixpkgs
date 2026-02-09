@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   #package config
@@ -13,7 +18,10 @@
     # package = lib.mkDefault pkgs.nix;
     package = pkgs.nix;
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       warn-dirty = false;
       sandbox = "relaxed";
     };
@@ -33,11 +41,18 @@
   programs.nix-index.enable = true;
 
   environment = {
-    systemPackages = [ pkgs.coreutils pkgs.git pkgs.vim pkgs.home-manager ];
-    shells = [ pkgs.bashInteractive pkgs.zsh ];
+    systemPackages = [
+      pkgs.coreutils
+      pkgs.git
+      pkgs.vim
+      pkgs.home-manager
+    ];
+    shells = [
+      pkgs.bashInteractive
+      pkgs.zsh
+    ];
     variables.EDITOR = "${lib.getBin pkgs.neovim}/bin/nvim";
-    variables.SSH_AUTH_SOCK =
-      "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+    variables.SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
   };
 
   programs = {
@@ -47,7 +62,9 @@
   };
 
   #system-defaults.nix
-  system.keyboard = { enableKeyMapping = true; };
+  system.keyboard = {
+    enableKeyMapping = true;
+  };
   system.defaults = {
     menuExtraClock = {
       ShowDayOfWeek = true;
@@ -71,8 +88,7 @@
     SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
     NSGlobalDomain = {
       AppleInterfaceStyle = "Dark"; # set dark mode
-      "com.apple.swipescrolldirection" =
-        false; # set natural scrolling to the _correct_ value
+      "com.apple.swipescrolldirection" = false; # set natural scrolling to the _correct_ value
       AppleShowAllExtensions = true;
       InitialKeyRepeat = 18;
       KeyRepeat = 1;

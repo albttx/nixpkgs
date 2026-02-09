@@ -1,2 +1,4 @@
-{ pkgs ? null }: { }
-
+{
+  pkgs ? null,
+}:
+{ }

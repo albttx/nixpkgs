@@ -23,7 +23,11 @@
 
       oh-my-zsh = {
         enable = true;
-        plugins = [ "git" "sudo" "docker" ];
+        plugins = [
+          "git"
+          "sudo"
+          "docker"
+        ];
       };
 
       shellAliases = {
@@ -40,18 +44,21 @@
         fcd = "cd $(fd --type directory | fzf)";
       };
 
-      initContent = let p10k-config = "${config.home.homeDirectory}/.p10k.zsh";
-      in ''
-        mcd() { mkdir -p "$1" && cd "$1"; }
+      initContent =
+        let
+          p10k-config = "${config.home.homeDirectory}/.p10k.zsh";
+        in
+        ''
+          mcd() { mkdir -p "$1" && cd "$1"; }
 
-        if [ -e "${p10k-config}" ]
-        then
-          source "${p10k-config}"
-        fi
+          if [ -e "${p10k-config}" ]
+          then
+            source "${p10k-config}"
+          fi
 
-        # source profileExtra
-        source ${config.home.homeDirectory}/.config/zsh/.zprofile
-      '';
+          # source profileExtra
+          source ${config.home.homeDirectory}/.config/zsh/.zprofile
+        '';
 
       profileExtra = ''
         if [ -f "${config.home.profileDirectory}/etc/profile.d/nix.sh" ]; then

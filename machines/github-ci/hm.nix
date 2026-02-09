@@ -1,4 +1,11 @@
-{ inputs, config, pkgs, lib, nix-doom-emacs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  lib,
+  nix-doom-emacs,
+  ...
+}:
 
 {
   users.users.runner = {

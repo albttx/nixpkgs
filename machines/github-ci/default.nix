@@ -1,7 +1,14 @@
-{ config, pkgs, lib, home-manager, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  home-manager,
+  ...
+}:
 let
   #secrets = import ../../secrets.nix;
-in {
+in
+{
   imports = [
     ../common/darwin/defaults.nix
 
@@ -18,8 +25,7 @@ in {
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
-  environment.darwinConfig =
-    "$HOME/go/src/github.com/albttx/nixpkgs/machines/github-ci/default.nix";
+  environment.darwinConfig = "$HOME/go/src/github.com/albttx/nixpkgs/machines/github-ci/default.nix";
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

@@ -1,7 +1,16 @@
-{ inputs, config, pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 
 {
-  imports = [ ./zsh.nix ./fzf.nix ./tmux.nix ];
+  imports = [
+    ./zsh.nix
+    ./fzf.nix
+    ./tmux.nix
+  ];
 
   # Htop
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.htop.enable

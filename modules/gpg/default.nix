@@ -1,5 +1,12 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  programs.gpg = { enable = true; };
+  programs.gpg = {
+    enable = true;
+  };
 }

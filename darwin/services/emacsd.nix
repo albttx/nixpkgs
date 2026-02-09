@@ -1,9 +1,16 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 
-let cfg = config.services.emacsd;
-in {
+let
+  cfg = config.services.emacsd;
+in
+{
   options = {
     services.emacsd = {
       enable = mkOption {
@@ -43,22 +50,27 @@ in {
     };
   };
 
-  config = let
-    emacsd = pkgs.writeShellScriptBin "emacsd" ''
-      export TERMINFO_DIRS="${config.system.path}/share/terminfo";
-      export TERM=xterm-emacs
-      ${cfg.package}/bin/${cfg.exec} --fg-daemon
-    '';
-  in mkIf cfg.enable {
-    launchd.user.agents.emacsd = {
-      path = cfg.additionalPath ++ [ config.environment.systemPath ];
-      serviceConfig = {
-        ProgramArguments = [ "${pkgs.zsh}/bin/zsh" "${emacsd}/bin/emacsd" ];
-        RunAtLoad = true;
-        KeepAlive = true;
-        StandardErrorPath = "/tmp/emacsd.log";
-        StandardOutPath = "/tmp/emacsd.log";
+  config =
+    let
+      emacsd = pkgs.writeShellScriptBin "emacsd" ''
+        export TERMINFO_DIRS="${config.system.path}/share/terminfo";
+        export TERM=xterm-emacs
+        ${cfg.package}/bin/${cfg.exec} --fg-daemon
+      '';
+    in
+    mkIf cfg.enable {
+      launchd.user.agents.emacsd = {
+        path = cfg.additionalPath ++ [ config.environment.systemPath ];
+        serviceConfig = {
+          ProgramArguments = [
+            "${pkgs.zsh}/bin/zsh"
+            "${emacsd}/bin/emacsd"
+          ];
+          RunAtLoad = true;
+          KeepAlive = true;
+          StandardErrorPath = "/tmp/emacsd.log";
+          StandardOutPath = "/tmp/emacsd.log";
+        };
       };
     };
-  };
 }

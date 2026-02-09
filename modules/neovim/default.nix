@@ -21,12 +21,12 @@ let
     };
   };
 
-in {
-  home.packages = with pkgs;
-    [
-      # neovim
-      silver-searcher
-    ];
+in
+{
+  home.packages = with pkgs; [
+    # neovim
+    silver-searcher
+  ];
 
   programs.neovim = {
     enable = true;

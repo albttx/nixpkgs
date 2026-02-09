@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   # Single source of node tooling (also used by emacs and neovim); avoid duplicate nodejs derivations.
   # neovim.withNodeJs is disabled to prevent it from adding its own nodejs.
   # Don't add nodejs explicitly - nodePackages.* will bring it in as a dependency.

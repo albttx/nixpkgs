@@ -1,7 +1,14 @@
-{ config, pkgs, lib, home-manager, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  home-manager,
+  ...
+}:
 let
   #secrets = import ../../secrets.nix;
-in {
+in
+{
   imports = [
     ../common/darwin/defaults.nix
     ./homebrew.nix
@@ -16,12 +23,14 @@ in {
   # Apps
   # `home-manager` currently has issues adding them to `~/Applications`
   # Issue: https://github.com/nix-community/home-manager/issues/1341
-  environment.systemPackages = with pkgs; [ kitty terminal-notifier ];
+  environment.systemPackages = with pkgs; [
+    kitty
+    terminal-notifier
+  ];
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
-  environment.darwinConfig =
-    "$HOME/go/src/github.com/albttx/nixpkgs/machines/mbp-albttx/default.nix";
+  environment.darwinConfig = "$HOME/go/src/github.com/albttx/nixpkgs/machines/mbp-albttx/default.nix";
 
   ids.gids.nixbld = 350; # [hack]
 

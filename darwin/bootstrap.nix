@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   # Nix configuration ------------------------------------------------------------------------------
@@ -21,7 +26,10 @@
 
     trusted-users = [ "@admin" ];
 
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
     keep-outputs = true;
     keep-derivations = true;
@@ -37,7 +45,10 @@
   # Shells -----------------------------------------------------------------------------------------
 
   # Add shells installed by nix to /etc/shells file
-  environment.shells = with pkgs; [ bashInteractive zsh ];
+  environment.shells = with pkgs; [
+    bashInteractive
+    zsh
+  ];
 
   # Install and setup ZSH to work with nix(-darwin) as well
   programs.zsh.enable = true;
