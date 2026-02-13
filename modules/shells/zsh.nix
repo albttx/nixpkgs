@@ -86,19 +86,19 @@
         {
           name = "powerline10k";
           src = pkgs.zsh-powerlevel10k;
-          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+          file = "share/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme";
         }
 
         {
           name = "autosuggestions";
           src = pkgs.zsh-autosuggestions;
-          file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh";
+          file = "share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh";
         }
 
         {
           name = "fast-syntax-highlighting";
           src = pkgs.zsh-fast-syntax-highlighting;
-          file = "share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh";
+          file = "share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh";
         }
       ];
     };
