@@ -61,6 +61,7 @@
       "protonvpn"
       "proton-drive"
       "proton-mail"
+      "proton-pass"
 
       "raycast"
       "rectangle"
@@ -75,6 +76,7 @@
       # 2. `tailscale up --accept-routes`
       "tailscale-app"
       "telegram"
+      "thebrowsercompany-dia"
       "todoist-app"
 
       "unity"
