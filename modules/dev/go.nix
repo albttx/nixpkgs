@@ -2,15 +2,15 @@
 {
   programs.go = {
     enable = true;
-    package = pkgs.go_1_24;
+    package = pkgs.pkgs-master.go_1_25;
     env = {
-      GOPATH = "go";
-      GOBIN = "go/bin";
+      GOPATH = "${config.home.homeDirectory}/go";
+      GOBIN = "${config.home.homeDirectory}/go/bin";
     };
   };
 
   programs.zsh.initContent = ''
-    export PATH="$GOPATH/bin:$PATH"
+    export PATH="${config.home.homeDirectory}/go/bin:$PATH"
   '';
 
   home.packages = with pkgs; [
