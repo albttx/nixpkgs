@@ -6,6 +6,8 @@
   # This ensures we only have one nodejs derivation (the one nodePackages use).
   # nodejs will be available in PATH via nodePackages.npm's dependency.
   home.packages = with pkgs; [
+    pkgs-master.bun
+
     yarn
     nodePackages.npm
     nodePackages.prettier
@@ -15,5 +17,6 @@
 
   programs.zsh.initContent = ''
     export PATH="$PATH:$HOME/.yarn/bin"
+    export PATH="$PATH:$HOME/.bun/bin"
   '';
 }

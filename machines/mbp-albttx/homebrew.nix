@@ -40,6 +40,7 @@
       "arc"
       "charles"
       "claude"
+      "claude-code"
       "cursor"
       "discord"
       "displaybuddy"

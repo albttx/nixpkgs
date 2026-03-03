@@ -103,31 +103,29 @@
             inherit (prev.stdenv) system;
             inherit (nixpkgsDefaults) config;
           };
+        };
 
-          pkgs-stable = _: prev: {
-            pkgs-stable = import inputs.nixpkgs-stable {
-              inherit (prev.stdenv) system;
-              inherit (nixpkgsDefaults) config;
-            };
+        pkgs-stable = _: prev: {
+          pkgs-stable = import inputs.nixpkgs-stable {
+            inherit (prev.stdenv) system;
+            inherit (nixpkgsDefaults) config;
           };
-          pkgs-unstable = _: prev: {
-            pkgs-unstable = import inputs.nixpkgs-unstable {
-              inherit (prev.stdenv) system;
-              inherit (nixpkgsDefaults) config;
-            };
+        };
+
+        pkgs-unstable = _: prev: {
+          pkgs-unstable = import inputs.nixpkgs-unstable {
+            inherit (prev.stdenv) system;
+            inherit (nixpkgsDefaults) config;
           };
+        };
 
-          # Overlay useful on Macs with Apple Silicon
-          pkgs-silicon =
-            _: prev:
-            optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-              # Add access to x86 packages system is running Apple Silicon
-              pkgs-x86 = import inputs.nixpkgs-unstable {
-                system = "x86_64-darwin";
-                inherit (nixpkgsDefaults) config;
-              };
-            };
-
+        # Overlay useful on Macs with Apple Silicon
+        pkgs-silicon = _: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
+          # Add access to x86 packages system is running Apple Silicon
+          pkgs-x86 = import inputs.nixpkgs-unstable {
+            system = "x86_64-darwin";
+            inherit (nixpkgsDefaults) config;
+          };
         };
       };
 

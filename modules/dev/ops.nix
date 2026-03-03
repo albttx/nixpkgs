@@ -26,6 +26,8 @@
 
     nmap
 
+    pkgs-master.netlify-cli
+
     awscli2
     minio-client
     scaleway-cli

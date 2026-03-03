@@ -36,7 +36,7 @@
     nixfmt-classic
 
     # :lang javascript (nodejs + nodePackages come from modules/dev/nodejs.nix to avoid duplicate derivations)
-    bun
+    # bun (installed in modules/dev/nodejs.nix)
 
     # :checkers
     aspell
