@@ -44,7 +44,7 @@
       "cursor"
       "discord"
       "displaybuddy"
-      # "docker"
+      "docker"
       # "flameshot" # screenshot
       "keybase"
       "emacs-app"
@@ -57,7 +57,7 @@
       # "libiconv" # lib required for rust
 
       "notion"
-      "orbstack"
+      #"orbstack"
 
       "protonvpn"
       "proton-drive"
