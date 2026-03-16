@@ -9,6 +9,7 @@
     ./direnv.nix
     ./ops.nix
     ./python.nix
+    ./web3.nix
   ];
 
   home.packages = with pkgs; [
