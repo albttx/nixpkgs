@@ -44,7 +44,7 @@
       "cursor"
       "discord"
       "displaybuddy"
-      "docker"
+      "docker-desktop"
       # "flameshot" # screenshot
       "keybase"
       "emacs-app"

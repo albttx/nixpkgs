@@ -35,7 +35,7 @@
     speedtest-cli
 
     ## tfreveal
-    (pkgs-master.buildGo124Module {
+    (pkgs-master.buildGoModule {
       pname = "tfreveal";
       version = "v0.0.4";
       src = pkgs.fetchFromGitHub {
