@@ -57,6 +57,7 @@
       # "libiconv" # lib required for rust
 
       "notion"
+      "obsidian"
       #"orbstack"
 
       "protonvpn"
