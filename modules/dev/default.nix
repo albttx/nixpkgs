@@ -44,4 +44,11 @@
     source = ./grc;
     recursive = true;
   };
+
+  # mise, a polyglot tool version manager and task runner.
+  # https://mise.jdx.dev/tasks/
+  programs.mise = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 }
