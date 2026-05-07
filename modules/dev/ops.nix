@@ -27,8 +27,10 @@
     nmap
 
     pkgs-master.netlify-cli
+    nodePackages.vercel
 
     awscli2
+    cloudflared
     minio-client
     scaleway-cli
 
