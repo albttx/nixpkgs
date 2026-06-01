@@ -60,6 +60,7 @@
         wget
 
         my-libvterm
+        rtk
       ];
 
     };
