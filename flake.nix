@@ -93,6 +93,7 @@
 
       overlays = {
         my-libvterm = import ./overlays/libvterm.nix;
+        rtk = import ./overlays/rtk.nix;
         mcp-nhost = _: prev: {
           mcp-nhost = inputs.mcp-nhost.packages.${prev.stdenv.system}.mcp-nhost;
         };
