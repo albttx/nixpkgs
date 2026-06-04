@@ -41,6 +41,7 @@
       ".*.sw?"
       "tags" # vim swap and tag files
       ".env"
+      ".env.*.local"
       ".direnv/" # directory environment configuration files
       "vendor/"
       "node_modules/" # package manager directories
@@ -52,6 +53,8 @@
       ".root" # file denoting the root of a project
 
       ".dir-locals.el"
+
+      ".claude/settings.local.json" # local Claude Code settings
     ];
 
   };
