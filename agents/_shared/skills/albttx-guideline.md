@@ -108,4 +108,33 @@ ask me whether to fix it.
 
 Keep the summary short. I do not need a recap of every command run.
 
+---
+
+## 6. Pull requests
+
+When a PR is linked to a ticket/issue, include a closing keyword in the
+PR description so GitHub auto-closes the ticket on merge:
+
+> Closes #${ticket_number}
+
+Use the appropriate keyword (`Closes`, `Fixes`, `Resolves`) followed by
+the ticket number. For tickets in another repo, use the full reference
+(`Closes owner/repo#${ticket_number}`).
+
+---
+
+## 7. Interfaces for testability
+
+I prefer programming to interfaces where it makes sense. Depending on an
+interface rather than a concrete type lets the code be mocked/stubbed
+easily, which keeps tests fast, isolated, and free of real dependencies
+(network, DB, filesystem, external services).
+
+- Define interfaces at the consumer side, kept narrow (only the methods
+  actually used)
+- Inject dependencies (constructor/function args) rather than constructing
+  them inline, so tests can pass mocks
+- Don't over-abstract: introduce an interface when there's a real seam to
+  mock or a second implementation, not speculatively
+
 --
