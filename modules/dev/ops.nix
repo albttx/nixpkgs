@@ -27,7 +27,7 @@
     nmap
 
     pkgs-master.netlify-cli
-    nodePackages.vercel
+    # vercel was removed from nixpkgs in 26.05 (was nodePackages.vercel); install via `npm i -g vercel` if needed
 
     awscli2
     cloudflared

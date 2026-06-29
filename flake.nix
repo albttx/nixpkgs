@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixpkgs-26.05-darwin";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # nix-doom-emacs = {
@@ -13,14 +13,14 @@
     # };
 
     nix-darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-25.11";
+      url = "github:LnL7/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
@@ -41,7 +41,8 @@
 
     mcp-nhost = {
       url = "github:nhost/mcp-nhost";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      # Don't follow nixpkgs-stable: mcp-nhost's bundled go overlay pins `go_1_24`,
+      # which was removed in nixpkgs 26.05. Let it use its own compatible nixpkgs pin.
     };
   };
 
@@ -63,7 +64,7 @@
         ;
       inherit (self) outputs;
 
-      homeStateVersion = "25.11";
+      homeStateVersion = "26.05";
 
       mkHome =
         modules: pkgs:
