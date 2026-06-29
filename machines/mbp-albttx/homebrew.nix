@@ -46,6 +46,7 @@
       "discord"
       "displaybuddy"
       "docker-desktop"
+      "docker/tap/sbx" # Docker Sandboxes; tap requires a one-time `brew trust docker/tap`
       # "flameshot" # screenshot
       "keybase"
       "emacs-app"
