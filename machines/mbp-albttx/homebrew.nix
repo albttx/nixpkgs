@@ -25,6 +25,7 @@
       "homebrew/bundle"
       "homebrew/cask-fonts"
       "homebrew/services"
+      "docker/tap"
       "supabase/tap"
     ];
 
@@ -52,7 +53,7 @@
       "ghostty"
       "google-chrome"
 
-      "ledger-wallet"
+      # "ledger-wallet"
       # "little-snitch"
       # "libiconv" # lib required for rust
 
