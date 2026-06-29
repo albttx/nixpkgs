@@ -5,15 +5,15 @@
     enable = true;
     enableDefaultConfig = false;
 
-    matchBlocks = {
+    settings = {
       "*" = {
-        controlMaster = "no";
-        forwardAgent = true;
-        hashKnownHosts = true;
+        ControlMaster = "no";
+        ForwardAgent = true;
+        HashKnownHosts = true;
       };
       "github.com" = {
-        identityFile = "~/.ssh/albttx";
-        hostname = "github.com";
+        IdentityFile = "~/.ssh/albttx";
+        HostName = "github.com";
       };
     };
 
