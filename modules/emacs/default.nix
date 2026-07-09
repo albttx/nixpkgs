@@ -33,7 +33,7 @@
     silver-searcher
 
     # :searcher nix
-    nixfmt-classic
+    nixfmt
 
     # :lang javascript (nodejs + nodePackages come from modules/dev/nodejs.nix to avoid duplicate derivations)
     # bun (installed in modules/dev/nodejs.nix)
