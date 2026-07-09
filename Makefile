@@ -28,11 +28,11 @@ ifeq ($(UNAME), Darwin) # darwin rules
 all: switch
 
 switch: result/sw/bin/darwin-rebuild
-	TERM=xterm ./result/sw/bin/darwin-rebuild switch ${impure} --verbose --flake ".#$(HOSTNAME)" --fallback --option sandbox false
+	sudo TERM=xterm ./result/sw/bin/darwin-rebuild switch ${impure} --verbose --flake ".#$(HOSTNAME)" --fallback --option sandbox false
 
 switch.bootstrap: result/sw/bin/darwin-rebuild
-	./result/sw/bin/darwin-rebuild switch ${impure} --verbose --flake ".#$(BOOTSTRAP)"
-	TERM=xterm ./result/sw/bin/darwin-rebuild switch ${impure} --verbose --flake .#mbp-albttx
+	sudo ./result/sw/bin/darwin-rebuild switch ${impure} --verbose --flake ".#$(BOOTSTRAP)"
+	sudo TERM=xterm ./result/sw/bin/darwin-rebuild switch ${impure} --verbose --flake .#mbp-albttx
 
 result/sw/bin/darwin-rebuild:
 	nix --experimental-features 'flakes nix-command' build ".#darwinConfigurations.$(BOOTSTRAP).system" --option sandbox false
