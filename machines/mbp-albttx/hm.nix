@@ -64,6 +64,7 @@
         wait-for-ssh
         screenpipe
         anarlog
+        meetily
       ];
 
     };
