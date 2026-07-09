@@ -96,6 +96,7 @@
         my-libvterm = import ./overlays/libvterm.nix;
         rtk = import ./overlays/rtk.nix;
         wait-for-ssh = import ./overlays/wait-for-ssh.nix;
+        screenpipe = import ./overlays/screenpipe.nix;
         mcp-nhost = _: prev: {
           mcp-nhost = inputs.mcp-nhost.packages.${prev.stdenv.system}.mcp-nhost;
         };

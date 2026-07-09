@@ -62,6 +62,7 @@
         my-libvterm
         rtk
         wait-for-ssh
+        screenpipe
       ];
 
     };
