@@ -32,6 +32,18 @@ in
     # at the top level as "Anarlog.app".
     sourceRoot = ".";
 
+    # The bundle is already code-signed with Developer ID "Fastrepl, Inc." and
+    # notarized (ticket stapled). Nix's default fixupPhase runs `strip` on the
+    # Mach-O binaries (removing the Developer ID signature) and the
+    # aarch64-darwin auto-signing hook then re-signs them ad-hoc, destroying
+    # notarization and breaking `codesign --verify --deep --strict` / `spctl`.
+    # Disable fixup entirely to keep the original signature intact.
+    dontFixup = true;
+
+    # macOS `cp -R` and `undmg` both preserve extended attributes, so any
+    # signing xattrs survive the copy into the store. Verified against the
+    # store output: `codesign --verify --deep --strict` and `spctl` both pass
+    # with source=Notarized Developer ID (Fastrepl, Inc. / 6SLY7V277V).
     installPhase = ''
       runHook preInstall
       mkdir -p "$out/Applications"

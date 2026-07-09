@@ -26,9 +26,37 @@ in
 
     src = pkgs.fetchurl { inherit (source) url hash; };
 
+    # bsdtar (libarchive) is required to unpack the tarball with its macOS
+    # code-signing extended attributes intact (see unpackPhase below).
+    nativeBuildInputs = [ pkgs.libarchive ];
+
     # The updater artifact is a gzipped tarball containing `screenpipe.app`.
     sourceRoot = ".";
 
+    # Unpack with bsdtar, NOT the GNU tar used by the default unpackPhase.
+    # Non-Mach-O bundle components (e.g. Contents/MacOS/mlx.metallib) carry
+    # their code signature in `com.apple.cs.*` extended attributes rather than
+    # embedded in the file. GNU tar cannot read the `LIBARCHIVE.xattr.*` pax
+    # headers and silently drops those xattrs on extraction ("Ignoring unknown
+    # extended header keyword"), which breaks `codesign --verify --deep
+    # --strict` ("code object is not signed at all") and notarization. bsdtar
+    # with -p preserves the xattrs, keeping the notarized signature valid.
+    unpackPhase = ''
+      runHook preUnpack
+      bsdtar -xpf "$src"
+      runHook postUnpack
+    '';
+
+    # The bundle is already code-signed with a Developer ID and notarized.
+    # Nix's default fixupPhase runs `strip` on the Mach-O binaries (removing the
+    # Developer ID signature) and the aarch64-darwin auto-signing hook then
+    # re-signs them ad-hoc, destroying notarization and breaking
+    # `codesign --verify --deep --strict` / `spctl`. Disable fixup entirely to
+    # keep the original signature intact.
+    dontFixup = true;
+
+    # macOS `cp -R` preserves extended attributes, so the signing xattrs
+    # survive the copy into the store (verified against the store output).
     installPhase = ''
       runHook preInstall
       mkdir -p "$out/Applications"
