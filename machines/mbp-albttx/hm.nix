@@ -63,6 +63,7 @@
         rtk
         wait-for-ssh
         screenpipe
+        anarlog
       ];
 
     };

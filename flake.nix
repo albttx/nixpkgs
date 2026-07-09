@@ -97,6 +97,7 @@
         rtk = import ./overlays/rtk.nix;
         wait-for-ssh = import ./overlays/wait-for-ssh.nix;
         screenpipe = import ./overlays/screenpipe.nix;
+        anarlog = import ./overlays/anarlog.nix;
         mcp-nhost = _: prev: {
           mcp-nhost = inputs.mcp-nhost.packages.${prev.stdenv.system}.mcp-nhost;
         };
