@@ -52,20 +52,24 @@ in
         orientation = "left";
       };
 
-      CustomUserPreferences = {
-        "com.apple.mail" = {
-          InboxViewerAttributes = {
-            # DisplayInThreadedMode = "yes";
-            # DisableInlineAttachmentViewing = true;
-            # SortedDescending = "yes";
-            # SortOrder = "received-date";
-          };
-          NSUserKeyEquivalents = {
-            # Send = "@U21a9"; # cmd + enter
-            Archive = "\\U007F"; # delete
-          };
-        };
-      };
+      # NOTE: Mail is a sandboxed app; `defaults write com.apple.mail` fails
+      # ("Could not write domain ...; exiting") unless the activation process
+      # has Full Disk Access, which aborts the whole `darwin-rebuild switch`.
+      # Re-enable this once Full Disk Access is granted to the shell/terminal.
+      # CustomUserPreferences = {
+      #   "com.apple.mail" = {
+      #     InboxViewerAttributes = {
+      #       # DisplayInThreadedMode = "yes";
+      #       # DisableInlineAttachmentViewing = true;
+      #       # SortedDescending = "yes";
+      #       # SortOrder = "received-date";
+      #     };
+      #     NSUserKeyEquivalents = {
+      #       # Send = "@U21a9"; # cmd + enter
+      #       Archive = "\\U007F"; # delete
+      #     };
+      #   };
+      # };
 
     };
   };
