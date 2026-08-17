@@ -99,6 +99,7 @@
         screenpipe = import ./overlays/screenpipe.nix;
         anarlog = import ./overlays/anarlog.nix;
         meetily = import ./overlays/meetily.nix;
+        higgsfield-cli = import ./overlays/higgsfield-cli.nix;
         mcp-nhost = _: prev: {
           mcp-nhost = inputs.mcp-nhost.packages.${prev.stdenv.system}.mcp-nhost;
         };

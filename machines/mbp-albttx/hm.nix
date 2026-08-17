@@ -65,6 +65,7 @@
         screenpipe
         anarlog
         meetily
+        higgsfield-cli
       ];
 
     };
