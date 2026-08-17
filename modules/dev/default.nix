@@ -38,6 +38,7 @@
 
     # ai tools
     # pkgs-master.claude-code
+    pkgs-master.grok-cli
   ];
 
   home.file.".grc" = {
