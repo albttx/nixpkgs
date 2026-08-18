@@ -38,7 +38,6 @@
 
     # ai tools
     # pkgs-master.claude-code
-    pkgs-master.grok-cli
     pkgs-master.grok-build
   ];
 
