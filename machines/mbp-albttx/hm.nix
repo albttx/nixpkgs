@@ -66,6 +66,7 @@
         anarlog
         meetily
         higgsfield-cli
+        multica
       ];
 
     };
