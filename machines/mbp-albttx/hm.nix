@@ -38,6 +38,7 @@
         ../../modules/shells
 
         # import editors
+        ../../modules/neovim
         ../../modules/emacs
         ../../modules/vscode
         # ../../modules/zed
