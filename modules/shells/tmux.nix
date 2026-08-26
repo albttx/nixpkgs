@@ -22,8 +22,10 @@ with builtins // lib;
         gpakosz-tmux = pkgs.fetchFromGitHub {
           owner = "gpakosz";
           repo = ".tmux";
-          rev = "master";
-          sha256 = "sha256-BpifKdw1RvFYxpTh6dLeL7w3pYvPqbOSkl6WJ+aw9tI=";
+          # pinned: rev = "master" breaks with a hash mismatch every time
+          # upstream moves (master of 2026-08-08)
+          rev = "58a3dcc0d718ec0fa1c0d5a2fddd640a1ad7a5b7";
+          sha256 = "sha256-YDzbZVFhrAMBhOI8HVDxR3rEPkrEwG57IUbnZicmfn4=";
         };
       in
       concatStringsSep "\n" [
