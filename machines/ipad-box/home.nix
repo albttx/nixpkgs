@@ -31,5 +31,9 @@ in
     PasswordAuthentication = true;
   };
 
-  environment.systemPackages = with pkgs; [ vim git ];
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+    gnumake # `make switch` from the dotfiles repo
+  ];
 }

@@ -43,12 +43,16 @@ endif # end osx
 
 ifeq ($(UNAME), Linux) # linux rules
 
-all:
-	@echo "switch.cloud"
+all: switch
 
-switch.cloud:
-	nix build .#homeConfigurations.cloud.activationPackage
-	./result/activate switch ${impure} --verbose; ./result/activate
+switch: switch.nixos switch.home-manager
+
+switch.nixos:
+	sudo nixos-rebuild switch ${impure} --verbose --flake ".#$(HOSTNAME)"
+
+switch.home-manager:
+	nix build ".#homeConfigurations.$(HOSTNAME).activationPackage"
+	./result/activate
 
 endif # end linux
 

@@ -236,6 +236,16 @@
         "mbp-albttx" = mkHome [ ./machines/mbp-albttx/hm.nix ] nixpkgs.legacyPackages."aarch64-darwin";
 
         "github-ci" = mkHome [ ./machines/github-ci/hm.nix ] nixpkgs.legacyPackages."aarch64-darwin";
+
+        # Standalone home-manager for the server: `make switch.home-manager`
+        # applies user config without a full nixos-rebuild. Same modules as
+        # the NixOS-integrated home-manager in machines/ipad-box/hm.nix.
+        "ipad-box" = mkHome [ ./machines/ipad-box/hm-albttx.nix ] (
+          import inputs.nixos-stable {
+            system = "x86_64-linux";
+            inherit (nixpkgsDefaults) config overlays;
+          }
+        );
       };
     };
 }
