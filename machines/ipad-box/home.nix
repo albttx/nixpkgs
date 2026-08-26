@@ -26,9 +26,22 @@ in
 
   services.openssh.enable = true;
   services.openssh.settings = {
-    # Root may log in with the SSH key above or with the root password.
-    PermitRootLogin = "yes";
+    # Log in as albttx (SSH key) and sudo; root stays usable on the console
+    # and in the initrd remote-unlock sshd (port 2222), which is separate
+    # from this one and keeps its own root key auth.
+    PermitRootLogin = "no";
     PasswordAuthentication = true;
+  };
+
+  # Ban IPs that brute-force sshd (reads the journal, bans via the firewall).
+  services.fail2ban = {
+    enable = true;
+    maxretry = 5;
+    bantime = "1h";
+    bantime-increment = {
+      enable = true;
+      maxtime = "48h";
+    };
   };
 
   environment.systemPackages = with pkgs; [
