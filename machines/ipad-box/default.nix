@@ -1,13 +1,10 @@
 { config, pkgs, ... }:
 
-let
-  sshKeys = [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC6XZR1TQ/FAh502qM7IFm7XSqKr1sau6twvLhe+0jh/5IrJAm/D4eL44eq+td/4jq9ltYKGs0byFS+AbefQUfnQL5TBgYdsDAGyJ+H3OlAZu+6jLZKJXgfbmlluI5zCPoSeCJOakHrzLAhBFUz0c2N2HrLFee4wv9dgnJ9yURCFT/CXbGvFbDhhKPDBAusNW/45eguxr/Yrv0IRgUUMZxfaAMYFFCO081EUnyWV8bzncCqRVkM3LC/80Fn47YiANS5mVDKLnmymH4Q6kFzMz1ZX/igXrPgKhs73j9dIK/QDVQmkug2LJE7xW0w6uG3KFw4hQKMKxtrYlGV0tp5s44xN6CdWFbgHsyCKExm4VR+4ND/HOc9CuDWGxG4Rnlfeiv5HG9AGemcJZl3KbAOg3JL4xc3pN50CsrP9CxrORzkr9PBKWF/A1o/yWBGk2ZGr3oziTeY3Acy2rIlew4FS95R4+dNcLXIZ2inelFEFrQe83ZTGkN3Ey0G5G0fc/zRhX4DzXK1Kk6EPwUPSUCH50Sya9j6KXsOTxwI6USAB/MzXyoqL8MIgdJNd3T2lheAGZiUwAJOEjSF3tzo5llO2JQDkjV4K6atnvGsyUm54TzA9Ne7XBMgkmFIPveRCP7YVdGqgALvRI0C1loq6c8aIFcn7qmJrmlmLGfuXeLNBeCBrQ== albttx"
-  ];
-in
 {
   imports = [
     ./hardware-configuration.nix
+    ./networking.nix
+    ./home.nix
   ];
 
   # Hetzner uses legacy BIOS boot, so GRUB2, not systemd-boot.
@@ -68,59 +65,6 @@ in
     # i.e. the same keys as the booted system.
     hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
   };
-
-  networking.hostName = "ipad-box";
-
-  # Hetzner uses static IP assignments; no DHCP.
-  networking.useDHCP = false;
-  networking.interfaces."enp0s31f6".ipv4.addresses = [
-    {
-      address = "138.201.59.13";
-      # Hetzner requires /32, see:
-      #   https://docs.hetzner.com/robot/dedicated-server/network/net-config-debian-ubuntu/#ipv4
-      # NixOS sets up the gateway route because defaultGateway.interface is set.
-      prefixLength = 32;
-    }
-  ];
-  networking.interfaces."enp0s31f6".ipv6.addresses = [
-    {
-      address = "2a01:4f8:172:1407::1";
-      prefixLength = 64;
-    }
-  ];
-  networking.defaultGateway = {
-    address = "138.201.59.1";
-    interface = "enp0s31f6";
-  };
-  networking.defaultGateway6 = { address = "fe80::1"; interface = "enp0s31f6"; };
-  networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
-
-  # Root password. The hash lives in /etc/root-password-hash (mode 0600, on the
-  # encrypted root) rather than inline, so it is not copied into /nix/store,
-  # which is world-readable.
-  users.users.root.hashedPasswordFile = "/etc/root-password-hash";
-
-  users.users.root.openssh.authorizedKeys.keys = sshKeys;
-
-  users.users.albttx = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = sshKeys;
-  };
-
-  # albttx has no password set (log in with the SSH key), so sudo cannot
-  # prompt for one. Set one with `passwd albttx` and drop this if you prefer
-  # password-protected sudo.
-  security.sudo.wheelNeedsPassword = false;
-
-  services.openssh.enable = true;
-  services.openssh.settings = {
-    # Root may log in with the SSH key above or with the root password.
-    PermitRootLogin = "yes";
-    PasswordAuthentication = true;
-  };
-
-  environment.systemPackages = with pkgs; [ vim git ];
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
