@@ -34,6 +34,10 @@
 
   programs.home-manager.enable = true;
 
+  # Shortcut to the dotfiles clone.
+  home.file."nixpkgs".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/go/src/github.com/albttx/nixpkgs";
+
   # The GPG signing key only lives on the laptop; signing every commit
   # here would just fail.
   programs.git.signing.signByDefault = lib.mkForce false;
