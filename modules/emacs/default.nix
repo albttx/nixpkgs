@@ -46,7 +46,6 @@
     # editorconfig
 
     # :lang org
-    pngpaste
     graphviz
 
     # :lang python
@@ -89,7 +88,9 @@
 
     # syntax color
     emacs-all-the-icons-fonts
-  ];
+  ]
+  # pngpaste is a macOS clipboard tool (:lang org)
+  ++ lib.optionals pkgs.stdenv.isDarwin [ pngpaste ];
 
   programs.zsh.initContent = ''
     export PATH="$HOME/.config/emacs/bin:$PATH"

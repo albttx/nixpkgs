@@ -224,6 +224,9 @@
           specialArgs = { inherit inputs outputs; };
           modules = [
             ./machines/ipad-box/default.nix
+            home-manager.nixosModules.home-manager
+            # home-manager config
+            ./machines/ipad-box/hm.nix
             { nixpkgs = nixpkgsDefaults; }
           ];
         };
