@@ -36,7 +36,10 @@ in
   # Ban IPs that brute-force sshd (reads the journal, bans via the firewall).
   services.fail2ban = {
     enable = true;
-    maxretry = 5;
+    # One ssh attempt can log several failures (the agent offers each key in
+    # turn), so 5 was reachable from a single fumbled login — it insta-banned
+    # the home IP during testing.
+    maxretry = 10;
     bantime = "1h";
     bantime-increment = {
       enable = true;
