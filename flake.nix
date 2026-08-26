@@ -5,6 +5,7 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixpkgs-26.05-darwin";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixos-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     # nix-doom-emacs = {
     #   url = "github:nix-community/nix-doom-emacs";
@@ -212,6 +213,19 @@
             )
           ];
 
+        };
+      };
+
+      nixosConfigurations = {
+        # Hetzner dedicated server. Rebuild on the machine itself:
+        #   nixos-rebuild switch --flake .#ipad-box
+        ipad-box = inputs.nixos-stable.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./machines/ipad-box/default.nix
+            { nixpkgs = nixpkgsDefaults; }
+          ];
         };
       };
 
