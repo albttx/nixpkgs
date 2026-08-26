@@ -44,6 +44,12 @@ in
     };
   };
 
+  # `make switch.home-manager` runs plain `nix build` on the flake.
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   environment.systemPackages = with pkgs; [
     vim
     git
