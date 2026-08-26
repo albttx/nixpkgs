@@ -51,7 +51,7 @@
       pkgs.bashInteractive
       pkgs.zsh
     ];
-    variables.EDITOR = "${lib.getBin pkgs.neovim}/bin/nvim";
+    variables.EDITOR = "nvim";
     variables.SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
   };
 
