@@ -120,13 +120,16 @@
       mkdir -p $HOME/.config
 
       if [ ! -d "$EMACS_DIR" ]; then
-        ${pkgs.git}/bin/git clone https://github.com/hlissner/doom-emacs.git $EMACS_DIR
+        ${pkgs.git}/bin/git clone --recurse-submodules https://github.com/doomemacs/core.git $EMACS_DIR
         yes | $EMACS_DIR/bin/doom install
-        $EMACS_DIR/bin/doom sync
+        $EMACS_DIR/bin/doom sync -!
       else
-        $EMACS_DIR/bin/doom sync
+        # Doom 3 keeps modules in sources/doom+; a core-only clone/upgrade
+        # leaves every (doom! ...) module as &nopath until this exists.
+        ${pkgs.git}/bin/git -C "$EMACS_DIR" submodule update -f --init --recursive
+        $EMACS_DIR/bin/doom sync -!
       fi
-      $EMACS_DIR/bin/doom env
+      $EMACS_DIR/bin/doom sync --env
     '';
   };
 

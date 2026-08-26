@@ -11,7 +11,7 @@
        :ui
        ;;deft
        doom
-       doom-dashboard
+       dashboard
        ;;doom-quit
        (emoji +unicode)
        ;;fill-column
