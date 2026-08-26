@@ -42,6 +42,10 @@
   # here would just fail.
   programs.git.signing.signByDefault = lib.mkForce false;
 
+  # modules/ssh points github.com at ~/.ssh/albttx (the laptop key); this
+  # machine has its own deploy key instead (registered on GitHub as "ipad-box").
+  programs.ssh.settings."github.com".IdentityFile = lib.mkForce "~/.ssh/ipad-box";
+
   home.packages = with pkgs; [
     # build tool
     coreutils
