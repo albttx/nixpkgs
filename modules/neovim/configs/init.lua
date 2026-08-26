@@ -6,6 +6,8 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+-- Space is the leader: don't move the cursor while which-key waits.
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 local opt = vim.opt
 opt.number = true
@@ -60,7 +62,8 @@ vim.api.nvim_create_autocmd("FileType", {
 require("nightfox").setup({ options = { transparent = true } })
 vim.cmd.colorscheme("nightfox")
 
-require("which-key").setup({ preset = "modern" })
+local wk = require("which-key")
+wk.setup({ preset = "modern" })
 require("lualine").setup({
   options = { theme = "nightfox", globalstatus = true },
 })
@@ -117,16 +120,29 @@ local map = function(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
 end
 
+-- `<leader>f` must stay a prefix (find), not a complete map.
+-- Binding it to format made `SPC ff` fire format after timeoutlen.
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", "Find files")
+map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", "Live grep")
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", "Buffers")
+map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", "Help tags")
+map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", "Recent files")
+map("n", "<leader><leader>", "<cmd>Telescope find_files<cr>", "Find files")
+map("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", "File tree")
+map("n", "<leader>w", "<cmd>write<cr>", "Write")
+map("n", "<leader>q", "<cmd>quit<cr>", "Quit")
+map("n", "<leader>cf", function()
+  require("conform").format({ async = true })
+end, "Format buffer")
+map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
+map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
+map("n", "gd", vim.lsp.buf.definition, "Go to definition")
 map("n", "<C-p>", "<cmd>Telescope find_files<cr>", "Find files")
 map("n", "<C-g>", "<cmd>Telescope live_grep<cr>", "Live grep")
 map("n", "<C-b>", "<cmd>Telescope buffers<cr>", "Buffers")
 map("n", "<C-t>", "<cmd>Telescope<cr>", "Telescope")
-map("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", "File tree")
-map("n", "<leader>w", "<cmd>write<cr>", "Write")
-map("n", "<leader>q", "<cmd>quit<cr>", "Quit")
-map("n", "<leader>f", function()
-  require("conform").format({ async = true })
-end, "Format buffer")
-map("n", "gd", vim.lsp.buf.definition, "Go to definition")
-map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
-map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
+
+wk.add({
+  { "<leader>f", group = "find" },
+  { "<leader>c", group = "code" },
+})
