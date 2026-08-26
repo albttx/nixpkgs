@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/banner.jpg" alt="albttx nix dotfiles" width="100%">
+</p>
+
 # Home-manager
 
 Personal system configuration managed with [Nix](https://nixos.org/), [nix-darwin](https://github.com/LnL7/nix-darwin) and [home-manager](https://github.com/nix-community/home-manager).
