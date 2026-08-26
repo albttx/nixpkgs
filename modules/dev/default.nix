@@ -10,6 +10,7 @@
     ./ops.nix
     ./python.nix
     ./web3.nix
+    ./ai
   ];
 
   home.packages = with pkgs; [
@@ -36,9 +37,7 @@
     mcp-nhost
     # pkgs-master.supabase-cli
 
-    # ai tools
-    # pkgs-master.claude-code
-    pkgs-master.grok-build
+    # ai tools live in ./ai
   ];
 
   home.file.".grc" = {
