@@ -46,6 +46,15 @@
   # machine has its own deploy key instead (registered on GitHub as "ipad-box").
   programs.ssh.settings."github.com".IdentityFile = lib.mkForce "~/.ssh/ipad-box";
 
+  # SSH clients only forward TERM, so sessions land here as xterm-256color
+  # with no truecolor capability and emacs degrades doom-one to the 256-color
+  # palette (which some terminal apps then render badly). Every terminal we
+  # actually connect from (kitty, Termius, iTerm) speaks 24-bit color; emacs
+  # and friends trust COLORTERM over terminfo.
+  programs.zsh.initContent = ''
+    export COLORTERM=truecolor
+  '';
+
   home.packages = with pkgs; [
     # build tool
     coreutils
