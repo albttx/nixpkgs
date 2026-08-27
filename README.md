@@ -6,6 +6,22 @@
 
 Personal system configuration managed with [Nix](https://nixos.org/), [nix-darwin](https://github.com/LnL7/nix-darwin) and [home-manager](https://github.com/nix-community/home-manager).
 
+## Machines
+
+`make switch` targets the current hostname.
+
+### mbp-albttx
+
+Personal MacBook Pro. nix-darwin + home-manager on `aarch64-darwin`. Config: [`machines/mbp-albttx`](machines/mbp-albttx).
+
+### ipad-box
+
+<p align="center">
+  <img src="machines/ipad-box/banner.jpg" alt="albttx@ipad-box" width="100%">
+</p>
+
+Hetzner dedicated NixOS server (`x86_64-linux`). Rebuild on the box with `make switch` or `nixos-rebuild switch --flake .#ipad-box`. Config: [`machines/ipad-box`](machines/ipad-box).
+
 ## Installation
 
 ```sh
