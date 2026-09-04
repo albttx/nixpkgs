@@ -18,3 +18,10 @@ User config can be applied without a full system rebuild:
 ```sh
 make switch.home-manager
 ```
+
+## Services
+
+Container services live under [`services/`](services/). The engine is Docker
+(not Podman) and it is also the `oci-containers` backend, so declarative
+containers added later inherit it. `albttx` is in the `docker` group, so
+`docker` / `docker compose` work without sudo.
