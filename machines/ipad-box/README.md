@@ -25,3 +25,16 @@ Container services live under [`services/`](services/). The engine is Docker
 (not Podman) and it is also the `oci-containers` backend, so declarative
 containers added later inherit it. `albttx` is in the `docker` group, so
 `docker` / `docker compose` work without sudo.
+
+### Shelfmark
+
+Official image `ghcr.io/calibrain/shelfmark` on loopback `:8084`. Data: `/var/lib/shelfmark/{config,books}`.
+
+```sh
+# after `make switch`, from a laptop
+ssh -L 8084:127.0.0.1:8084 albttx@ipad-box
+# then open http://localhost:8084
+# enable authentication in Settings before exposing it further
+```
+
+Systemd unit: `docker-shelfmark`. Bump the tag in `services/shelfmark.nix` to update.
