@@ -55,6 +55,18 @@
     export COLORTERM=truecolor
   '';
 
+  # Ghostty advertises TERM=xterm-ghostty and ssh forwards it verbatim, but
+  # this box has no such terminfo entry, so anything going through ncurses
+  # (zsh's zle, tmux, emacs, less) falls back to guesses and redraws garbage.
+  # Pin those sessions to plain xterm, which every host knows. This lives in
+  # .zshenv rather than .zshrc so TERM is already fixed before zle, p10k's
+  # instant prompt, or any tmux auto-attach touches the terminal.
+  programs.zsh.envExtra = ''
+    if [[ $TERM == xterm-ghostty ]]; then
+      export TERM=xterm
+    fi
+  '';
+
   home.packages = with pkgs; [
     # build tool
     coreutils
