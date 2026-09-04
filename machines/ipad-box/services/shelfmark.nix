@@ -2,7 +2,7 @@
 # Official install is the Docker image (no first-class Nix package):
 #   https://github.com/calibrain/shelfmark
 #   compose: https://github.com/calibrain/shelfmark/blob/main/compose/docker-compose.yml
-{ ... }:
+{ config, lib, ... }:
 
 let
   dataDir = "/var/lib/shelfmark";
@@ -10,6 +10,7 @@ let
   # NixOS user (albttx) on this box.
   uid = "1000";
   gid = "1000";
+  port = 8084;
 in
 {
   systemd.tmpfiles.rules = [
@@ -21,10 +22,11 @@ in
   virtualisation.oci-containers.containers.shelfmark = {
     image = "ghcr.io/calibrain/shelfmark:v1.3.15";
     autoStart = true;
-    # Docker published ports bypass the NixOS firewall. Bind loopback so
-    # this is not reachable on the public WAN address. Reach it with:
-    #   ssh -L 8084:127.0.0.1:8084 albttx@ipad-box
-    ports = [ "127.0.0.1:8084:8084" ];
+    # Docker published ports bypass the NixOS firewall, so binding 0.0.0.0
+    # would expose this on the public WAN address no matter what
+    # networking.firewall says. Keep the publish on loopback; the tailnet
+    # gets it through `tailscale serve` below.
+    ports = [ "127.0.0.1:${toString port}:${toString port}" ];
     volumes = [
       "${dataDir}/config:/config"
       "${dataDir}/books:/books"
@@ -42,4 +44,39 @@ in
       "--health-retries=3"
     ];
   };
+
+  # Publish on the tailnet without writing this node's tailnet address down
+  # anywhere: `tailscale serve` proxies <node>:${toString port} to the loopback
+  # publish above, and tailscaled takes the address from the interface it
+  # manages. Nothing to update if the node is ever re-registered.
+  #
+  #   http://ipad-box:${toString port}   (MagicDNS)  — tailnet only, not Funnel
+  #
+  # Serve config is persisted in tailscaled's state, so this unit is really
+  # just making that state declarative; it is idempotent on every rebuild.
+  systemd.services.shelfmark-tailscale-serve =
+    let
+      tailscale = lib.getExe config.services.tailscale.package;
+    in
+    {
+      description = "Expose Shelfmark on the tailnet";
+      after = [
+        "tailscaled.service"
+        "docker-shelfmark.service"
+      ];
+      wants = [ "tailscaled.service" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = "${tailscale} serve --bg --yes --http ${toString port} http://127.0.0.1:${toString port}";
+        ExecStop = "${tailscale} serve --http ${toString port} off";
+        # tailscaled is up before it is logged in and addressable; retry rather
+        # than fail the boot if serve runs a moment too early.
+        Restart = "on-failure";
+        RestartSec = "5s";
+      };
+      startLimitIntervalSec = 300;
+      startLimitBurst = 20;
+    };
 }
