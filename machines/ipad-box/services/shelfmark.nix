@@ -2,7 +2,7 @@
 # Official install is the Docker image (no first-class Nix package):
 #   https://github.com/calibrain/shelfmark
 #   compose: https://github.com/calibrain/shelfmark/blob/main/compose/docker-compose.yml
-{ config, lib, ... }:
+{ ... }:
 
 let
   dataDir = "/var/lib/shelfmark";
@@ -24,8 +24,8 @@ in
     autoStart = true;
     # Docker published ports bypass the NixOS firewall, so binding 0.0.0.0
     # would expose this on the public WAN address no matter what
-    # networking.firewall says. Keep the publish on loopback; the tailnet
-    # gets it through `tailscale serve` below.
+    # networking.firewall says. Keep the publish on loopback; Traefik is the
+    # way in, at https://shelfmark.box.albttx.tech (see ./traefik.nix).
     ports = [ "127.0.0.1:${toString port}:${toString port}" ];
     volumes = [
       "${dataDir}/config:/config"
@@ -44,43 +44,4 @@ in
       "--health-retries=3"
     ];
   };
-
-  # Publish on the tailnet without writing this node's tailnet address down
-  # anywhere: `tailscale serve` proxies <node>:${toString port} to the loopback
-  # publish above, and tailscaled takes the address from the interface it
-  # manages. Nothing to update if the node is ever re-registered.
-  #
-  #   http://ipad-box:${toString port}   (MagicDNS)  — tailnet only, not Funnel
-  #
-  # --tcp rather than --http: the HTTP forwarder matches on the Host header and
-  # answers 404 to requests addressed to the bare 100.x address, while the TCP
-  # forwarder serves both the MagicDNS name and the tailnet IP.
-  #
-  # Serve config is persisted in tailscaled's state, so this unit is really
-  # just making that state declarative; it is idempotent on every rebuild.
-  systemd.services.shelfmark-tailscale-serve =
-    let
-      tailscale = lib.getExe config.services.tailscale.package;
-    in
-    {
-      description = "Expose Shelfmark on the tailnet";
-      after = [
-        "tailscaled.service"
-        "docker-shelfmark.service"
-      ];
-      wants = [ "tailscaled.service" ];
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-        ExecStart = "${tailscale} serve --bg --yes --tcp ${toString port} tcp://127.0.0.1:${toString port}";
-        ExecStop = "${tailscale} serve --tcp=${toString port} off";
-        # tailscaled is up before it is logged in and addressable; retry rather
-        # than fail the boot if serve runs a moment too early.
-        Restart = "on-failure";
-        RestartSec = "5s";
-      };
-      startLimitIntervalSec = 300;
-      startLimitBurst = 20;
-    };
 }
