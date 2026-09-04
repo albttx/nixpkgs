@@ -81,5 +81,11 @@ Official image `ghcr.io/calibrain/shelfmark` published on loopback `:8084`;
 Traefik fronts it. Data: `/var/lib/shelfmark/{config,books}`. Enable
 authentication in Settings before sharing the node further.
 
-Systemd unit: `docker-shelfmark`. Bump the tag in `services/shelfmark.nix` to
-update.
+While Traefik is waiting on its token and DNS, a `tailscale serve` stopgap
+keeps it reachable directly on the tailnet at http://ipad-box:8084. Drop
+`shelfmark-tailscale-serve` from `services/shelfmark.nix` once
+https://shelfmark.box.albttx.tech works — the unit's `ExecStop` removes the
+proxy from tailscaled's state when it goes.
+
+Systemd units: `docker-shelfmark`, plus `shelfmark-tailscale-serve` for as
+long as the stopgap lasts. Bump the tag in `services/shelfmark.nix` to update.
