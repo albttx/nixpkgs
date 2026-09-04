@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./networking.nix
     ./home.nix
+    ./services
   ];
 
   # Hetzner uses legacy BIOS boot, so GRUB2, not systemd-boot.
