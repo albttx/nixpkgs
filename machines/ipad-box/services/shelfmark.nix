@@ -52,6 +52,10 @@ in
   #
   #   http://ipad-box:${toString port}   (MagicDNS)  — tailnet only, not Funnel
   #
+  # --tcp rather than --http: the HTTP forwarder matches on the Host header and
+  # answers 404 to requests addressed to the bare 100.x address, while the TCP
+  # forwarder serves both the MagicDNS name and the tailnet IP.
+  #
   # Serve config is persisted in tailscaled's state, so this unit is really
   # just making that state declarative; it is idempotent on every rebuild.
   systemd.services.shelfmark-tailscale-serve =
@@ -69,8 +73,8 @@ in
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = true;
-        ExecStart = "${tailscale} serve --bg --yes --http ${toString port} http://127.0.0.1:${toString port}";
-        ExecStop = "${tailscale} serve --http ${toString port} off";
+        ExecStart = "${tailscale} serve --bg --yes --tcp ${toString port} tcp://127.0.0.1:${toString port}";
+        ExecStop = "${tailscale} serve --tcp=${toString port} off";
         # tailscaled is up before it is logged in and addressable; retry rather
         # than fail the boot if serve runs a moment too early.
         Restart = "on-failure";

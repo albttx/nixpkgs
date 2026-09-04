@@ -30,21 +30,18 @@ containers added later inherit it. `albttx` is in the `docker` group, so
 
 Official image `ghcr.io/calibrain/shelfmark` on loopback `:8084`. Data: `/var/lib/shelfmark/{config,books}`.
 
-Docker's published port stays on loopback, because published ports bypass the
-NixOS firewall and `0.0.0.0` would mean the public WAN address. `tailscale
-serve` fronts it, so from any node on the tailnet:
+Reachable over Tailscale only. Docker's published port stays on loopback,
+because published ports bypass the NixOS firewall and `0.0.0.0` would mean the
+public WAN address; `tailscale serve` fronts it on the tailnet. From any node
+on the tailnet:
 
 ```
 http://ipad-box:8084
 ```
 
-That is tailnet-only — Serve, not Funnel, so it is not on the public internet.
-Enable authentication in Settings before sharing the node further. Without
-Tailscale it is still reachable over SSH:
-
-```sh
-ssh -L 8084:127.0.0.1:8084 albttx@ipad-box   # then http://localhost:8084
-```
+Serve, not Funnel — it is not on the public internet, and there is no path to
+it from outside the tailnet. Enable authentication in Settings before sharing
+the node further.
 
 Systemd units: `docker-shelfmark` and `shelfmark-tailscale-serve`
 (`tailscale serve status` shows the proxy). Bump the tag in
