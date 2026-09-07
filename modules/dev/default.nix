@@ -4,6 +4,7 @@
   imports = [
     # modules
     ./go.nix
+    ./p.nix
     ./rust.nix
     ./nodejs.nix
     ./direnv.nix

@@ -54,16 +54,10 @@
   };
 
   home.activation.generateFzFMarks = lib.hm.dag.entryAfter [ "installPackages" ] ''
-    #!/usr/bin/env bash
+    CODE_DIR="$HOME/go/src"
 
-    DIRS=$(find $HOME/go/src -name .git -type d -prune | sort --ignore-case)
-
-    echo -n "" > $HOME/.fzf-marks
-
-    for d in $DIRS; do
-        d=$(echo $d | sed 's/\/.git//g')
-        name=$(echo $d | sed -E "s/^.*(github\.com|gitlab\.com)\///g")
-        echo "$name : $d" >> $HOME/.fzf-marks
-    done
+    ${pkgs.p}/bin/p list --code-dir "$CODE_DIR" | sort --ignore-case | while read -r proj; do
+      echo "''${proj#*/} : $CODE_DIR/$proj"
+    done > $HOME/.fzf-marks
   '';
 }
