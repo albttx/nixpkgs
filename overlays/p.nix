@@ -11,8 +11,8 @@ in
     src = pkgs.fetchFromGitHub {
       owner = "albttx";
       repo = "p";
-      rev = "10db109c295c705f8730905b3e0ee50b7cbe63cc";
-      hash = "sha256-lcoFUzzVz7iE0XqH58wW/pX7mYyClZQUKs2d7BWfq7s=";
+      rev = "023d9f0ce949abfc4880bdde4121a5976e64dc0e";
+      hash = "sha256-ouJBiIzVgXxzAbruAHTbDkHGTTYaRWC2XebW+RDmaRk=";
     };
 
     vendorHash = "sha256-1oU2POF3UJ+PiliuwoAn2URosVvEi97uc92AcPCg97s=";
