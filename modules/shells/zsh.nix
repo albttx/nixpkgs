@@ -4,6 +4,17 @@
   home.packages = with pkgs; [
     oh-my-zsh
     eza
+
+    # ^s is the p project picker now (fzf.nix); this stays around for
+    # switching between live tmux sessions only.
+    (writeScriptBin "fzf-tmux-sessions" ''
+      #!/bin/sh
+      selected_session=$(tmux list-sessions -F "#{session_name}" | fzf)
+
+      if [ -n "$selected_session" ]; then
+          tmux switch-client -t "$selected_session"
+      fi
+    '')
   ];
 
   programs = {
