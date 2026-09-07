@@ -53,6 +53,7 @@
 
       "ghostty"
       "google-chrome"
+      "grok-bot"
 
       # "ledger-wallet"
       # "little-snitch"
