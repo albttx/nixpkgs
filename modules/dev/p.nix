@@ -1,16 +1,18 @@
 { config, pkgs, ... }:
 
+let
+  codeDir = "${config.home.homeDirectory}/go/src";
+in
 {
   # p, a project switcher for the GOPATH-style tree: https://github.com/albttx/p
   home.packages = [ pkgs.p ];
 
   home.sessionVariables = {
-    CODE_DIR = "${config.home.homeDirectory}/go/src";
+    CODE_DIR = codeDir;
   };
 
-  # p expands $HOME itself, so the literal string is fine here.
   xdg.configFile."p/config.yaml".text = ''
-    code_dir: "$HOME/go/src/"
+    code_dir: "${codeDir}"
   '';
 
   # Order matters: `p init` defines the `p` shell function, and the
