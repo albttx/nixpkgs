@@ -84,8 +84,6 @@
       "thebrowsercompany-dia"
       "todoist-app"
 
-      "unity"
-      "unity-hub"
       "whatsapp"
 
       # zed code editor
