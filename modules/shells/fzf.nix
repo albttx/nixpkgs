@@ -1,24 +1,21 @@
 { lib, pkgs, ... }:
 
-let
-  # ctrl+s picker. `p list` emits host/owner/repo, which is exactly what
-  # `p add` accepts, so the fzf selection is passed straight through. `p add`
-  # clones if the checkout is missing, creates the tmux session if there
-  # isn't one, then attaches — or switch-clients when $TMUX is set. So this
-  # script must not branch on tmux itself; doing so would defeat that.
-  fzf-p-projects = pkgs.writeShellScriptBin "fzf-p-projects" ''
-    selected=$(${pkgs.p}/bin/p list | ${pkgs.fzf}/bin/fzf --prompt 'project> ' --layout=reverse)
-
-    # Esc / ^c: fzf exits non-zero with no output. Never call `p add ""`.
-    if [ -n "$selected" ]; then
-      exec ${pkgs.p}/bin/p add "$selected"
-    fi
-  '';
-in
 {
-  home.packages = [
-    pkgs.fd
-    fzf-p-projects
+  home.packages = with pkgs; [
+    fd
+
+    # ctrl+s picker. `p list` emits host/owner/repo, which is exactly what
+    # `p add` accepts, so the fzf selection is passed straight through.
+    # `p add` clones if the checkout is missing, creates the tmux session if
+    # there isn't one, then attaches — or switch-clients when $TMUX is set.
+    (writeShellScriptBin "fzf-p-projects" ''
+      selected=$(p list | fzf --prompt 'project> ' --layout=reverse)
+
+      # Esc / ^c: fzf exits non-zero with no output. Never call `p add ""`.
+      if [ -n "$selected" ]; then
+        exec p add "$selected"
+      fi
+    '')
   ];
 
   programs.zsh = {
@@ -39,7 +36,7 @@ in
     # .zprofile, which is where ^s used to be bound.
     initContent = lib.mkAfter ''
       fzf-p-projects-widget() {
-        ${fzf-p-projects}/bin/fzf-p-projects
+        fzf-p-projects
         local ret=$?
         zle reset-prompt
         return $ret
