@@ -1,7 +1,22 @@
 { lib, pkgs, ... }:
 
 {
-  home.packages = [ pkgs.fd ];
+  home.packages = with pkgs; [
+    fd
+
+    # ctrl+s picker. `p list` emits host/owner/repo, which is exactly what
+    # `p add` accepts, so the fzf selection is passed straight through.
+    # `p add` clones if the checkout is missing, creates the tmux session if
+    # there isn't one, then attaches — or switch-clients when $TMUX is set.
+    (writeShellScriptBin "fzf-p-projects" ''
+      selected=$(p list | fzf --prompt 'project> ' --layout=reverse)
+
+      # Esc / ^c: fzf exits non-zero with no output. Never call `p add ""`.
+      if [ -n "$selected" ]; then
+        exec p add "$selected"
+      fi
+    '')
+  ];
 
   programs.zsh = {
     plugins = [
@@ -16,6 +31,19 @@
         };
       }
     ];
+
+    # mkAfter so the binding lands after the plugins and after zsh.nix sources
+    # .zprofile, which is where ^s used to be bound.
+    initContent = lib.mkAfter ''
+      fzf-p-projects-widget() {
+        fzf-p-projects
+        local ret=$?
+        zle reset-prompt
+        return $ret
+      }
+      zle -N fzf-p-projects-widget
+      bindkey '^s' fzf-p-projects-widget
+    '';
   };
 
   programs.fzf = {
@@ -54,16 +82,10 @@
   };
 
   home.activation.generateFzFMarks = lib.hm.dag.entryAfter [ "installPackages" ] ''
-    #!/usr/bin/env bash
+    CODE_DIR="$HOME/go/src"
 
-    DIRS=$(find $HOME/go/src -name .git -type d -prune | sort --ignore-case)
-
-    echo -n "" > $HOME/.fzf-marks
-
-    for d in $DIRS; do
-        d=$(echo $d | sed 's/\/.git//g')
-        name=$(echo $d | sed -E "s/^.*(github\.com|gitlab\.com)\///g")
-        echo "$name : $d" >> $HOME/.fzf-marks
-    done
+    ${pkgs.p}/bin/p list --code-dir "$CODE_DIR" | sort --ignore-case | while read -r proj; do
+      echo "''${proj#*/} : $CODE_DIR/$proj"
+    done > $HOME/.fzf-marks
   '';
 }
