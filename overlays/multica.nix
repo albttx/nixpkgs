@@ -2,26 +2,26 @@ final: super:
 let
   pkgs = super.pkgs;
 
-  version = "0.4.30";
+  version = "0.4.41";
 
   # Prebuilt release binaries from https://github.com/multica-ai/multica/releases
   # Same artifacts the official install.sh / Homebrew tap ship.
   sources = {
     aarch64-darwin = {
       url = "https://github.com/multica-ai/multica/releases/download/v${version}/multica-cli-${version}-darwin-arm64.tar.gz";
-      hash = "sha256-NilCjuq31kXvLA/4zxqa/EiZAtlbjBpYBd9VRBeKqiI=";
+      hash = "sha256-WyKDKxIAJRWZmyU3rekCJW/L2YdmCJ6zCFUr4ze/7rw=";
     };
     x86_64-darwin = {
       url = "https://github.com/multica-ai/multica/releases/download/v${version}/multica-cli-${version}-darwin-amd64.tar.gz";
-      hash = "sha256-DH0Umh3gTsGHbWT2izkC+9PW+zvL66bZreGi7gTMEns=";
+      hash = "sha256-JUfLJ8n9VvV/T4rwXI7TtDF3L+BjQ99w5hYML8pySq4=";
     };
     aarch64-linux = {
       url = "https://github.com/multica-ai/multica/releases/download/v${version}/multica-cli-${version}-linux-arm64.tar.gz";
-      hash = "sha256-Wc1Fm8It2sIvUU1k1aVf2UkPIDVw4urNdrmvCiomlhg=";
+      hash = "sha256-T95yG/S4VwxPPZ2D87rak4YngRWEnwhHnzyyHAhoHNE=";
     };
     x86_64-linux = {
       url = "https://github.com/multica-ai/multica/releases/download/v${version}/multica-cli-${version}-linux-amd64.tar.gz";
-      hash = "sha256-+F0PpgXGtAsmOKg0hV3QSao+uW889Jawnf6SGtOEZpU=";
+      hash = "sha256-tmbvfsImeA2wS0W47Du9SARQm23I7wZ5HKft9kP42Hc=";
     };
   };
 
