@@ -95,6 +95,7 @@
 
       overlays = {
         my-libvterm = import ./overlays/libvterm.nix;
+        bun = import ./overlays/bun.nix;
         rtk = import ./overlays/rtk.nix;
         wait-for-ssh = import ./overlays/wait-for-ssh.nix;
         screenpipe = import ./overlays/screenpipe.nix;
