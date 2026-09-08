@@ -6,13 +6,13 @@ in
   # Project switcher for a GOPATH-style source tree: https://github.com/albttx/p
   p = pkgs.buildGoModule {
     pname = "p";
-    version = "0-unstable-2026-09-07";
+    version = "0-unstable-2026-09-08";
 
     src = pkgs.fetchFromGitHub {
       owner = "albttx";
       repo = "p";
-      rev = "023d9f0ce949abfc4880bdde4121a5976e64dc0e";
-      hash = "sha256-ouJBiIzVgXxzAbruAHTbDkHGTTYaRWC2XebW+RDmaRk=";
+      rev = "9a43a1515ce8df1222a283c77b3bbf7659f7f9ba";
+      hash = "sha256-1Sz0cycwR971xaVGAfzNmFtr64ilq3m5VHgms5Xt9/0=";
     };
 
     vendorHash = "sha256-1oU2POF3UJ+PiliuwoAn2URosVvEi97uc92AcPCg97s=";
