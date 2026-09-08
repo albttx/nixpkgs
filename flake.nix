@@ -102,6 +102,7 @@
         meetily = import ./overlays/meetily.nix;
         higgsfield-cli = import ./overlays/higgsfield-cli.nix;
         multica = import ./overlays/multica.nix;
+        herdr = import ./overlays/herdr.nix;
         p = import ./overlays/p.nix;
         mcp-nhost = _: prev: {
           mcp-nhost = inputs.mcp-nhost.packages.${prev.stdenv.system}.mcp-nhost;
