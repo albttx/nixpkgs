@@ -78,5 +78,6 @@
     my-libvterm
 
     multica
+    herdr
   ];
 }

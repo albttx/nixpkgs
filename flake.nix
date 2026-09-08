@@ -95,6 +95,7 @@
 
       overlays = {
         my-libvterm = import ./overlays/libvterm.nix;
+        bun = import ./overlays/bun.nix;
         rtk = import ./overlays/rtk.nix;
         wait-for-ssh = import ./overlays/wait-for-ssh.nix;
         screenpipe = import ./overlays/screenpipe.nix;
@@ -102,6 +103,7 @@
         meetily = import ./overlays/meetily.nix;
         higgsfield-cli = import ./overlays/higgsfield-cli.nix;
         multica = import ./overlays/multica.nix;
+        herdr = import ./overlays/herdr.nix;
         p = import ./overlays/p.nix;
         mcp-nhost = _: prev: {
           mcp-nhost = inputs.mcp-nhost.packages.${prev.stdenv.system}.mcp-nhost;

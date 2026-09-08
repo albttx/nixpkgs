@@ -68,6 +68,7 @@
         meetily
         higgsfield-cli
         multica
+        herdr
       ];
 
     };

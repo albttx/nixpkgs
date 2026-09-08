@@ -5,7 +5,7 @@
   # `nodePackages` was removed in nixpkgs 26.05; npm now ships with the `nodejs` derivation
   # and the rest are top-level packages.
   home.packages = with pkgs; [
-    pkgs-master.bun
+    bun # pinned to latest release in overlays/bun.nix
 
     yarn
     nodejs
