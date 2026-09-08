@@ -76,5 +76,7 @@
     # headless server: terminal emacs for the doom config
     emacs-nox
     my-libvterm
+
+    multica
   ];
 }
