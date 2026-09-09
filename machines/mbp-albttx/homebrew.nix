@@ -42,6 +42,7 @@
       "charles"
       "claude"
       "claude-code"
+      "codex"
       "cursor"
       "discord"
       "displaybuddy"
