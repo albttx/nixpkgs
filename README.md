@@ -18,6 +18,13 @@ Personal MacBook Pro. nix-darwin + home-manager on `aarch64-darwin`. Config: [`m
 
 Hetzner dedicated NixOS server (`x86_64-linux`). Rebuild on the box with `make switch` or `nixos-rebuild switch --flake .#ipad-box`. Config: [`machines/ipad-box`](machines/ipad-box).
 
+## AI configuration
+
+Claude Code rules, skills and agents live in [`ai/`](ai) and are symlinked into
+`~/.claude` by `modules/dev/ai/claude-config.nix`. Skills carry the per-technology
+conventions; agents exist only where there is a real tool or permission boundary.
+See [`ai/README.md`](ai/README.md).
+
 ## Installation
 
 ```sh
