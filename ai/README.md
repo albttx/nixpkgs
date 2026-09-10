@@ -20,8 +20,7 @@ than the main thread's.
 ai/
 ├── CLAUDE.md          # always loaded: philosophy, git, orchestration, language
 ├── skills/<name>/SKILL.md
-├── agents/<name>.md
-└── install.sh         # fallback for non-nix machines
+└── agents/<name>.md
 ```
 
 ## Skills
@@ -120,23 +119,28 @@ modules.ai.claude.linkConfig = false;   # set for github-ci
 
 Apply with `make switch`.
 
-**One-time cleanup.** home-manager links alongside existing files, it does not
-remove them, so anything the old `agents/install.sh` copied into `~/.claude`
-survives the switch. Those stale agents carry guidance these skills reverse.
-Clear them once with the installer, which prunes exactly that set and nothing
-else:
+### Migrating from the old layout
+
+Already done on `mbp-albttx`. home-manager links alongside existing files and
+cannot remove ones it does not manage, so the flat files the previous
+`agents/install.sh` copied into `~/.claude` survive a switch and keep overriding
+these skills. On any machine that still has them:
 
 ```sh
-./ai/install.sh --dry-run   # lists what it would prune
-./ai/install.sh
+cd ~/.claude/agents && rm -f cosmos-specialist.md docs-specialist.md \
+  frontend-react-specialist.md frontend-svelte-specialist.md go-specialist.md \
+  nix-specialist.md nodejs-specialist.md postgres-specialist.md \
+  seo-specialist.md son-of-albert.md
+cd ~/.claude/skills && rm -f agentcash.md albttx-guideline.md
 ```
 
-On a machine without home-manager:
+`devops-specialist.md` and `osint-specialist.md` need no action: home-manager
+wants those exact paths, so it backs the old ones up as `.backup` and replaces
+them.
 
-```sh
-./ai/install.sh --dry-run   # show what would change
-./ai/install.sh
-```
+There is no installer. Deployment is home-manager only, so there is exactly one
+source of truth for what lands in `~/.claude`. A script that copied real files
+onto the paths home-manager wants to symlink would fight it.
 
 ## Adding a skill
 
