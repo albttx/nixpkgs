@@ -49,6 +49,10 @@
         '';
       };
 
+      # No clone of this repo on the CI runner, so the ~/.claude links would
+      # dangle. The claude-code package itself still gets installed.
+      modules.ai.claude.linkConfig = false;
+
       programs.home-manager.enable = true;
 
       home.packages = with pkgs; [
