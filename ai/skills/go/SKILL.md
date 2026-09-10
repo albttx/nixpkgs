@@ -136,22 +136,38 @@ func TestParseConfig(t *testing.T) {
 Reach for `net/http` first. Go 1.22+ `ServeMux` handles method and path patterns
 (`mux.HandleFunc("GET /users/{id}", ...)`) and covers most services.
 
-When a router is genuinely needed, use **chi** — it is `http.Handler` all the way
-down, so handlers stay `func(w http.ResponseWriter, r *http.Request)` and middleware
-stays standard. Never `gin`. Do not introduce a framework that replaces the stdlib
-handler signature.
+For anything with real routing, grouping or middleware, use **Echo**. Never
+`gin`.
 
 ```go
-r := chi.NewRouter()
-r.Use(middleware.RequestID, middleware.Recoverer)
+e := echo.New()
+e.Use(middleware.Logger(), middleware.Recover())
 
-r.Route("/api/users", func(r chi.Router) {
-    r.Get("/{id}", handleGetUser)
-    r.Post("/", handleCreateUser)
-})
+g := e.Group("/api/users")
+g.GET("/:id", handleGetUser)
+g.POST("", handleCreateUser)
+
+func handleGetUser(c echo.Context) error {
+    id := c.Param("id")
+
+    user, err := store.GetUser(c.Request().Context(), id)
+    if errors.Is(err, ErrNotFound) {
+        return echo.NewHTTPError(http.StatusNotFound, "user not found")
+    }
+    if err != nil {
+        return fmt.Errorf("get user %s: %w", id, err)
+    }
+
+    return c.JSON(http.StatusOK, user)
+}
 ```
 
-Middleware is a plain `func(http.Handler) http.Handler`.
+- **Always `c.Request().Context()`**, never `context.Background()`, so a
+  cancelled request cancels the query behind it.
+- Return the error rather than writing the response yourself. `echo.NewHTTPError`
+  for the ones the client should see; a wrapped error for everything else, and
+  let a central error handler turn it into a 500 without leaking the message.
+- Group by resource and hang shared middleware off the group, not off every route.
 
 ## Database
 
@@ -194,6 +210,34 @@ features earn it. No ORM.
 
 See the `postgres` skill for schema, indexing and migration-safety detail.
 
+## Logging
+
+**logrus.** Structured fields, not formatted strings.
+
+```go
+log := logrus.WithFields(logrus.Fields{
+    "component": "store",
+    "user_id":   id,
+})
+
+log.WithField("duration_ms", ms).Info("user fetched")
+log.WithError(err).Error("fetch failed")
+```
+
+- `WithError(err)` rather than putting the error in the message. It lands under
+  the `error` key where a log search can find it.
+- `WithFields` for context that repeats; build the entry once at the top of a
+  handler or a service method and pass it down rather than re-adding the same
+  fields at every call.
+- `logrus.JSONFormatter` in anything deployed, text only for local runs.
+- Levels: `Debug` for traces, `Info` for lifecycle, `Warn` for recoverable,
+  `Error` for failures. `Fatal` and `Panic` only in `main`, never in a library
+  or a handler — they call `os.Exit` and skip every deferred cleanup.
+- Set the level from config, defaulting to `Info`.
+- Take a `*logrus.Entry` as a dependency rather than reaching for the package-level
+  logger, so tests can capture output and the no-global-state rule holds.
+- Never log a secret, a token, or a full request body that might contain one.
+
 ## Concurrency
 
 ```go
@@ -219,11 +263,13 @@ A mutex is often simpler than a channel. Use the one that makes the code readabl
 
 Short list, reached for only when the stdlib genuinely falls short:
 
+- **HTTP**: `net/http` for simple cases, `labstack/echo/v4` when routing or
+  middleware earns a framework
 - **CLI**: `urfave/cli/v3`, or `spf13/cobra` when the command tree is large
 - **TUI**: the Charm stack (`bubbletea`, `bubbles`, `huh`)
 - **Config**: `BurntSushi/toml` or `gopkg.in/yaml.v3`. Note the TOML/YAML
   zero-value trap: use `*bool` when "unset" must differ from "false".
-- **Logging**: `slog` (stdlib)
+- **Logging**: `logrus`
 - **Postgres**: `pgx` + `pgxpool`; `sqlc` for query codegen; `goose` for migrations
 - **gRPC**: `google.golang.org/grpc` + `buf`
 - **Validation**: hand-written validators, or `go-playground/validator` when the

@@ -30,8 +30,8 @@ run() {
 
 # The old agents/install.sh flattened agents/*/agents/*.md into ~/.claude/agents/
 # and agents/_shared/skills/*.md into ~/.claude/skills/. Those stale files carry
-# guidance the new skills deliberately reverse (Echo over chi, testify, yarn over
-# the lockfile) and a son-of-albert delegation table for agents that no longer
+# guidance the new skills deliberately reverse (testify, yarn over the lockfile,
+# raw hex colours) and a son-of-albert delegation table for agents that no longer
 # exist. Remove exactly those names, nothing else.
 LEGACY_AGENTS=(
     cosmos-specialist.md

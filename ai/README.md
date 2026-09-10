@@ -29,7 +29,7 @@ ai/
 | Skill | Covers |
 |---|---|
 | `albttx-guideline` | Operating rules: verify before acting, security, quality gates, PR conventions |
-| `go` | Go: layout, errors, tests, chi, database/sql, golangci-lint, CI split |
+| `go` | Go: layout, errors, tests, Echo, logrus, database/sql, golangci-lint, CI split |
 | `svelte` | SvelteKit 2 + Svelte 5 runes, Tailwind v4 CSS-first, i18n |
 | `react` | Next.js App Router, React 19, RSC boundary, Tailwind v4 CSS-first |
 | `nodejs` | Bun/Node, workspaces, Zod, Drizzle, pino, serverless |
