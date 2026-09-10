@@ -2,8 +2,7 @@
 
 {
   imports = [
-    ./claude-code.nix
-    ./claude-config.nix
+    ./claude.nix
     ./grok-code.nix
   ];
 }

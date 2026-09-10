@@ -3,7 +3,7 @@
 # Fallback installer for non-nix machines.
 #
 # On nix machines this is handled declaratively by
-# modules/dev/ai/claude-config.nix, which symlinks ai/ into ~/.claude.
+# modules/dev/ai/claude.nix, which symlinks ai/ into ~/.claude.
 # Use this script only where home-manager is not available.
 #
 # Layout installed:

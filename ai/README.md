@@ -79,17 +79,44 @@ in `CLAUDE.md` and apply to the main thread, which *can* delegate.
 
 ## Deployment
 
-On nix machines this is declarative. `modules/dev/ai/claude-config.nix`
-symlinks `ai/` into `~/.claude`:
+On nix machines this is declarative. `modules/dev/ai/claude.nix` installs the
+`claude-code` package and links `ai/` into `~/.claude`:
 
 ```nix
-home.file.".claude/CLAUDE.md".source = ../../../ai/CLAUDE.md;
-home.file.".claude/skills" = { source = ../../../ai/skills; recursive = true; };
-home.file.".claude/agents" = { source = ../../../ai/agents; recursive = true; };
+home.file.".claude/CLAUDE.md".source      = link "${aiPath}/CLAUDE.md";
+home.file.".claude/skills/<name>".source  = link "${aiPath}/skills/<name>";
+home.file.".claude/agents/<name>.md".source = link "${aiPath}/agents/<name>.md";
 ```
 
-`recursive = true` links each file individually, so `~/.claude` stays writable
-for Claude Code's own state and unrelated skills installed there survive.
+The entries are generated from `builtins.readDir`, so adding a skill needs a
+`make switch` to create its link, but editing one does not.
+
+### Why the links point at the working tree, not the nix store
+
+`link` is `config.lib.file.mkOutOfStoreSymlink`, so `~/.claude/skills/go` resolves
+to `~/go/src/github.com/albttx/nixpkgs/ai/skills/go`. A skill edited mid-task from
+any project is live immediately and shows up as a git change here, ready to commit.
+
+A plain store symlink would be read-only, and that fails in a nastier way than it
+sounds. A direct append errors out, fine. But the write-new-then-rename that most
+editors and `sed -i` perform *replaces* the symlink with a real file and
+**succeeds**, and then the next `make switch` quietly moves that file aside as
+`.backup` and re-links. The edit looks applied, then disappears a day later.
+
+Two consequences worth knowing:
+
+- `~/.claude/skills` and `~/.claude/agents` stay real directories, so
+  plugin-installed skills alongside these are untouched. The eight
+  `paperclip` skills already there keep working.
+- The live skills follow whatever branch this repo has checked out. Switching
+  branches here changes Claude's behaviour everywhere.
+
+Machines with no clone at `modules.ai.claude.repoPath` must opt out, or the links
+dangle:
+
+```nix
+modules.ai.claude.linkConfig = false;   # set for github-ci
+```
 
 Apply with `make switch`.
 

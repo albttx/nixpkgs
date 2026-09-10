@@ -21,7 +21,7 @@ Hetzner dedicated NixOS server (`x86_64-linux`). Rebuild on the box with `make s
 ## AI configuration
 
 Claude Code rules, skills and agents live in [`ai/`](ai) and are symlinked into
-`~/.claude` by `modules/dev/ai/claude-config.nix`. Skills carry the per-technology
+`~/.claude` by `modules/dev/ai/claude.nix`. Skills carry the per-technology
 conventions; agents exist only where there is a real tool or permission boundary.
 See [`ai/README.md`](ai/README.md).
 
