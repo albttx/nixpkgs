@@ -78,6 +78,7 @@
     starship = {
       enable = true;
       enableZshIntegration = true;
+      presets = [ "catppuccin-powerline" ];
     };
 
     direnv = {
