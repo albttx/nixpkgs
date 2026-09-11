@@ -14,7 +14,10 @@
   boot.loader.grub = {
     enable = true;
     efiSupport = false;
-    devices = [ "/dev/sda" "/dev/sdb" ];
+    devices = [
+      "/dev/sda"
+      "/dev/sdb"
+    ];
   };
 
   boot.swraid.enable = true;
@@ -36,7 +39,11 @@
     allowDiscards = true; # TRIM through to the SSDs
   };
 
-  boot.initrd.availableKernelModules = [ "raid1" "dm_mod" "dm_crypt" ];
+  boot.initrd.availableKernelModules = [
+    "raid1"
+    "dm_mod"
+    "dm_crypt"
+  ];
   # NIC driver must be in the initrd for the remote-unlock SSH server below.
   boot.initrd.kernelModules = [ "e1000e" ];
 

@@ -11,86 +11,88 @@
 {
   # nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
 
-  home.packages = with pkgs; [
-    sqlite # required by magit
+  home.packages =
+    with pkgs;
+    [
+      sqlite # required by magit
 
-    # basics
-    fd
-    git
-    # nerdfonts
-    fontconfig
+      # basics
+      fd
+      git
+      # nerdfonts
+      fontconfig
 
-    # build tools
-    clang
-    cmake
-    libtool
-    coreutils
-    # libvterm # installed with overlay my-libvterm
+      # build tools
+      clang
+      cmake
+      libtool
+      coreutils
+      # libvterm # installed with overlay my-libvterm
 
-    #completion tools
-    semgrep
-    ripgrep
-    silver-searcher
+      #completion tools
+      semgrep
+      ripgrep
+      silver-searcher
 
-    # :searcher nix
-    nixfmt
+      # :searcher nix
+      nixfmt
 
-    # :lang javascript (nodejs + nodePackages come from modules/dev/nodejs.nix to avoid duplicate derivations)
-    # bun (installed in modules/dev/nodejs.nix)
+      # :lang javascript (nodejs + nodePackages come from modules/dev/nodejs.nix to avoid duplicate derivations)
+      # bun (installed in modules/dev/nodejs.nix)
 
-    # :checkers
-    aspell
+      # :checkers
+      aspell
 
-    # :tools
-    # dockfmt
-    # editorconfig
+      # :tools
+      # dockfmt
+      # editorconfig
 
-    # :lang org
-    graphviz
+      # :lang org
+      graphviz
 
-    # :lang python
-    # black is provided by modules/dev/python.nix (in python3.withPackages environment)
-    # black
-    #python312Packages.pyflakes
-    # python312Packages.pynose
-    #python312Packages.pytest
-    isort
-    # pipenv
+      # :lang python
+      # black is provided by modules/dev/python.nix (in python3.withPackages environment)
+      # black
+      #python312Packages.pyflakes
+      # python312Packages.pynose
+      #python312Packages.pytest
+      isort
+      # pipenv
 
-    # :lang markdown
-    ispell
-    gh-markdown-preview
+      # :lang markdown
+      ispell
+      gh-markdown-preview
 
-    # :lang go
-    golangci-lint-langserver
+      # :lang go
+      golangci-lint-langserver
 
-    # :lang bash
-    shellcheck
-    shfmt
+      # :lang bash
+      shellcheck
+      shfmt
 
-    # :lang web
-    # stylelint
-    jsbeautifier
+      # :lang web
+      # stylelint
+      jsbeautifier
 
-    ## lsp
-    # (pkgs.buildGoModule {
-    #   pname = "gnopls";
-    #   version = "v0.1.0";
-    #   src = pkgs.fetchFromGitHub {
-    #     owner = "gnolang";
-    #     repo = "gnopls";
-    #     rev = "v0.1.0";
-    #     sha256 = "sha256-3LWeWIDn8+IMrXZGSJwx/9BKFoBx4puPcRFDIVq4Yiw=";
-    #   };
-    #   lsFlags = [ "-mod=mod" ];
-    #   vendorHash = "sha256-xaIv3l+7kNlywtiCg7YvP+WMVOilzCLvyOA9gGeUziQ=";
-    # })
+      ## lsp
+      # (pkgs.buildGoModule {
+      #   pname = "gnopls";
+      #   version = "v0.1.0";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "gnolang";
+      #     repo = "gnopls";
+      #     rev = "v0.1.0";
+      #     sha256 = "sha256-3LWeWIDn8+IMrXZGSJwx/9BKFoBx4puPcRFDIVq4Yiw=";
+      #   };
+      #   lsFlags = [ "-mod=mod" ];
+      #   vendorHash = "sha256-xaIv3l+7kNlywtiCg7YvP+WMVOilzCLvyOA9gGeUziQ=";
+      # })
 
-    # syntax color
-    emacs-all-the-icons-fonts
-  ]
-  # pngpaste is a macOS clipboard tool (:lang org)
-  ++ lib.optionals pkgs.stdenv.isDarwin [ pngpaste ];
+      # syntax color
+      emacs-all-the-icons-fonts
+    ]
+    # pngpaste is a macOS clipboard tool (:lang org)
+    ++ lib.optionals pkgs.stdenv.isDarwin [ pngpaste ];
 
   programs.zsh.initContent = ''
     export PATH="$HOME/.config/emacs/bin:$PATH"
