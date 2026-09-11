@@ -79,6 +79,7 @@
       enable = true;
       enableZshIntegration = true;
       presets = [ "catppuccin-powerline" ];
+      settings.add_newline = false;
     };
 
     direnv = {
