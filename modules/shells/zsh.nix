@@ -35,21 +35,12 @@
         fcd = "cd $(fd --type directory | fzf)";
       };
 
-      initContent =
-        let
-          p10k-config = "${config.home.homeDirectory}/.p10k.zsh";
-        in
-        ''
-          mcd() { mkdir -p "$1" && cd "$1"; }
+      initContent = ''
+        mcd() { mkdir -p "$1" && cd "$1"; }
 
-          if [ -e "${p10k-config}" ]
-          then
-            source "${p10k-config}"
-          fi
-
-          # source profileExtra
-          source ${config.home.homeDirectory}/.config/zsh/.zprofile
-        '';
+        # source profileExtra
+        source ${config.home.homeDirectory}/.config/zsh/.zprofile
+      '';
 
       profileExtra = ''
         if [ -f "${config.home.profileDirectory}/etc/profile.d/nix.sh" ]; then
@@ -71,12 +62,6 @@
 
       plugins = [
         {
-          name = "powerline10k";
-          src = pkgs.zsh-powerlevel10k;
-          file = "share/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme";
-        }
-
-        {
           name = "autosuggestions";
           src = pkgs.zsh-autosuggestions;
           file = "share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh";
@@ -90,12 +75,26 @@
       ];
     };
 
+    starship = {
+      enable = true;
+      enableZshIntegration = true;
+      presets = [ "catppuccin-powerline" ];
+      settings = {
+        add_newline = false;
+        # The preset disables line_break, leaving the ❯ inline with the
+        # powerline bar; re-enable it so the prompt character gets its own line.
+        line_break.disabled = false;
+        # The preset already truncates to 3 components, but inside a git repo
+        # the default truncate_to_repo collapses the path to the repo root
+        # alone; disable it so 3 components always show.
+        directory.truncate_to_repo = false;
+      };
+    };
+
     direnv = {
       enable = true;
       enableZshIntegration = true;
       nix-direnv.enable = true;
     };
   };
-
-  home.file.".p10k.zsh".source = ./configs/p10k.zsh;
 }
