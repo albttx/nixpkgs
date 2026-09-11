@@ -79,7 +79,12 @@
       enable = true;
       enableZshIntegration = true;
       presets = [ "catppuccin-powerline" ];
-      settings.add_newline = false;
+      settings = {
+        add_newline = false;
+        # The preset disables line_break, leaving the ❯ inline with the
+        # powerline bar; re-enable it so the prompt character gets its own line.
+        line_break.disabled = false;
+      };
     };
 
     direnv = {
