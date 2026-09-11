@@ -35,21 +35,12 @@
         fcd = "cd $(fd --type directory | fzf)";
       };
 
-      initContent =
-        let
-          p10k-config = "${config.home.homeDirectory}/.p10k.zsh";
-        in
-        ''
-          mcd() { mkdir -p "$1" && cd "$1"; }
+      initContent = ''
+        mcd() { mkdir -p "$1" && cd "$1"; }
 
-          if [ -e "${p10k-config}" ]
-          then
-            source "${p10k-config}"
-          fi
-
-          # source profileExtra
-          source ${config.home.homeDirectory}/.config/zsh/.zprofile
-        '';
+        # source profileExtra
+        source ${config.home.homeDirectory}/.config/zsh/.zprofile
+      '';
 
       profileExtra = ''
         if [ -f "${config.home.profileDirectory}/etc/profile.d/nix.sh" ]; then
@@ -71,12 +62,6 @@
 
       plugins = [
         {
-          name = "powerline10k";
-          src = pkgs.zsh-powerlevel10k;
-          file = "share/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme";
-        }
-
-        {
           name = "autosuggestions";
           src = pkgs.zsh-autosuggestions;
           file = "share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh";
@@ -90,12 +75,15 @@
       ];
     };
 
+    starship = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     direnv = {
       enable = true;
       enableZshIntegration = true;
       nix-direnv.enable = true;
     };
   };
-
-  home.file.".p10k.zsh".source = ./configs/p10k.zsh;
 }
