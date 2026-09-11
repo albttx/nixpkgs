@@ -84,6 +84,10 @@
         # The preset disables line_break, leaving the ❯ inline with the
         # powerline bar; re-enable it so the prompt character gets its own line.
         line_break.disabled = false;
+        # The preset already truncates to 3 components, but inside a git repo
+        # the default truncate_to_repo collapses the path to the repo root
+        # alone; disable it so 3 components always show.
+        directory.truncate_to_repo = false;
       };
     };
 
