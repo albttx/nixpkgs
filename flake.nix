@@ -132,13 +132,15 @@
         };
 
         # Overlay useful on Macs with Apple Silicon
-        pkgs-silicon = _: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-          # Add access to x86 packages system is running Apple Silicon
-          pkgs-x86 = import inputs.nixpkgs-unstable {
-            system = "x86_64-darwin";
-            inherit (nixpkgsDefaults) config;
+        pkgs-silicon =
+          _: prev:
+          optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
+            # Add access to x86 packages system is running Apple Silicon
+            pkgs-x86 = import inputs.nixpkgs-unstable {
+              system = "x86_64-darwin";
+              inherit (nixpkgsDefaults) config;
+            };
           };
-        };
       };
 
       darwinConfigurations = {

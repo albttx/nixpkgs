@@ -59,6 +59,9 @@ endif # end linux
 fmt:
 	nix-shell -p nixfmt --command "nixfmt  $(NIX_FILES)"
 
+fmt.check:
+	nix-shell -p nixfmt --command "nixfmt --check $(NIX_FILES)"
+
 clean:
 	./result/sw/bin/nix-collect-garbage
 

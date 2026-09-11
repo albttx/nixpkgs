@@ -24,8 +24,14 @@
     address = "138.201.59.1";
     interface = "enp0s31f6";
   };
-  networking.defaultGateway6 = { address = "fe80::1"; interface = "enp0s31f6"; };
-  networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
+  networking.defaultGateway6 = {
+    address = "fe80::1";
+    interface = "enp0s31f6";
+  };
+  networking.nameservers = [
+    "8.8.8.8"
+    "1.1.1.1"
+  ];
 
   # ---- Tailscale ----
   # The module only installs and runs tailscaled; the node still has to be
