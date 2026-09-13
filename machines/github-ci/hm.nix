@@ -49,9 +49,9 @@
         '';
       };
 
-      # No clone of this repo on the CI runner, so the ~/.claude links would
-      # dangle. The claude-code package itself still gets installed.
-      modules.ai.claude.linkConfig = false;
+      # No clone of this repo on the CI runner, so the ~/.claude and
+      # ~/.config/opencode links would dangle. The packages still get installed.
+      modules.ai.linkConfig = false;
 
       programs.home-manager.enable = true;
 

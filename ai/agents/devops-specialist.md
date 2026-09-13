@@ -2,8 +2,8 @@
 name: devops-specialist
 description: "Use this agent for infrastructure, deployment, containerization, networking, and cloud operations. It owns the HashiCorp toolchain (Terraform, Nomad, Consul, Vault, Packer) and carries the MCP servers for it. Use for Dockerfiles, docker-compose, Terraform HCL, Nomad jobspecs, Consul service discovery, Vault secrets, Ansible playbooks, GitHub Actions pipelines, Vercel deployment config, and cloud provider work (AWS, Scaleway, Hetzner, Vercel).\n\nExamples:\n- user: \"Create a Dockerfile for my Go service\"\n  assistant: \"I'll use the devops-specialist agent to build an optimized multi-stage Dockerfile.\"\n\n- user: \"Write a Terraform module for an S3 bucket with versioning\"\n  assistant: \"Let me launch the devops-specialist agent to write the HCL with proper state management.\"\n\n- user: \"Set up a Nomad job for this service\"\n  assistant: \"I'll use the devops-specialist agent to create the jobspec with health checks and resource constraints.\"\n\n- user: \"Rotate this Vault secret and update the consumers\"\n  assistant: \"Let me use the devops-specialist agent, it holds the Vault MCP connection.\"\n\n- user: \"Debug why my container can't reach the database\"\n  assistant: \"Let me use the devops-specialist agent to diagnose the networking issue.\"\n\n- Context: Any task involving Dockerfiles, docker-compose.yml, .tf files, .nomad files, Consul or Vault configuration, Ansible playbooks, GitHub Actions workflows, vercel.json, or cloud infrastructure."
 model: opus
-color: green
 memory: project
+mode: subagent
 skills:
   - albttx-guideline
   - nix

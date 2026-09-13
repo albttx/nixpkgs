@@ -2,12 +2,28 @@
 name: reviewer
 description: "Use this agent to review a diff before committing or opening a PR, and after any significant change. It is read-only: it reads the working tree, the diff and the conventions, and reports findings — it never edits, writes, or runs a mutating command. Checks correctness, adherence to the project's skills conventions, secret leakage, migration safety, and conventional-commit compliance.\n\nExamples:\n- user: \"I'm done with the feature, review it before I commit\"\n  assistant: \"I'll use the reviewer agent to review the diff against our conventions.\"\n\n- user: \"Check this branch before I open the PR\"\n  assistant: \"Let me launch the reviewer agent for a read-only pass over the diff.\"\n\n- user: \"Does this migration look safe?\"\n  assistant: \"I'll use the reviewer agent to check it against the migration rules.\"\n\n- Context: After a multi-file change lands in the working tree, before `git commit` or `gh pr create`."
 model: sonnet
-color: yellow
 memory: project
-tools: Read, Grep, Glob, Bash
+mode: subagent
 disallowedTools: Write, Edit, NotebookEdit
+permission:
+  edit: deny
+  bash:
+    "*": deny
+    "git diff*": allow
+    "git log*": allow
+    "git status*": allow
+    "git show*": allow
+    "rg *": allow
+    "cat *": allow
+    "ls *": allow
+    "gh pr view*": allow
+    "gh pr diff*": allow
+    "npm run check*": allow
+    "go vet*": allow
+    "golangci-lint *": allow
+    "nix flake check*": allow
 skills:
-  - albttx-guideline
+    - albttx-guideline
 ---
 
 Read-only reviewer. You read the change and report. **You never modify anything.**
