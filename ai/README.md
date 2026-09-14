@@ -1,7 +1,7 @@
 # ai
 
-Shared agent configuration: global rules, skills, and agents. Claude Code and
-OpenCode both consume this tree.
+Shared agent configuration: global rules, skills, and agents. Claude Code,
+OpenCode and Codex all consume this tree.
 
 The organising principle is **skills = knowledge, agents = isolation**.
 
@@ -21,11 +21,23 @@ than the main thread's.
 ai/
 ├── CLAUDE.md          # always loaded: philosophy, git, orchestration, language
 ├── skills/<name>/SKILL.md
-└── agents/<name>.md
+├── agents/<name>.md
+└── codex/agents/<name>.toml   # hand-converted copies of agents/<name>.md
 ```
 
-`CLAUDE.md` is also linked as OpenCode's `AGENTS.md`. Skills are the Agent Skills
-standard (`name` + `description` frontmatter), so both tools load them as-is.
+`CLAUDE.md` is also linked as OpenCode's and Codex's `AGENTS.md`. Skills are the
+Agent Skills standard (`name` + `description` frontmatter), so all three tools
+load them as-is.
+
+Agents are the one place the tools diverge. Claude and OpenCode read the
+markdown files directly; Codex only reads TOML files (`name`, `description`,
+`developer_instructions`), so `codex/agents/` holds committed copies converted
+by hand. The `.md` file is the reference: when an agent changes, update its
+`.toml` in the same commit. Claude-specific frontmatter (`model`, `memory`,
+`skills`, `mcpServers`) is dropped on conversion, since a codex agent inherits
+the parent session's model and tooling. The exception is `reviewer`: its
+read-only constraint maps to `sandbox_mode = "read-only"`, which Codex enforces
+for real.
 
 ## Skills
 
@@ -86,14 +98,17 @@ in `CLAUDE.md` and apply to the main thread, which *can* delegate.
 
 ## Deployment
 
-On nix machines this is declarative. `modules/dev/ai/claude.nix` and
-`modules/dev/ai/opencode.nix` install the packages and link `ai/` into
-`~/.claude` and `~/.config/opencode`:
+On nix machines this is declarative. `modules/dev/ai/claude.nix`,
+`modules/dev/ai/codex.nix` and `modules/dev/ai/opencode.nix` install the
+packages and link `ai/` into `~/.claude`, `~/.codex` and `~/.config/opencode`:
 
 ```nix
 home.file.".claude/CLAUDE.md".source                 = link "${aiPath}/CLAUDE.md";
 home.file.".claude/skills/<name>".source             = link "${aiPath}/skills/<name>";
 home.file.".claude/agents/<name>.md".source          = link "${aiPath}/agents/<name>.md";
+home.file.".codex/AGENTS.md".source                  = link "${aiPath}/CLAUDE.md";
+home.file.".codex/skills/<name>".source              = link "${aiPath}/skills/<name>";
+home.file.".codex/agents/<name>.toml".source         = link "${aiPath}/codex/agents/<name>.toml";
 home.file.".config/opencode/AGENTS.md".source        = link "${aiPath}/CLAUDE.md";
 home.file.".config/opencode/skills/<name>".source    = link "${aiPath}/skills/<name>";
 home.file.".config/opencode/agents/<name>.md".source = link "${aiPath}/agents/<name>.md";
@@ -119,9 +134,10 @@ Two consequences worth knowing:
 - `~/.claude/skills` and `~/.claude/agents` stay real directories, so
   plugin-installed skills alongside these are untouched. The eight
   `paperclip` skills already there keep working. The same is true of
-  `~/.config/opencode/skills` and `~/.config/opencode/agents`.
+  `~/.codex/skills`, `~/.codex/agents`, `~/.config/opencode/skills` and
+  `~/.config/opencode/agents`.
 - The live skills follow whatever branch this repo has checked out. Switching
-  branches here changes Claude and OpenCode behaviour everywhere.
+  branches here changes Claude, Codex and OpenCode behaviour everywhere.
 
 Machines with no clone at `modules.ai.repoPath` must opt out, or the links
 dangle:
@@ -152,9 +168,9 @@ wants those exact paths, so it backs the old ones up as `.backup` and replaces
 them.
 
 There is no installer. Deployment is home-manager only, so there is exactly one
-source of truth for what lands in `~/.claude` and `~/.config/opencode`. A script
-that copied real files onto the paths home-manager wants to symlink would fight
-it.
+source of truth for what lands in `~/.claude`, `~/.codex` and
+`~/.config/opencode`. A script that copied real files onto the paths
+home-manager wants to symlink would fight it.
 
 ## Adding a skill
 

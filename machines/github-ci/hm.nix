@@ -49,7 +49,7 @@
         '';
       };
 
-      # No clone of this repo on the CI runner, so the ~/.claude and
+      # No clone of this repo on the CI runner, so the ~/.claude, ~/.codex and
       # ~/.config/opencode links would dangle. The packages still get installed.
       modules.ai.linkConfig = false;
 
