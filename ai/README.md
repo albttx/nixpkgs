@@ -1,6 +1,7 @@
 # ai
 
-Claude Code configuration: global rules, skills, and agents.
+Shared agent configuration: global rules, skills, and agents. Claude Code and
+OpenCode both consume this tree.
 
 The organising principle is **skills = knowledge, agents = isolation**.
 
@@ -22,6 +23,9 @@ ai/
 ├── skills/<name>/SKILL.md
 └── agents/<name>.md
 ```
+
+`CLAUDE.md` is also linked as OpenCode's `AGENTS.md`. Skills are the Agent Skills
+standard (`name` + `description` frontmatter), so both tools load them as-is.
 
 ## Skills
 
@@ -49,10 +53,10 @@ ai/
 
 ### Reviewer enforcement, a known gap
 
-`reviewer` has `tools: Read, Grep, Glob, Bash` plus
-`disallowedTools: Write, Edit, NotebookEdit`, so it cannot edit files. But it
-needs `Bash` for `git diff`, and **agent frontmatter cannot restrict individual
-bash commands**. Its "never run `git commit`" rule is prose, not enforcement.
+`reviewer` has `disallowedTools: Write, Edit, NotebookEdit`, so Claude cannot
+edit files. It still needs `Bash` for `git diff`, and **Claude agent frontmatter
+cannot restrict individual bash commands**. Its "never run `git commit`" rule is
+prose on Claude, not enforcement.
 
 If that gap matters, close it in `~/.claude/settings.json` with deny rules:
 
@@ -68,9 +72,13 @@ If that gap matters, close it in `~/.claude/settings.json` with deny rules:
 }
 ```
 
-Left undone for now, on the principle that complexity waits for a concrete
-reason. The prose constraint is honoured in practice; add the deny rules the
-first time it is not.
+On OpenCode the `permission` frontmatter is real enforcement: `edit` is denied
+and bash is allow-listed to read-only inspection commands. Claude still cannot
+restrict individual bash commands, so its constraint stays prose plus
+`disallowedTools`.
+
+`devops-specialist`'s `mcpServers` block is Claude-only. OpenCode loads the
+agent prompt but does not start those MCP servers from agent frontmatter.
 
 There is deliberately no orchestrator agent. Sub-agents cannot spawn sub-agents,
 so an orchestrator sub-agent could never delegate. The orchestration rules live
@@ -78,13 +86,17 @@ in `CLAUDE.md` and apply to the main thread, which *can* delegate.
 
 ## Deployment
 
-On nix machines this is declarative. `modules/dev/ai/claude.nix` installs the
-`claude-code` package and links `ai/` into `~/.claude`:
+On nix machines this is declarative. `modules/dev/ai/claude.nix` and
+`modules/dev/ai/opencode.nix` install the packages and link `ai/` into
+`~/.claude` and `~/.config/opencode`:
 
 ```nix
-home.file.".claude/CLAUDE.md".source      = link "${aiPath}/CLAUDE.md";
-home.file.".claude/skills/<name>".source  = link "${aiPath}/skills/<name>";
-home.file.".claude/agents/<name>.md".source = link "${aiPath}/agents/<name>.md";
+home.file.".claude/CLAUDE.md".source                 = link "${aiPath}/CLAUDE.md";
+home.file.".claude/skills/<name>".source             = link "${aiPath}/skills/<name>";
+home.file.".claude/agents/<name>.md".source          = link "${aiPath}/agents/<name>.md";
+home.file.".config/opencode/AGENTS.md".source        = link "${aiPath}/CLAUDE.md";
+home.file.".config/opencode/skills/<name>".source    = link "${aiPath}/skills/<name>";
+home.file.".config/opencode/agents/<name>.md".source = link "${aiPath}/agents/<name>.md";
 ```
 
 The entries are generated from `builtins.readDir`, so adding a skill needs a
@@ -106,15 +118,16 @@ Two consequences worth knowing:
 
 - `~/.claude/skills` and `~/.claude/agents` stay real directories, so
   plugin-installed skills alongside these are untouched. The eight
-  `paperclip` skills already there keep working.
+  `paperclip` skills already there keep working. The same is true of
+  `~/.config/opencode/skills` and `~/.config/opencode/agents`.
 - The live skills follow whatever branch this repo has checked out. Switching
-  branches here changes Claude's behaviour everywhere.
+  branches here changes Claude and OpenCode behaviour everywhere.
 
-Machines with no clone at `modules.ai.claude.repoPath` must opt out, or the links
+Machines with no clone at `modules.ai.repoPath` must opt out, or the links
 dangle:
 
 ```nix
-modules.ai.claude.linkConfig = false;   # set for github-ci
+modules.ai.linkConfig = false;   # set for github-ci
 ```
 
 Apply with `make switch`.
@@ -139,8 +152,9 @@ wants those exact paths, so it backs the old ones up as `.backup` and replaces
 them.
 
 There is no installer. Deployment is home-manager only, so there is exactly one
-source of truth for what lands in `~/.claude`. A script that copied real files
-onto the paths home-manager wants to symlink would fight it.
+source of truth for what lands in `~/.claude` and `~/.config/opencode`. A script
+that copied real files onto the paths home-manager wants to symlink would fight
+it.
 
 ## Adding a skill
 

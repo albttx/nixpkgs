@@ -6,46 +6,15 @@
 }:
 
 let
-  cfg = config.modules.ai.claude;
+  cfg = config.modules.ai;
 
   link = config.lib.file.mkOutOfStoreSymlink;
   aiPath = "${cfg.repoPath}/ai";
 
-  # Enumerated from the store copy of the flake, so adding a skill needs a
-  # `make switch` to create its link. The link targets are working-tree paths.
-  skills = lib.attrNames (
-    lib.filterAttrs (_: t: t == "directory") (builtins.readDir ../../../ai/skills)
-  );
-
-  agents = map (lib.removeSuffix ".md") (
-    lib.attrNames (
-      lib.filterAttrs (n: t: t == "regular" && lib.hasSuffix ".md" n) (
-        builtins.readDir ../../../ai/agents
-      )
-    )
-  );
+  inherit (import ./tree.nix { inherit lib; }) skills agents;
 
 in
 {
-  options.modules.ai.claude = {
-    linkConfig = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = ''
-        Symlink ai/ into ~/.claude. Turn this off on machines that have no
-        clone of this repo at {option}`modules.ai.claude.repoPath`, otherwise
-        the links dangle.
-      '';
-    };
-
-    repoPath = lib.mkOption {
-      type = lib.types.str;
-      default = "${config.home.homeDirectory}/go/src/github.com/albttx/nixpkgs";
-      example = "/root/go/src/github.com/albttx/nixpkgs";
-      description = "Working-tree path of this repo, used as the link target.";
-    };
-  };
-
   config = {
     # From master: claude-code moves too fast for the stable channel.
     home.packages = [ pkgs.pkgs-master.claude-code ];
