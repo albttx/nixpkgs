@@ -13,4 +13,14 @@
       )
     )
   );
+
+  # Codex reads agents as TOML, so these are hand-converted copies of agents,
+  # not a third kind of agent.
+  codexAgents = map (lib.removeSuffix ".toml") (
+    lib.attrNames (
+      lib.filterAttrs (n: t: t == "regular" && lib.hasSuffix ".toml" n) (
+        builtins.readDir ../../../ai/codex/agents
+      )
+    )
+  );
 }
