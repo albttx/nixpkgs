@@ -88,7 +88,6 @@
     {
       lib = inputs.nixpkgs-unstable.lib.extend (
         _: _: {
-          mkDarwinSystem = import ./lib/mkDarwinSystem.nix inputs;
           lsnix = import ./lib/lsnix.nix;
         }
       );
