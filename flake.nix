@@ -88,7 +88,6 @@
     {
       lib = inputs.nixpkgs-unstable.lib.extend (
         _: _: {
-          mkDarwinSystem = import ./lib/mkDarwinSystem.nix inputs;
           lsnix = import ./lib/lsnix.nix;
         }
       );
@@ -165,7 +164,6 @@
           specialArgs = { inherit inputs outputs; };
           modules = [
             ./machines/mbp-albttx/default.nix
-            ./darwin/services/emacsd.nix
             home-manager.darwinModules.home-manager
 
             # ./modules/shells/tmux.nix
@@ -196,7 +194,6 @@
           specialArgs = { inherit inputs outputs; };
           modules = [
             ./machines/github-ci/default.nix
-            ./darwin/services/emacsd.nix
             home-manager.darwinModules.home-manager
 
             # ./modules/shells/tmux.nix
