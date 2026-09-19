@@ -54,6 +54,10 @@
 
       programs.home-manager.enable = true;
 
+      # Local web UI on :3000. The Homebrew desktop app can attach to this
+      # server instead of starting a second one.
+      modules.ai.openchamber.service.enable = true;
+
       home.packages = with pkgs; [
         # build tool
         coreutils
