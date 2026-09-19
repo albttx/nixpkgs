@@ -68,14 +68,20 @@ in
 
   config = lib.mkMerge [
     {
-      # OpenChamber is the web/PWA workspace for OpenCode. Packaged in
-      # overlays/openchamber; the macOS desktop app is the Homebrew cask.
+      # OpenChamber is the web/PWA workspace for OpenCode, from the
+      # published npm package @openchamber/web (overlays/openchamber).
       home.packages = [ pkgs.openchamber ];
     }
 
     (lib.mkIf cfg.service.enable {
-      # Do not run `openchamber startup enable`: it writes a unit/plist that
-      # would fight these home-manager entries.
+      # Nix starts this on switch and at login. Do not run
+      # `openchamber startup enable`: it writes a unit/plist that would
+      # fight these home-manager entries.
+      # `true` is sd-switch: start/restart the unit on `make switch`,
+      # not just at the next login.
+      systemd.user.startServices = lib.mkIf pkgs.stdenv.isLinux true;
+      launchd.enable = lib.mkIf pkgs.stdenv.isDarwin true;
+
       home.activation.openchamberUiPassword = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         pw_file=${lib.escapeShellArg cfg.uiPasswordFile}
         mkdir -p "$(dirname "$pw_file")"

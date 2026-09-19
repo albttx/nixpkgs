@@ -44,7 +44,6 @@
       "claude-code"
       "codex"
       "cursor"
-      "openchamber"
       "discord"
       "displaybuddy"
       "docker-desktop"
