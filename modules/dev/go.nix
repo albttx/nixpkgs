@@ -2,7 +2,7 @@
 {
   programs.go = {
     enable = true;
-    package = pkgs.pkgs-master.go_1_25;
+    package = pkgs.pkgs-master.go_1_26;
     env = {
       GOPATH = "${config.home.homeDirectory}/go";
       GOBIN = "${config.home.homeDirectory}/go/bin";
