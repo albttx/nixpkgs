@@ -40,6 +40,11 @@
       flake = false;
     };
 
+    security-audit-skill = {
+      url = "github:cloudflare/security-audit-skill";
+      flake = false;
+    };
+
     mcp-nhost = {
       url = "github:nhost/mcp-nhost";
       # Don't follow nixpkgs-stable: mcp-nhost's bundled go overlay pins `go_1_24`,
@@ -106,6 +111,15 @@
         p = import ./overlays/p.nix;
         mcp-nhost = _: prev: {
           mcp-nhost = inputs.mcp-nhost.packages.${prev.stdenv.system}.mcp-nhost;
+        };
+
+        # Upstream agent skill: store path, not a working-tree link. It is not
+        # edited here, so a read-only store symlink is the right shape.
+        security-audit-skill = _: prev: {
+          security-audit-skill = prev.runCommand "security-audit-skill" { } ''
+            mkdir -p $out
+            cp -R ${inputs.security-audit-skill}/skills/security-audit/. $out/
+          '';
         };
 
         # Install master packages
