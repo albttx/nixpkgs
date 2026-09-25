@@ -6,6 +6,7 @@
     ./codex.nix
     ./grok-code.nix
     ./opencode.nix
+    ./security-audit.nix
     (lib.mkRenamedOptionModule [ "modules" "ai" "claude" "linkConfig" ] [ "modules" "ai" "linkConfig" ])
     (lib.mkRenamedOptionModule [ "modules" "ai" "claude" "repoPath" ] [ "modules" "ai" "repoPath" ])
   ];
