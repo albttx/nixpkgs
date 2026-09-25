@@ -4,15 +4,15 @@ let
 in
 {
   # Project switcher for a GOPATH-style source tree: https://github.com/albttx/p
-  p = pkgs.buildGoModule {
+  p = pkgs.buildGoModule (finalAttrs: {
     pname = "p";
-    version = "0-unstable-2026-09-08";
+    version = "0.2.0";
 
     src = pkgs.fetchFromGitHub {
       owner = "albttx";
       repo = "p";
-      rev = "9a43a1515ce8df1222a283c77b3bbf7659f7f9ba";
-      hash = "sha256-1Sz0cycwR971xaVGAfzNmFtr64ilq3m5VHgms5Xt9/0=";
+      rev = "v${finalAttrs.version}";
+      hash = "sha256-C+fHM+0wGAQgvyuLOO/F7RHe7MNwHkjBd5tiWUii6nw=";
     };
 
     vendorHash = "sha256-1oU2POF3UJ+PiliuwoAn2URosVvEi97uc92AcPCg97s=";
@@ -23,6 +23,7 @@ in
     ldflags = [
       "-s"
       "-w"
+      "-X main.version=${finalAttrs.version}"
     ];
 
     meta = with pkgs.lib; {
@@ -30,5 +31,5 @@ in
       homepage = "https://github.com/albttx/p";
       mainProgram = "p";
     };
-  };
+  });
 }

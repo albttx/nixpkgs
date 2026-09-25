@@ -13,6 +13,8 @@ in
 
   xdg.configFile."p/config.yaml".text = ''
     code_dir: "${codeDir}"
+
+    tmux: true
   '';
 
   # Order matters: `p init` defines the `p` shell function, and the
