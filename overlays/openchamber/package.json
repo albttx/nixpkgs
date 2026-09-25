@@ -1,0 +1,8 @@
+{
+  "name": "openchamber",
+  "version": "1.24.2",
+  "private": true,
+  "dependencies": {
+    "@openchamber/web": "1.24.2"
+  }
+}
