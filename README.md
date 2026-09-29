@@ -10,24 +10,14 @@ Personal system configuration managed with [Nix](https://nixos.org/), [nix-darwi
 
 `make switch` targets the current hostname.
 
-### mbp-albttx
+### [mbp-albttx](machines/mbp-albttx)
 
-Personal MacBook Pro. nix-darwin + home-manager on `aarch64-darwin`. Config: [`machines/mbp-albttx`](machines/mbp-albttx).
+Personal MacBook Pro. nix-darwin + home-manager on `aarch64-darwin`.
 
-### ipad-box
+### [ipad-box](machines/ipad-box)
 
-<p align="center">
-  <img src="machines/ipad-box/banner.jpg" alt="albttx@ipad-box" width="100%">
-</p>
+Hetzner dedicated NixOS server (`x86_64-linux`). Rebuild on the box with `make switch` or `nixos-rebuild switch --flake .#ipad-box`.
 
-Hetzner dedicated NixOS server (`x86_64-linux`). Rebuild on the box with `make switch` or `nixos-rebuild switch --flake .#ipad-box`. Config: [`machines/ipad-box`](machines/ipad-box).
-
-## AI configuration
-
-Claude Code rules, skills and agents live in [`ai/`](ai) and are symlinked into
-`~/.claude` by `modules/dev/ai/claude.nix`. Skills carry the per-technology
-conventions; agents exist only where there is a real tool or permission boundary.
-See [`ai/README.md`](ai/README.md).
 
 ## Installation
 
