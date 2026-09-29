@@ -100,6 +100,17 @@ require("blink.cmp").setup({
   fuzzy = { implementation = "prefer_rust_with_warning" },
 })
 
+-- `:e .` opens the current file's directory, not the project cwd.
+-- Scoped to that exact command so cwd stays at the project root for
+-- Telescope, `:!` and friends (autochdir would move it on every buffer).
+vim.keymap.set("c", "<CR>", function()
+  local line = vim.fn.getcmdline()
+  if vim.fn.getcmdtype() == ":" and line:match("^%s*e[dit]*!?%s+%.$") then
+    return "<C-u>edit " .. vim.fn.fnameescape(vim.fn.expand("%:p:h")) .. "<CR>"
+  end
+  return "<CR>"
+end, { expr = true })
+
 -- Native LSP (nvim-lspconfig provides server configs on rtp).
 vim.lsp.config("lua_ls", {
   settings = {

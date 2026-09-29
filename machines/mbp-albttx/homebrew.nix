@@ -45,6 +45,7 @@
       "claude-code"
       "codex"
       "cursor"
+      "cursor-cli"
       "discord"
       "displaybuddy"
       "docker-desktop"
