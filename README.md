@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=".github/assets/banner.svg" alt="albttx Nix configuration" width="100%">
+  <img src=".github/assets/banner.jpg" alt="albttx Nix configuration" width="100%">
 </p>
 
 # Home-manager
