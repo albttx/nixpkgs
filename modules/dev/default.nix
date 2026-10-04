@@ -16,7 +16,9 @@
 
   home.packages = with pkgs; [
     # basic dev tools
-    devenv
+    pkgs-master.devenv
+
+    bat
 
     jq
 
