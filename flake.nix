@@ -103,6 +103,8 @@
         higgsfield-cli = import ./overlays/higgsfield-cli.nix;
         multica = import ./overlays/multica.nix;
         herdr = import ./overlays/herdr.nix;
+        gno = import ./overlays/gno.nix;
+        gno-indexer = import ./overlays/gno-indexer.nix;
         p = import ./overlays/p.nix;
         mcp-nhost = _: prev: {
           mcp-nhost = inputs.mcp-nhost.packages.${prev.stdenv.system}.mcp-nhost;
