@@ -58,7 +58,6 @@
         # build tool
         coreutils
         curl
-        devenv
         wget
 
         my-libvterm

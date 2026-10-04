@@ -16,6 +16,8 @@
 
   home.packages = with pkgs; [
     # basic dev tools
+    devenv
+
     jq
 
     tree
