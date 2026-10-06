@@ -101,6 +101,7 @@
         anarlog = import ./overlays/anarlog.nix;
         meetily = import ./overlays/meetily.nix;
         higgsfield-cli = import ./overlays/higgsfield-cli.nix;
+        openchamber = import ./overlays/openchamber;
         multica = import ./overlays/multica.nix;
         herdr = import ./overlays/herdr.nix;
         gno = import ./overlays/gno.nix;

@@ -6,6 +6,7 @@
     ./codex.nix
     ./grok-code.nix
     ./opencode.nix
+    ./openchamber.nix
     (lib.mkRenamedOptionModule [ "modules" "ai" "claude" "linkConfig" ] [ "modules" "ai" "linkConfig" ])
     (lib.mkRenamedOptionModule [ "modules" "ai" "claude" "repoPath" ] [ "modules" "ai" "repoPath" ])
   ];

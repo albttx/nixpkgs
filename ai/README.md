@@ -100,7 +100,10 @@ in `CLAUDE.md` and apply to the main thread, which *can* delegate.
 
 On nix machines this is declarative. `modules/dev/ai/claude.nix`,
 `modules/dev/ai/codex.nix` and `modules/dev/ai/opencode.nix` install the
-packages and link `ai/` into `~/.claude`, `~/.codex` and `~/.config/opencode`:
+packages and link `ai/` into `~/.claude`, `~/.codex` and `~/.config/opencode`.
+`modules/dev/ai/openchamber.nix` installs the OpenChamber CLI next to
+OpenCode, and on mbp-albttx / ipad-box starts a user service. It does not
+add its own config links:
 
 ```nix
 home.file.".claude/CLAUDE.md".source                 = link "${aiPath}/CLAUDE.md";
