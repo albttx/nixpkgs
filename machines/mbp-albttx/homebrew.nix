@@ -19,6 +19,7 @@
       "libtool"
 
       "supabase"
+      "shadow"
     ];
 
     taps = [
