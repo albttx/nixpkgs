@@ -19,7 +19,6 @@
       "libtool"
 
       "supabase"
-      "shadow"
     ];
 
     taps = [
@@ -74,6 +73,7 @@
 
       "raycast"
       "rectangle"
+      "shadow"
       "slack"
       "signal"
       "spotify"
