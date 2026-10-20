@@ -54,6 +54,7 @@ for real.
 | `docs` | READMEs, ADRs, runbooks, changelogs, FR/EN, em-dash ban |
 | `seo` | Technical SEO, JSON-LD, Core Web Vitals, sitemaps |
 | `agentcash` | MPPScan / x402Scan registration API discovery |
+| `security-audit` | Cloudflare multi-phase security audit (pinned flake input, not in `ai/skills/`) |
 
 ## Agents
 
@@ -116,6 +117,12 @@ home.file.".config/opencode/agents/<name>.md".source = link "${aiPath}/agents/<n
 
 The entries are generated from `builtins.readDir`, so adding a skill needs a
 `make switch` to create its link, but editing one does not.
+
+Upstream skills that we do not maintain live in the flake, not in `ai/skills/`.
+`modules/dev/ai/security-audit.nix` links Cloudflare's
+[`security-audit`](https://github.com/cloudflare/security-audit-skill) from the
+nix store into the same three skill directories. Update it with
+`nix flake update security-audit-skill`, then `make switch`.
 
 ### Why the links point at the working tree, not the nix store
 
