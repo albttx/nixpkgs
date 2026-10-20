@@ -34,6 +34,11 @@
 
   programs.home-manager.enable = true;
 
+  # Reachable over Tailscale (trusted interface). Password is required
+  # because this binds all interfaces; the public firewall stays closed.
+  modules.ai.openchamber.service.enable = true;
+  modules.ai.openchamber.host = "0.0.0.0";
+
   # Shortcut to the dotfiles clone.
   home.file."nixpkgs".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/go/src/github.com/albttx/nixpkgs";

@@ -17,6 +17,8 @@ in
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = sshKeys;
+    # Keep systemd --user services (OpenChamber) up after SSH logout.
+    linger = true;
   };
 
   # albttx has no password set (log in with the SSH key), so sudo cannot

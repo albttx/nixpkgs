@@ -54,6 +54,9 @@
 
       programs.home-manager.enable = true;
 
+      # Nix-packaged @openchamber/web CLI, started by launchd at login.
+      modules.ai.openchamber.service.enable = true;
+
       home.packages = with pkgs; [
         # build tool
         coreutils
