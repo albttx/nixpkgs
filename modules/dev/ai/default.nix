@@ -4,6 +4,7 @@
   imports = [
     ./claude.nix
     ./codex.nix
+    ./cursor.nix
     ./grok-code.nix
     ./opencode.nix
     (lib.mkRenamedOptionModule [ "modules" "ai" "claude" "linkConfig" ] [ "modules" "ai" "linkConfig" ])
@@ -15,7 +16,7 @@
       type = lib.types.bool;
       default = true;
       description = ''
-        Symlink ai/ into ~/.claude, ~/.codex and ~/.config/opencode. Turn this
+        Symlink ai/ into ~/.claude, ~/.codex, ~/.cursor and ~/.config/opencode. Turn this
         off on machines that have no clone of this repo at
         {option}`modules.ai.repoPath`, otherwise the links dangle.
       '';
